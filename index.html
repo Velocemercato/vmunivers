@@ -73,7 +73,7 @@ a:focus-visible{outline:3px solid #f4cf55;outline-offset:3px}
 .grp>summary em{font-style:normal;font-weight:800;background:#f4cf55;color:#0b1533;border-radius:999px;padding:3px 11px}.grp>summary:after{content:"▾";color:#f4cf55;font-size:1.2rem;margin-left:6px;transition:transform .2s}.grp[open]>summary:after{transform:rotate(180deg)}
 .grp .apps{margin:0;padding:12px}.grp[hidden]{display:none}
 .ap[hidden]{display:none}.none{text-align:center;color:#cfd6ea;margin:20px}
-</style><meta name="theme-color" content="#000000" id="vmapp-t"><link rel="apple-touch-icon" href="https://velocemercato.fr/app/univers-apple.png" id="vmapp-i"><style id="vmbar-css">
+</style><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#000000" id="vmapp-t"><link rel="apple-touch-icon" href="/app/univers-apple.png"><style id="vmbar-css">
 .vmbar{background:#04060f;border-bottom:1px solid rgba(255,255,255,.12);font:700 13px/1 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;position:relative;z-index:70}
 .vmbar-in{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:4px;padding:6px max(10px,env(safe-area-inset-left,0px));overflow-x:auto;scrollbar-width:none}
 .vmbar-in::-webkit-scrollbar{display:none}
@@ -128,7 +128,7 @@ q.addEventListener('input',f);grps.forEach(function(g,i){g.addEventListener('tog
 var vb=document.getElementById('vBig'),vg=document.getElementById('vGrid');function v(m){[].forEach.call(root.querySelectorAll('.gapps'),function(x){x.className='apps gapps '+m});vb.classList.toggle('on',m==='big');vg.classList.toggle('on',m==='grid4');try{localStorage.setItem('vm-hub-vue',m)}catch(e){}}
 vb.onclick=function(){v('big')};vg.onclick=function(){v('grid4')};var m='grid4';try{m=localStorage.getItem('vm-hub-vue')||'grid4'}catch(e){}v(m);
 var h=location.hash.slice(1);if(h&&document.getElementById('g-'+h)){document.getElementById('g-'+h).open=true}else if(h&&!document.getElementById(h)){q.value=decodeURIComponent(h);f()}})();</script><button type="button" class="vmfab" id="vmFab" aria-haspopup="dialog">📤 Partager</button>
-<button type="button" class="vminst" id="vmInst">📲 Installer l'app</button>
+<button type="button" class="vminst" id="vmInst">📲 Installer VM Univers</button>
 <div class="vmsh" id="vmSh" hidden role="dialog" aria-modal="true" aria-labelledby="vmShT"><div class="vmsh-box">
 <h3 id="vmShT">📤 Partager cette page</h3><p class="vmsh-t" id="vmShU"></p>
 <div class="vmsh-g">
@@ -159,9 +159,9 @@ f.onclick=open;$('vmShX').onclick=function(){m.hidden=true;f.focus()};m.onclick=
 $('vmS-more').onclick=function(){navigator.share({title:document.title,url:url()}).catch(function(){})};
 $('vmS-cp').onclick=function(){var b=this;(navigator.clipboard?navigator.clipboard.writeText(url()):Promise.reject()).then(function(){b.lastChild.textContent='Copié ✓'}).catch(function(){prompt('Copie ce lien :',url())})};
 document.addEventListener('keydown',function(e){if(e.key==='Escape')m.hidden=true});
-if('serviceWorker' in navigator)0.catch(function(){});
+if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(function(){});
 var ib=$('vmInst'),dp=null,standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone,ios=/iphone|ipad|ipod/i.test(navigator.userAgent),andr=/android/i.test(navigator.userAgent);
-var mf=(($('vmapp-m')||{}).getAttribute&&$('vmapp-m').getAttribute('href'))||'',app=(mf.match(/app[/]([a-z]+)[.]webmanifest/)||[,'foot'])[1];
+var mf=(($('vmapp-m')||{}).getAttribute&&$('vmapp-m').getAttribute('href'))||'',app=(mf.match(/app[/]([a-z]+)[.]webmanifest/)||[,'univers'])[1];
 var NOMS={location:'VM Détailing',menu:'VM Menu QR',pro:'VM Pro Local',cv:'VM CV',emploi:'VM Emploi',univers:'l’appli VM',foot:'VM Foot',gaming:'VM Gaming',actus:'VM Actus',arena:'VM Arena',tv:'VM TV',annonces:'VM Annonces',allolivre:'AlloLivre'},nom=NOMS[app]||'VM',key='vm-app-non-'+app,no=false;try{no=localStorage.getItem(key)==='1'}catch(e){}
 ib.textContent='📲 Installer '+nom;
 function show(){if(!no)ib.classList.add('show')}
