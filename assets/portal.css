@@ -29,6 +29,7 @@ main{max-width:1150px;margin:auto;padding:0 24px 90px}
 .feat .fimg{position:absolute;inset:0;background:url('/assets/projects/vm-location/img/hero.webp') center/cover}
 .feat:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#000e,#0004)}
 .feat .ftxt{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;gap:9px;max-width:600px;padding:28px}
+.feat .ftxt>.feature-opening{max-width:100%;padding:7px 12px;border-radius:12px;background:var(--gold);color:#10182b;font-size:.88rem;font-weight:800;line-height:1.4}
 .feature-logo{width:60px;height:60px;object-fit:contain;border-radius:12px;background:#080d18}
 .feat small{color:var(--gold);font-weight:800;letter-spacing:.07em}.feat b{font-size:clamp(1.8rem,6vw,2.5rem);line-height:1.1}.feat .ftxt>span{color:#e0e4eb}
 .feat em{font-style:normal;font-weight:800;padding:10px 16px;border-radius:10px;background:var(--gold);color:#10182b;margin-top:4px}
