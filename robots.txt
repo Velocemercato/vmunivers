@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://vmunivers.fr/sitemap.xml
