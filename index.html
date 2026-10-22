@@ -43,10 +43,10 @@
 <a class="portal-brand" href="/" aria-label="VM Univers, accueil"><img src="/app/univers-192.png" alt="" width="36" height="36">VM UNIVERS</a>
 <div class="portal-links"><a href="#g-rapporte">Services</a><a href="#g-gratuit">Outils gratuits</a><a href="#g-passion">Médias</a><a href="#g-bientot">À venir</a></div>
 </nav>
-<header class="hub"><a class="home-logo" href="/" aria-label="VM Univers, accueil"><img class="hl" src="/app/logo-vm-officiel.png" alt="Logo VM Univers" width="128" height="128"></a><div class="eyebrow">Le portail de tous nos projets</div>
+<header class="hub"><a class="home-logo" href="/" aria-label="VM Univers, accueil"><img class="hl" src="/app/logo-vm-officiel.png" alt="Logo VM Univers" width="128" height="128"></a><div class="eyebrow">Le portail central de tous nos projets</div>
 <h1>Un univers.<br><span>Tous vos projets.</span></h1><p>Services, outils du quotidien, foot et médias : retrouvez chaque projet VM et accédez directement à son site.</p>
 <label class="srch"><span aria-hidden="true">🔎</span><span class="sr-only">Rechercher un projet VM</span><input id="q" type="search" placeholder="Que cherches-tu ? jeux, actu, papiers, livraison…" autocomplete="off"></label>
-<div class="tools"><span class="project-count" id="projectCount" role="status" aria-live="polite"></span>
+<div class="vm-channels" role="group" aria-label="Nos chaînes vidéo"><a class="vm-channel vm-channel--youtube" href="https://www.youtube.com/@VeloceMercato" target="_blank" rel="noopener">▶ YouTube</a><a class="vm-channel vm-channel--twitch" href="https://www.twitch.tv/velocemercato" target="_blank" rel="noopener">Twitch ↗</a></div><div class="tools"><span class="project-count" id="projectCount" role="status" aria-live="polite"></span>
 <div class="views"><button id="vBig" type="button" aria-label="Afficher les cartes détaillées" aria-pressed="true">🖼️</button><button id="vGrid" type="button" aria-label="Afficher la mosaïque" aria-pressed="false">▦</button></div></div>
 </header>
 <main id="projets">
@@ -58,8 +58,8 @@
 <details class="grp" id="g-bientot"><summary><span><b>🌱 Bientôt</b><small>Les nouveautés qui arrivent</small></span><em>2</em></summary><div class="apps big gapps"><div class="ap soon" data-c="bientot" data-k="bons plans promo promos reduction réduction bientot bientôt"><span class="ai" style="background-image:url('/assets/projects/img/apps/bonsplans.webp')"></span><span class="ab"><img src="/assets/projects/app/bonsplans-192.png" alt="" width="48" height="48" loading="lazy"><span><b>VM Bons Plans</b><small>Les vraies promos du jour</small></span><span class="go">Bientôt</span></span></div><div class="ap soon" data-c="bientot" data-k="pastille en vrai plateau podcast direct invités bientot bientôt"><span class="ai" style="background-image:url('/assets/projects/vm-gaming/img/escouade/presentateur-360.webp')"></span><span class="ab"><img src="/assets/projects/app/tv-192.png" alt="" width="48" height="48" loading="lazy"><span><b>La Pastille en vrai</b><small>Plateau, invités et directs les soirs de match</small></span><span class="go">Bientôt</span></span></div></div></details>
 </div>
 <p class="none" id="none" role="status" hidden>Rien trouvé 🤔 Essaie un autre mot (foot, jeux, actu, papiers, livraison, annonces…)</p>
-<div class="cta"><div><b>Un projet, une idée, un partenariat ?</b><p>Écris-nous : on répond à tout le monde.</p></div><a class="btn" href="mailto:velocemercato.fr@gmail.com?subject=Groupe%20VM%20%3A%20prise%20de%20contact">✉️ velocemercato.fr@gmail.com</a></div>
-<p class="note">L'univers VM regroupe les projets de Romain Oriez, entrepreneur individuel – SIRET 528 102 916 00012. <a href="https://velocemercato.fr/mentions-legales.html" style="color:inherit">Mentions légales</a></p>
+<div class="cta"><div><b>Un projet, une idée, un partenariat ?</b><p>Écris-nous : on répond à tout le monde.</p></div><a class="btn" href="mailto:vmunivers.fr@gmail.fr?subject=Groupe%20VM%20%3A%20prise%20de%20contact">✉️ vmunivers.fr@gmail.fr</a></div>
+<p class="note">L'univers VM regroupe nos projets · activité d'entrepreneur individuel – SIRET 528 102 916 00012. <a href="https://velocemercato.fr/mentions-legales.html" style="color:inherit">Mentions légales</a></p>
 </main>
 <script src="/assets/portal.js" defer></script><button type="button" class="vmfab" id="vmFab" aria-haspopup="dialog">📤 Partager</button>
 <button type="button" class="vminst" id="vmInst">📲 Installer VM Univers</button>
@@ -103,7 +103,7 @@ ib.onclick=function(){
  if(ios){alert('Pour installer '+nom+' sur iPhone : — 1. Ouvre cette page dans Safari — 2. Bouton Partager ↑ en bas — 3. « Sur l’écran d’accueil » — 4. « Ajouter »')}
 
  try{localStorage.setItem(key,'1')}catch(e){}ib.classList.remove('show')};
-window.vmMail=function(su,bo){var to='velocemercato.fr@gmail.com';location.href='mailto:'+to+'?subject='+encodeURIComponent(su)+'&body='+encodeURIComponent(bo);
+window.vmMail=function(su,bo){var to='vmunivers.fr@gmail.fr';location.href='mailto:'+to+'?subject='+encodeURIComponent(su)+'&body='+encodeURIComponent(bo);
  var d=document.getElementById('vmMailBox');if(d)d.remove();d=document.createElement('div');d.id='vmMailBox';d.setAttribute('role','dialog');
  d.style.cssText='position:fixed;left:12px;right:12px;bottom:12px;z-index:95;max-width:440px;margin:0 auto;background:#fff;color:#0b1533;border:3px solid #000;border-radius:16px;padding:14px;box-shadow:5px 5px 0 #1d3fb8;font:15px/1.4 system-ui,sans-serif';
  d.innerHTML='<b>✉️ Ton appli e-mail s’ouvre avec le message prêt.</b><br>Appuie sur « Envoyer » dedans : tant que ce n’est pas fait, rien n’est envoyé.<br><small>Rien ne s’ouvre ? Copie la demande et envoie-la à '+to+'.</small><div style="display:flex;gap:8px;margin-top:10px"><button type="button" id="vmMailCp" style="flex:1;font:800 .95rem system-ui;padding:10px;border-radius:999px;border:2px solid #000;background:#f4cf55;cursor:pointer">📋 Copier la demande</button><button type="button" id="vmMailX" style="font:800 .95rem system-ui;padding:10px 14px;border-radius:999px;border:2px solid #000;background:#fff;cursor:pointer">OK</button></div>';
