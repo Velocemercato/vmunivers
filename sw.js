@@ -1,80 +1,39 @@
-// VM Univers — service worker v2
-const V = 'vmu-v2';
-const STATIC = V + '-static';
-const IMG = V + '-img';
-const MAX_IMG = 60;
-const PRECACHE = [
-  '/',
-  '/manifest.webmanifest',
-  '/app/univers-192.png',
-  '/app/univers-512.png',
-  '/app/logo-vm.webp'   // optionnel : ignoré s'il n'existe pas encore
-];
+// VM Univers : cache limité aux ressources de ce domaine.
+const CACHE = 'vmu-v3';
+const PREFIX = 'vmu-v';
+const PRECACHE = ["/", "/manifest.webmanifest", "/app/univers-192.png", "/app/univers-512.png", "/app/logo-vm-officiel.png", "/assets/portal.css", "/assets/portal.js"];
+const OFFLINE = '<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VM Univers — hors connexion</title><body style="background:#080d18;color:#fff;font:18px/1.6 system-ui;padding:32px"><h1>VM Univers</h1><p>Cette page n’est pas disponible hors connexion. Reconnectez-vous et réessayez.</p></body></html>';
 
-self.addEventListener('install', e => {
-  e.waitUntil(
-    caches.open(STATIC)
-      .then(c => Promise.all(PRECACHE.map(u => c.add(u).catch(() => {}))))
-      .then(() => self.skipWaiting())
-  );
+self.addEventListener('install', event => {
+  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(PRECACHE)).then(() => self.skipWaiting()));
 });
-
-self.addEventListener('activate', e => {
-  e.waitUntil(
-    caches.keys()
-      .then(keys => Promise.all(keys.filter(k => !k.startsWith(V)).map(k => caches.delete(k))))
-      .then(() => self.clients.claim())
-  );
+self.addEventListener('activate', event => {
+  event.waitUntil(caches.keys().then(keys => Promise.all(
+    keys.filter(key => key.startsWith(PREFIX) && key !== CACHE).map(key => caches.delete(key))
+  )).then(() => self.clients.claim()));
 });
-
-async function trim(name, max) {
-  const c = await caches.open(name);
-  const keys = await c.keys();
-  if (keys.length > max) await Promise.all(keys.slice(0, keys.length - max).map(k => c.delete(k)));
-}
-
-function cacheable(r) {
-  return r && (r.ok || r.type === 'opaque');
-}
-
-async function swr(req, name, max) {
-  const c = await caches.open(name);
-  const hit = await c.match(req);
-  const net = fetch(req).then(r => {
-    if (cacheable(r)) { c.put(req, r.clone()); if (max) trim(name, max); }
-    return r;
-  }).catch(() => null);
-  return hit || (await net) || Response.error();
-}
-
-self.addEventListener('fetch', e => {
-  const req = e.request;
-  if (req.method !== 'GET') return;
-  const url = new URL(req.url);
-
-  // Pages : réseau d'abord, repli sur la page en cache
-  if (req.mode === 'navigate') {
-    e.respondWith(
-      fetch(req).then(r => {
-        if (r.ok && url.origin === location.origin) {
-          const copy = r.clone();
-          caches.open(STATIC).then(c => c.put(req, copy));
-        }
-        return r;
-      }).catch(async () => (await caches.match(req)) || (await caches.match('/')) || Response.error())
-    );
-    return;
-  }
-
-  // Images (y compris celles de velocemercato.fr) : cache avec renouvellement
-  if (req.destination === 'image') {
-    e.respondWith(swr(req, IMG, MAX_IMG));
-    return;
-  }
-
-  // Autres ressources du même domaine
-  if (url.origin === location.origin) {
-    e.respondWith(swr(req, STATIC));
-  }
-  // Appels tiers (compteurs, QR) : jamais mis en cache
+self.addEventListener('fetch', event => {
+  const request = event.request;
+  const url = new URL(request.url);
+  if (request.method !== 'GET' || url.origin !== self.location.origin) return;
+  const page = request.mode === 'navigate';
+  const asset = /\.(css|js|webp|png|jpe?g|svg|woff2?|webmanifest)$/.test(url.pathname);
+  // JSON, compteurs de votes et API restent exclusivement sur le réseau.
+  if (!page && !asset) return;
+  event.respondWith((async () => {
+    const cache = await caches.open(CACHE);
+    try {
+      const response = await fetch(request);
+      if (response.ok && !response.redirected && new URL(response.url).origin === self.location.origin) {
+        // Une panne de stockage ne doit jamais empêcher de lire la réponse réseau.
+        try { await cache.put(request, response.clone()); } catch (_) { /* Cache facultatif. */ }
+      }
+      return response;
+    } catch (_) {
+      const saved = await cache.match(request, {ignoreSearch: page});
+      if (saved) return saved;
+      if (page) return new Response(OFFLINE, {status:503, headers:{'Content-Type':'text/html; charset=utf-8'}});
+      return Response.error();
+    }
+  })());
 });
