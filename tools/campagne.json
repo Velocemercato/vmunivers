@@ -1,0 +1,197 @@
+[
+  {
+    "id": "vm-univers",
+    "titre": "VM Univers — tous nos projets",
+    "brand": "VM UNIVERS",
+    "color": "F4CF55",
+    "url": "vmunivers.fr",
+    "route": "https://vmunivers.fr/",
+    "audience": "VM Univers",
+    "scenes": [
+      {
+        "image": "portal-screen",
+        "title": "Votre prochain\nprojet, ici.",
+        "sub": "L’annuaire de tous les projets VM"
+      },
+      {
+        "image": "directory-screen",
+        "title": "Un thème.\nUn seul clic.",
+        "sub": "Médias · services · outils · communauté"
+      },
+      {
+        "image": "office",
+        "title": "Une vision\npour demain.",
+        "sub": "Les futurs bureaux VM",
+        "concept": true
+      },
+      {
+        "image": "vm:app/logo-vm-officiel.png",
+        "title": "Entrez dans\nl’univers VM.",
+        "sub": "Choisissez votre prochain projet"
+      }
+    ]
+  },
+  {
+    "id": "veloce-foot",
+    "titre": "Véloce Mercato — le foot simplement",
+    "brand": "VÉLOCE MERCATO",
+    "color": "F4CF55",
+    "url": "velocemercato.fr",
+    "route": "https://velocemercato.fr/",
+    "audience": "Véloce Mercato",
+    "scenes": [
+      {
+        "image": "veloce:img/banniere-foot.webp",
+        "title": "Le foot.\nSimple et rapide.",
+        "sub": "L’univers Véloce Mercato"
+      },
+      {
+        "image": "veloce:img/v2-mercato.webp",
+        "title": "Mercato, brèves\net scores.",
+        "sub": "Des infos avec leurs sources"
+      },
+      {
+        "image": "veloce:img/avatar-veloce.webp",
+        "title": "La Pastille Foot\navec Heineguez.",
+        "sub": "Présentateur virtuel · émissions générées par IA"
+      },
+      {
+        "image": "foot-screen",
+        "title": "Entrez\ndans le match.",
+        "sub": "Actualités, quiz et communauté"
+      }
+    ]
+  },
+  {
+    "id": "vm-gaming",
+    "titre": "VM Gaming — trouve ta communauté",
+    "brand": "VM GAMING",
+    "color": "D6FF6E",
+    "url": "velocemercato.fr/vm-gaming",
+    "route": "https://velocemercato.fr/vm-gaming/",
+    "audience": "Véloce Mercato",
+    "scenes": [
+      {
+        "image": "veloce:vm-gaming/img/vm-gaming.webp",
+        "title": "Des jeux.\nDes actus. Des potes.",
+        "sub": "Bienvenue dans VM Gaming"
+      },
+      {
+        "image": "veloce:vm-gaming/img/vm-gaming-univers-960.webp",
+        "title": "EA FC, GTA,\nWarzone et plus.",
+        "sub": "Retrouvez les brèves de vos jeux"
+      },
+      {
+        "image": "veloce:vm-gaming/img/escouade/presentateur-900.webp",
+        "title": "Une escouade.\nUne communauté.",
+        "sub": "Personnages inventés · univers VM Gaming"
+      },
+      {
+        "image": "gaming-screen",
+        "title": "Rejoignez\nVM Gaming.",
+        "sub": "Découvrez le site et son Discord"
+      }
+    ]
+  },
+  {
+    "id": "vm-actus",
+    "titre": "VM Actus — comprendre l’essentiel",
+    "brand": "VM ACTUS",
+    "color": "FF647C",
+    "url": "velocemercato.fr/actus",
+    "route": "https://velocemercato.fr/actus/",
+    "audience": "Véloce Mercato",
+    "scenes": [
+      {
+        "image": "veloce:img/v2-actus.webp",
+        "title": "L’essentiel\nde l’actualité.",
+        "sub": "France, monde et régions"
+      },
+      {
+        "image": "actus-screen",
+        "title": "Des brèves claires.\nDes sources citées.",
+        "sub": "Explorez les thèmes qui vous intéressent"
+      },
+      {
+        "image": "veloce:img/presentateur-actus.webp",
+        "title": "Le JT VM Actus\navec Heineguez.",
+        "sub": "Présentateur virtuel · émissions générées par IA"
+      },
+      {
+        "image": "veloce:img/v2-actus-640.webp",
+        "title": "Prenez le temps\nde comprendre.",
+        "sub": "Retrouvez les articles et les émissions"
+      }
+    ]
+  },
+  {
+    "id": "vm-studio",
+    "titre": "VM Studio — le projet TV & radio",
+    "brand": "VM STUDIO",
+    "color": "70C8FF",
+    "url": "velocemercato.fr/studio.html",
+    "route": "https://velocemercato.fr/studio.html#tv",
+    "audience": "Véloce Mercato et VM Univers",
+    "scenes": [
+      {
+        "image": "studio",
+        "title": "Bienvenue\ndans VM Studio.",
+        "sub": "Une identité Véloce, en version virtuelle",
+        "concept": true
+      },
+      {
+        "image": "studio",
+        "title": "Foot. Actus.\nGaming.",
+        "sub": "Le projet de plateau VM",
+        "concept": true
+      },
+      {
+        "image": "studio",
+        "title": "Le micro\nest à VM.",
+        "sub": "TV, radio et personnages virtuels",
+        "concept": true
+      },
+      {
+        "image": "studio",
+        "title": "Découvrez\nLa Pastille.",
+        "sub": "Les émissions déjà publiées sont sur le site",
+        "concept": true
+      }
+    ]
+  },
+  {
+    "id": "vm-bureaux",
+    "titre": "VM Univers — les futurs bureaux",
+    "brand": "VM UNIVERS",
+    "color": "F4CF55",
+    "url": "vmunivers.fr",
+    "route": "https://vmunivers.fr/decouvrir.html#vm-bureaux",
+    "audience": "VM Univers",
+    "scenes": [
+      {
+        "image": "office",
+        "title": "Les bureaux VM.\nDemain se dessine.",
+        "sub": "La partie bureaux du projet VM",
+        "concept": true
+      },
+      {
+        "image": "office",
+        "title": "L’accueil.\nL’identité VM.",
+        "sub": "Noir, rouge et or",
+        "concept": true
+      },
+      {
+        "image": "office",
+        "title": "Des idées\nprennent forme.",
+        "sub": "Une visualisation du projet, côté bureaux",
+        "concept": true
+      },
+      {
+        "image": "vm:app/logo-vm-officiel.png",
+        "title": "Explorez\ntous les projets.",
+        "sub": "VM Univers, le portail central",
+        "concept": true
+      }
+    ]
+  }
+]

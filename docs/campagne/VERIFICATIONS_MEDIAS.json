@@ -1,0 +1,182 @@
+{
+  "videos": [
+    {
+      "file": "vm-bureaux-paysage.mp4",
+      "size": 2364867,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "duration": "20.000000",
+      "decode": "OK"
+    },
+    {
+      "file": "vm-bureaux-vertical.mp4",
+      "size": 5216096,
+      "dimensions": [
+        1080,
+        1920
+      ],
+      "duration": "20.000000",
+      "decode": "OK"
+    },
+    {
+      "file": "vm-studio-vertical.mp4",
+      "size": 6353745,
+      "dimensions": [
+        1080,
+        1920
+      ],
+      "duration": "20.000000",
+      "decode": "OK"
+    },
+    {
+      "file": "vm-studio-paysage.mp4",
+      "size": 2664297,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "duration": "20.000000",
+      "decode": "OK"
+    },
+    {
+      "file": "vm-actus-vertical.mp4",
+      "size": 5239230,
+      "dimensions": [
+        1080,
+        1920
+      ],
+      "duration": "20.000000",
+      "decode": "OK"
+    },
+    {
+      "file": "vm-actus-paysage.mp4",
+      "size": 2964196,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "duration": "20.000000",
+      "decode": "OK"
+    },
+    {
+      "file": "vm-gaming-vertical.mp4",
+      "size": 6146481,
+      "dimensions": [
+        1080,
+        1920
+      ],
+      "duration": "20.000000",
+      "decode": "OK"
+    },
+    {
+      "file": "vm-gaming-paysage.mp4",
+      "size": 2779363,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "duration": "20.000000",
+      "decode": "OK"
+    },
+    {
+      "file": "veloce-foot-vertical.mp4",
+      "size": 4886434,
+      "dimensions": [
+        1080,
+        1920
+      ],
+      "duration": "20.000000",
+      "decode": "OK"
+    },
+    {
+      "file": "veloce-foot-paysage.mp4",
+      "size": 2659376,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "duration": "20.000000",
+      "decode": "OK"
+    },
+    {
+      "file": "vm-univers-vertical.mp4",
+      "size": 4048328,
+      "dimensions": [
+        1080,
+        1920
+      ],
+      "duration": "20.000000",
+      "decode": "OK"
+    },
+    {
+      "file": "vm-univers-paysage.mp4",
+      "size": 1964461,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "duration": "20.000000",
+      "decode": "OK"
+    }
+  ],
+  "browser": [
+    {
+      "site": "vmunivers",
+      "width": 320,
+      "lecture_reelle": "OK",
+      "chargement_auto_videos": false,
+      "debordement": false
+    },
+    {
+      "site": "vmunivers",
+      "width": 390,
+      "lecture_reelle": "OK",
+      "chargement_auto_videos": false,
+      "debordement": false
+    },
+    {
+      "site": "vmunivers",
+      "width": 768,
+      "lecture_reelle": "OK",
+      "chargement_auto_videos": false,
+      "debordement": false
+    },
+    {
+      "site": "vmunivers",
+      "width": 1440,
+      "lecture_reelle": "OK",
+      "chargement_auto_videos": false,
+      "debordement": false
+    },
+    {
+      "site": "velocemercato.fr",
+      "width": 320,
+      "lecture_reelle": "OK",
+      "chargement_auto_videos": false,
+      "debordement": false
+    },
+    {
+      "site": "velocemercato.fr",
+      "width": 390,
+      "lecture_reelle": "OK",
+      "chargement_auto_videos": false,
+      "debordement": false
+    },
+    {
+      "site": "velocemercato.fr",
+      "width": 768,
+      "lecture_reelle": "OK",
+      "chargement_auto_videos": false,
+      "debordement": false
+    },
+    {
+      "site": "velocemercato.fr",
+      "width": 1440,
+      "lecture_reelle": "OK",
+      "chargement_auto_videos": false,
+      "debordement": false
+    }
+  ]
+}
