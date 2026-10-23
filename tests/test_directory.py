@@ -58,7 +58,7 @@ class DirectoryTests(unittest.TestCase):
             self.assertEqual(page.evaluate('document.documentElement.scrollWidth'),width)
             page.goto(self.base+'/#demos',wait_until='networkidle')
             self.assertTrue(page.locator('#demos').is_visible())
-            self.assertEqual(page.locator('#demos .dm').count(),7)
+            self.assertEqual(page.locator('#demos .dm').count(),8)
             self.assertEqual(page.evaluate('document.documentElement.scrollWidth'),width)
             context.close()
 
