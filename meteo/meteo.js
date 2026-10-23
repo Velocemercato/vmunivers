@@ -115,10 +115,13 @@
       {timeout: 10000, maximumAge: 600000});
   };
 
-  // Lieux à visiter.
+  // Lieux à visiter, avec les fiches et avis validés par VM.
   const regions = window.VM_LIEUX;
+  const slug = text => text.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  // Seules les photos publiées dans /meteo/photos/ sont affichées.
+  const photo = path => /^photos\/[\w-]+\.(webp|jpe?g|png)$/i.test(path || '') ? `/meteo/${path}` : '';
+  let avis = [];
   const select = $('region');
-  select.innerHTML = regions.map((r, i) => `<option value="${i}">${esc(r.region)} (${r.lieux.length})</option>`).join('');
   const cats = $('cats');
   let cat = '';
   let lieuxRequest = 0;
@@ -130,12 +133,17 @@
     cats.querySelectorAll('button').forEach(button => button.onclick = () => { cat = button.dataset.c; lieux(); });
     const shown = region.lieux.filter(l => !cat || l[4] === cat);
     const list = $('lieux');
-    list.innerHTML = shown.map((l, i) => `<article class="lieu"><p class="tag">${esc(l[4])}</p><h3>${esc(l[0])}</h3><p class="where">📍 ${esc(l[1])}</p><p>${esc(l[5])}</p>
-      <p class="wx" data-i="${i}">Météo…</p><div class="links"><button type="button" data-i="${i}">🌦️ Prévisions</button>${maps(l[0] + ' ' + l[1], l[2], l[3])}</div></article>`).join('');
+    list.innerHTML = shown.map((l, i) => {
+      const mine = avis.filter(a => a.lieu === slug(l[0]));
+      const image = photo(l[6]) || photo((mine.find(a => photo(a.photo)) || {}).photo);
+      return `<article class="lieu">${image ? `<img class="ph" src="${image}" alt="Photo : ${esc(l[0])}" loading="lazy">` : ''}<p class="tag">${esc(l[4])}</p><h3>${esc(l[0])}</h3><p class="where">📍 ${esc(l[1])}</p><p>${esc(l[5])}</p>
+      ${l[7] ? `<p class="par">Proposé par ${esc(l[7])}</p>` : ''}<p class="wx" data-i="${i}">Météo…</p><div class="links"><button type="button" data-i="${i}">🌦️ Prévisions</button><button type="button" data-a="${i}">💬 Avis &amp; photos (${mine.length})</button>${maps(l[0] + ' ' + l[1], l[2], l[3])}</div></article>`;
+    }).join('');
     list.querySelectorAll('button[data-i]').forEach(button => button.onclick = () => {
       const l = shown[button.dataset.i];
       detail([l[0], l[2], l[3]], l[1]);
     });
+    list.querySelectorAll('button[data-a]').forEach(button => button.onclick = () => ouvrirAvis(shown[button.dataset.a]));
     const request = ++lieuxRequest;
     try {
       const results = await forecast(shown.map(l => [l[0], l[2], l[3]]), false);
@@ -150,8 +158,63 @@
   }
   select.onchange = () => { cat = ''; lieux(); };
 
+  // Les propositions partent par e-mail : rien n'est publié avant validation.
+  const mail = (subject, body) => {
+    if (window.vmMail) return window.vmMail(subject, body);
+    location.href = `mailto:velocemercato.fr@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+  const stars = n => '★'.repeat(n) + '☆'.repeat(5 - n);
+  let current = null;
+  function ouvrirAvis(l) {
+    current = l;
+    const mine = avis.filter(a => a.lieu === slug(l[0]));
+    $('avisTitre').textContent = `Avis & photos · ${l[0]}`;
+    $('avisListe').innerHTML = mine.length ? mine.map(a => `<li>${photo(a.photo) ? `<img src="${photo(a.photo)}" alt="Photo de ${esc(a.nom)}" loading="lazy">` : ''}<p><b>${esc(a.nom)}</b> <span class="stars" aria-label="${a.note} sur 5">${stars(Math.max(1, Math.min(5, +a.note || 5)))}</span> <small>${esc(a.date || '')}</small></p><p>${esc(a.texte)}</p></li>`).join('')
+      : '<li class="msg">Pas encore d’avis. Sois le premier !</li>';
+    $('avisForm').reset();
+    $('avisForm').hidden = false;
+    $('avisMerci').hidden = true;
+    $('avisBox').showModal();
+  }
+  $('avisForm').onsubmit = event => {
+    event.preventDefault();
+    const f = event.target.elements;
+    mail(`VM Découverte – avis : ${current[0]}`, `Lieu : ${current[0]} (${current[1]})\nIdentifiant : ${slug(current[0])}\nPrénom : ${f.nom.value.trim()}\nNote : ${f.note.value}/5\nAvis : ${f.texte.value.trim()}\n\n📷 Joins ta photo à cet e-mail (facultatif).\nJ’accepte la publication de mon prénom, de mon avis et de ma photo sur VM Univers.`);
+    event.target.hidden = true;
+    $('avisMerci').hidden = false;
+  };
+
+  $('ficheRegion').innerHTML = regions.map(r => `<option>${esc(r.region)}</option>`).join('');
+  $('ficheBtn').onclick = () => {
+    $('ficheForm').reset();
+    $('ficheForm').hidden = false;
+    $('ficheMerci').hidden = true;
+    $('ficheRegion').value = (regions[select.value] || regions[0]).region;
+    $('ficheBox').showModal();
+  };
+  $('ficheForm').onsubmit = event => {
+    event.preventDefault();
+    const f = event.target.elements;
+    mail(`VM Découverte – nouveau lieu : ${f.lieu.value.trim()}`, `Nom du lieu : ${f.lieu.value.trim()}\nCommune et département : ${f.ville.value.trim()}\nRégion : ${f.region.value}\nType : ${f.type.value}\nDescription : ${f.desc.value.trim()}\nProposé par : ${f.nom.value.trim()}\n\n📷 Joins une ou plusieurs photos du lieu à cet e-mail.\nJ’accepte la publication de mon prénom, de ma fiche et de mes photos sur VM Univers.`);
+    event.target.hidden = true;
+    $('ficheMerci').hidden = false;
+  };
+  document.querySelectorAll('dialog [data-close]').forEach(button => button.onclick = () => button.closest('dialog').close());
+
+  async function charger() {
+    const [lus, fiches] = await Promise.all(['/meteo/avis.json', '/meteo/contributions.json'].map(url =>
+      fetch(url, {cache: 'no-store'}).then(r => r.ok ? r.json() : []).catch(() => [])));
+    avis = Array.isArray(lus) ? lus.filter(a => a && a.lieu && a.nom && a.texte) : [];
+    (Array.isArray(fiches) ? fiches : []).forEach(c => {
+      const region = regions.find(r => r.region === c.region);
+      if (region && c.nom && Number.isFinite(c.lat) && Number.isFinite(c.lon)) region.lieux.push([c.nom, c.ville || '', c.lat, c.lon, c.type || 'Nature', c.description || '', c.photo, c.par]);
+    });
+    select.innerHTML = regions.map((r, i) => `<option value="${i}">${esc(r.region)} (${r.lieux.length})</option>`).join('');
+    lieux();
+  }
+
   const today = new Date();
   $('date').textContent = today.toLocaleDateString('fr-FR', {weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'});
   zone('france');
-  lieux();
+  charger();
 })();
