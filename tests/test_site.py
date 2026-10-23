@@ -237,9 +237,9 @@ class SiteTests(unittest.TestCase):
             context = self.context(width, 'dark')
             context.route('https://api.open-meteo.com/**', weather)
             context.route('https://geocoding-api.open-meteo.com/**', geocode)
-            context.route(self.base + '/meteo/avis.json', lambda route: route.fulfill(json=[
+            context.route('https://velocemercato.fr/meteo/avis.json', lambda route: route.fulfill(json=[
                 {'lieu': 'ballon-d-alsace', 'nom': 'Julie', 'note': 5, 'texte': 'Vue superbe <b>au</b> sommet.', 'photo': '../../app/univers-192.png', 'date': '23/10/2026'}]))
-            context.route(self.base + '/meteo/contributions.json', lambda route: route.fulfill(json=[
+            context.route('https://velocemercato.fr/meteo/contributions.json', lambda route: route.fulfill(json=[
                 {'region': 'Bourgogne-Franche-Comté', 'nom': 'Étang de test', 'ville': 'Champagney (70)', 'lat': 47.7, 'lon': 6.68, 'type': 'Nature', 'description': 'Fiche validée.', 'par': 'Léo'}]))
             context.add_init_script('window.vmMail = (subject, body) => { window.sent = {subject, body}; };')
             page = context.new_page()

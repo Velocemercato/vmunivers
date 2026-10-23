@@ -118,8 +118,10 @@
   // Lieux à visiter, avec les fiches et avis validés par VM.
   const regions = window.VM_LIEUX;
   const slug = text => text.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  // Avis, fiches et photos sont gérés une seule fois, sur velocemercato.fr.
+  const SOURCE = 'https://velocemercato.fr/meteo';
   // Seules les photos publiées dans /meteo/photos/ sont affichées.
-  const photo = path => /^photos\/[\w-]+\.(webp|jpe?g|png)$/i.test(path || '') ? `/meteo/${path}` : '';
+  const photo = path => /^photos\/[\w-]+\.(webp|jpe?g|png)$/i.test(path || '') ? `${SOURCE}/${path}` : '';
   let avis = [];
   const select = $('region');
   const cats = $('cats');
@@ -202,7 +204,7 @@
   document.querySelectorAll('dialog [data-close]').forEach(button => button.onclick = () => button.closest('dialog').close());
 
   async function charger() {
-    const [lus, fiches] = await Promise.all(['/meteo/avis.json', '/meteo/contributions.json'].map(url =>
+    const [lus, fiches] = await Promise.all([`${SOURCE}/avis.json`, `${SOURCE}/contributions.json`].map(url =>
       fetch(url, {cache: 'no-store'}).then(r => r.ok ? r.json() : []).catch(() => [])));
     avis = Array.isArray(lus) ? lus.filter(a => a && a.lieu && a.nom && a.texte) : [];
     (Array.isArray(fiches) ? fiches : []).forEach(c => {
