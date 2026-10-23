@@ -79,9 +79,9 @@ class SiteTests(unittest.TestCase):
         self.assertFalse(any('vm-stats-' in url for url in requests))
         if PORTAL:
             self.assertFalse(any(not url.startswith(self.base) for url in requests), requests)
-            self.assertEqual(page.locator('a.ap').count(), 22)
+            self.assertEqual(page.locator('a.ap').count(), 27)
             self.assertEqual(page.locator('.ap.soon').count(), 2)
-            self.assertEqual(page.locator('a.ap img').count(), 22)
+            self.assertEqual(page.locator('a.ap img').count(), 27)
             for href in page.locator('a.ap').evaluate_all('links => links.map(link=>link.href)'):
                 self.assertIn(urlsplit(href).hostname, [urlsplit(self.base).hostname, 'velocemercato.fr', 'velocemercato.github.io'])
         else:
