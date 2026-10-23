@@ -12,7 +12,7 @@ Fichiers : `assets/home-clarity.css`, `assets/home-navigation.js`, `index.html` 
 
 ## VM Univers
 
-L'accueil commence par une présentation courte, la recherche et un sélecteur de thème. Les six catégories sont repliées au départ ; une recherche ou un thème ouvre les résultats. Les 28 liens de projets restent identiques, avec deux projets à venir. Le logo, les visuels et la mention « Disponible courant juin 2027 » du detailing sont conservés. Le studio professionnel reste accessible directement ; les coulisses et le contact sont plus bas.
+L'accueil commence par une présentation courte, la recherche et un sélecteur de thème. Les six catégories sont repliées au départ ; une recherche ou un thème ouvre les résultats. Les 28 liens de projets restent identiques, avec deux projets à venir. Le logo, les visuels et la mention « Disponible courant juin 2027 » du detailing sont conservés. Le studio professionnel reste accessible directement ; les coulisses et le contact sont plus bas. Les tarifs, les sept démonstrations métiers et les étapes ajoutés par Claude sont conservés dans un volet professionnel replié, avec accès direct par les liens Tarifs et Démonstrations. Les anciennes URL `#tarifs` et `#demos` ouvrent ce volet automatiquement.
 
 Les paramètres `q` et `theme`, les liens partagés, les deux modes de cartes et la navigation sans redirection de domaine sont préservés. Les réseaux du portail restent Facebook, Instagram et TikTok de Véloce Mercato, clairement identifiés en attendant les comptes VM Univers.
 

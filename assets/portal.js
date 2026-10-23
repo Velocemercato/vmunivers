@@ -94,6 +94,20 @@
   let mode = 'big';
   try { mode = localStorage.getItem('vm-hub-vue') || 'big'; } catch (_) { /* Vue par défaut. */ }
   view(mode);
+  function revealSection() {
+    let id = '';
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch (_) { return; }
+    const target = document.getElementById(id);
+    if (!target) return;
+    let node = target;
+    while (node) {
+      if (node.tagName === 'DETAILS') node.open = true;
+      node = node.parentElement;
+    }
+    requestAnimationFrame(() => target.scrollIntoView({block: 'start'}));
+  }
+  addEventListener('hashchange', revealSection);
+  revealSection();
   let hash = '';
   try { hash = decodeURIComponent(location.hash.slice(1)); } catch (_) { /* URL mal formée. */ }
   const group = groups.find(item => item.id === `g-${hash}` || item.id === hash);

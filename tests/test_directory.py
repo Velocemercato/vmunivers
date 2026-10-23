@@ -48,4 +48,18 @@ class DirectoryTests(unittest.TestCase):
         page.locator('.portal-links a[href="#projets"]').click();self.assertEqual(page.locator('.ap:not([hidden])').count(),30)
         context.close()
 
+    def test_professional_offers_stay_compact_and_hash_links_open_them(self):
+        for width in [320, 390, 1440]:
+            context=self.context(width);page=context.new_page();page.goto(self.base,wait_until='networkidle')
+            self.assertFalse(page.locator('#offres-pro').evaluate('node => node.open'))
+            page.locator('.portal-pro-actions a[href="#tarifs"]').click()
+            self.assertTrue(page.locator('#tarifs').is_visible())
+            self.assertEqual(page.locator('#tarifs .tf').count(),6)
+            self.assertEqual(page.evaluate('document.documentElement.scrollWidth'),width)
+            page.goto(self.base+'/#demos',wait_until='networkidle')
+            self.assertTrue(page.locator('#demos').is_visible())
+            self.assertEqual(page.locator('#demos .dm').count(),7)
+            self.assertEqual(page.evaluate('document.documentElement.scrollWidth'),width)
+            context.close()
+
 if __name__=='__main__':unittest.main(verbosity=2)
