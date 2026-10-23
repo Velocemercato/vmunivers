@@ -11,9 +11,9 @@ class DirectoryTests(unittest.TestCase):
     def test_themes_preserve_every_project_and_count(self):
         context=self.context();page=context.new_page();page.goto(self.base,wait_until='networkidle')
         self.assertEqual(page.locator('.grp').count(),6)
-        self.assertEqual(page.locator('.ap').count(),29)
-        titles=page.locator('.ap .ab b').all_text_contents();self.assertEqual(len(set(titles)),29)
-        totals={'medias':4,'auto':2,'pro':2,'quotidien':16,'communaute':3,'bientot':2}
+        self.assertEqual(page.locator('.ap').count(),30)
+        titles=page.locator('.ap .ab b').all_text_contents();self.assertEqual(len(set(titles)),30)
+        totals={'medias':4,'auto':2,'pro':3,'quotidien':16,'communaute':3,'bientot':2}
         for theme,total in totals.items():
             page.locator(f'.theme-chip[data-theme="{theme}"]').click()
             self.assertEqual(page.locator('.ap:not([hidden])').count(),total)
@@ -32,7 +32,7 @@ class DirectoryTests(unittest.TestCase):
         page.reload(wait_until='networkidle');self.assertEqual(page.get_by_role('searchbox').input_value(),'rénovation jantes')
         self.assertEqual(page.locator('.ap:not([hidden])').count(),1)
         page.get_by_role('searchbox').fill('introuvable-9876');self.assertTrue(page.locator('#none').is_visible())
-        page.locator('#resetFilters').click();self.assertEqual(page.locator('.ap:not([hidden])').count(),29)
+        page.locator('#resetFilters').click();self.assertEqual(page.locator('.ap:not([hidden])').count(),30)
         self.assertFalse(page.locator('#none').is_visible());self.assertFalse(page.locator('#resetFilters').is_visible())
         context.close()
 
@@ -43,7 +43,7 @@ class DirectoryTests(unittest.TestCase):
         self.assertEqual(page.locator('.grp:not([hidden])').count(),1)
         self.assertEqual(page.locator('.ap:not([hidden])').count(),4)
         self.assertTrue(page.locator('#g-passion').get_attribute('open') is not None)
-        page.locator('.portal-links a[href="#projets"]').click();self.assertEqual(page.locator('.ap:not([hidden])').count(),29)
+        page.locator('.portal-links a[href="#projets"]').click();self.assertEqual(page.locator('.ap:not([hidden])').count(),30)
         context.close()
 
 if __name__=='__main__':unittest.main(verbosity=2)
