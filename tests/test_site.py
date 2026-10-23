@@ -8,7 +8,7 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from threading import Thread
 import unittest
-from urllib.parse import urlsplit
+from urllib.parse import parse_qs, urlsplit
 from urllib.request import urlopen
 from urllib.error import HTTPError
 
@@ -79,11 +79,11 @@ class SiteTests(unittest.TestCase):
         self.assertFalse(any('vm-stats-' in url for url in requests))
         if PORTAL:
             self.assertFalse(any(not url.startswith(self.base) for url in requests), requests)
-            self.assertEqual(page.locator('a.ap').count(), 20)
+            self.assertEqual(page.locator('a.ap').count(), 21)
             self.assertEqual(page.locator('.ap.soon').count(), 2)
-            self.assertEqual(page.locator('a.ap img').count(), 20)
+            self.assertEqual(page.locator('a.ap img').count(), 21)
             for href in page.locator('a.ap').evaluate_all('links => links.map(link=>link.href)'):
-                self.assertIn(urlsplit(href).hostname, ['velocemercato.fr', 'velocemercato.github.io'])
+                self.assertIn(urlsplit(href).hostname, ['velocemercato.fr', 'velocemercato.github.io', '127.0.0.1'])
         else:
             self.assertEqual(page.locator('header a.logo').get_attribute('href'), '/')
             self.assertEqual(page.locator('.vmbar .vmb-logo').get_attribute('href'), 'https://vmunivers.fr/')
@@ -214,6 +214,51 @@ class SiteTests(unittest.TestCase):
             self.assertIn('href="https://vmunivers.fr/"', output)
             self.assertNotIn('vm-stats-', output)
             self.assertIn('Article de contrôle', output)
+
+    def test_06_meteo_decouverte(self):
+        if not PORTAL:
+            self.skipTest('Page propre au portail')
+        def weather(route):
+            query = parse_qs(urlsplit(route.request.url).query)
+            count = len(query['latitude'][0].split(','))
+            days = int(query['forecast_days'][0])
+            item = {'current': {'time': '2026-10-23T14:00', 'temperature_2m': 14.2, 'apparent_temperature': 12.9, 'weather_code': 3,
+                                'wind_speed_10m': 11.0, 'relative_humidity_2m': 70},
+                    'daily': {'time': [f'2026-10-{23 + d}' for d in range(days)], 'weather_code': [61] * days,
+                              'temperature_2m_max': [16.0] * days, 'temperature_2m_min': [8.0] * days, 'precipitation_probability_max': [40] * days}}
+            if 'hourly' in query:
+                item['hourly'] = {'time': [f'2026-10-{23 + h // 24}T{h % 24:02d}:00' for h in range(days * 24)],
+                                  'temperature_2m': [12.0] * days * 24, 'weather_code': [2] * days * 24, 'precipitation_probability': [10] * days * 24}
+            route.fulfill(json=item if count == 1 else [item] * count)
+        def geocode(route):
+            route.fulfill(json={'results': [{'name': 'Belfort', 'latitude': 47.64, 'longitude': 6.86, 'admin1': 'Bourgogne-Franche-Comté', 'country': 'France'}]})
+        for width in [320, 1440]:
+            context = self.context(width, 'dark')
+            context.route('https://api.open-meteo.com/**', weather)
+            context.route('https://geocoding-api.open-meteo.com/**', geocode)
+            page = context.new_page()
+            errors = []
+            page.on('pageerror', lambda error: errors.append(str(error)))
+            page.goto(self.base + '/meteo/', wait_until='networkidle')
+            self.assertEqual(page.locator('#villes .ville').count(), 16)
+            self.assertIn('14°', page.locator('#villes .ville').first.inner_text())
+            page.get_by_role('tab', name='🌍 Monde').click()
+            page.wait_for_function("document.querySelectorAll('#villes .ville').length === 16 && document.querySelector('#villes .ville b').textContent === 'New York'")
+            self.assertGreater(page.locator('#lieux .lieu').count(), 4)
+            page.wait_for_function("[...document.querySelectorAll('#lieux .wx')].every(p => p.textContent.includes('14°'))")
+            page.locator('#cats button', has_text='Nature').click()
+            self.assertTrue(all(tag == 'Nature' for tag in page.locator('#lieux .tag').all_text_contents()))
+            page.locator('#ville').fill('Belfort')
+            page.get_by_role('button', name='Chercher').click()
+            page.locator('#choix button').first.click()
+            page.wait_for_selector('#detail .hours li')
+            self.assertEqual(page.locator('#detail .hours li').count(), 24)
+            self.assertEqual(page.locator('#detail .days li').count(), 7)
+            self.assertIn('Belfort', page.locator('#detail h2').inner_text())
+            self.assertEqual(page.evaluate('document.documentElement.scrollWidth'), width)
+            self.assertFalse(errors, errors)
+            page.screenshot(path=str(ARTIFACTS / f'meteo-{width}px.png'), full_page=True)
+            context.close()
 
 
 if __name__ == '__main__':

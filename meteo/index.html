@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VM Météo &amp; Découverte — météo France, Europe, monde et lieux à visiter</title>
+<meta name="description" content="La météo du jour en France, en Europe et dans le monde, prévisions sur 7 jours et les plus beaux lieux à visiter région par région, avec itinéraire.">
+<link rel="canonical" href="https://vmunivers.fr/meteo/">
+<meta property="og:title" content="VM Météo & Découverte"><meta property="og:description" content="Météo France, Europe, monde et lieux à visiter par région."><meta property="og:url" content="https://vmunivers.fr/meteo/"><meta property="og:image" content="https://vmunivers.fr/app/logo-vm-officiel.png">
+<link rel="icon" href="/app/univers-192.png" type="image/png"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#000000">
+<link rel="stylesheet" href="/assets/portal.css"><link rel="stylesheet" href="/meteo/meteo.css">
+</head>
+<body>
+<a class="skip" href="#meteo">Aller à la météo</a>
+<nav class="portal-nav" aria-label="Navigation principale">
+<a class="portal-brand" href="/" aria-label="VM Univers, accueil"><img src="/app/univers-192.png" alt="" width="36" height="36">VM UNIVERS</a>
+<div class="portal-links"><a href="#meteo">Météo</a><a href="#decouvrir">Lieux à visiter</a><a href="/">Tous les projets</a></div>
+</nav>
+<header class="mhero">
+<p class="eyebrow">VM Météo &amp; Découverte</p>
+<h1>Le temps qu’il fait.<br><span>Les lieux à voir.</span></h1>
+<p>Météo en direct en France, en Europe et dans le monde, prévisions sur 7 jours, et les plus beaux endroits à visiter, région par région. <span class="sub">Aujourd’hui : <span id="date"></span></span></p>
+</header>
+<main>
+<section id="meteo" aria-labelledby="t-meteo">
+<h2 id="t-meteo">🌦️ La météo</h2>
+<form id="cherche" class="cherche" role="search"><label for="ville" class="sr-only">Ville</label><input id="ville" type="search" placeholder="Ta ville : Belfort, Lyon, Rome…" autocomplete="off" required><button type="submit">Chercher</button><button type="button" id="position">📍 Ma position</button></form>
+<ul id="choix" class="choix" aria-live="polite"></ul>
+<section id="detail" class="detail" aria-live="polite" hidden></section>
+<div class="tabs" role="tablist" aria-label="Zone"><button type="button" role="tab" data-zone="france" aria-selected="true">🇫🇷 France</button><button type="button" role="tab" data-zone="europe" aria-selected="false">🇪🇺 Europe</button><button type="button" role="tab" data-zone="monde" aria-selected="false">🌍 Monde</button></div>
+<div id="villes" class="villes" aria-live="polite"></div>
+<p class="note">Touchez une ville pour ses prévisions heure par heure et sur 7 jours.</p>
+</section>
+<section id="decouvrir" aria-labelledby="t-lieux">
+<h2 id="t-lieux">🧭 Lieux à visiter</h2>
+<div class="filtres"><label for="region">Région</label><select id="region"></select></div>
+<div id="cats" class="cats" aria-label="Type de lieu"></div>
+<div id="lieux" class="lieux"></div>
+<div class="cta"><div><b>Tu connais un endroit à ne pas manquer ?</b><p>Propose-le : chaque lieu est vérifié avant d’être ajouté.</p></div><a class="btn" href="mailto:velocemercato.fr@gmail.com?subject=VM%20M%C3%A9t%C3%A9o%20%26%20D%C3%A9couverte%20%3A%20proposer%20un%20lieu&amp;body=Nom%20du%20lieu%20%3A%0AVille%20et%20d%C3%A9partement%20%3A%0APourquoi%20le%20visiter%20%3A">✉️ Proposer un lieu</a></div>
+</section>
+<p class="note">Données météo : <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a> (CC BY 4.0), mises à jour en continu. Itinéraires ouverts dans Mappy, Google Maps ou OpenStreetMap. Un projet <a href="/">VM Univers</a> · <a href="https://velocemercato.fr/mentions-legales.html">Mentions légales</a></p>
+</main>
+<script src="/meteo/lieux.js" defer></script><script src="/meteo/meteo.js" defer></script>
+</body>
+</html>
