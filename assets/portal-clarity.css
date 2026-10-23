@@ -1,0 +1,50 @@
+/* Un accueil de portail : choisir un thème avant d'ouvrir ses projets. */
+.portal-intro .hub-pro-in{padding:30px 0 28px;gap:36px;grid-template-columns:minmax(0,1.7fr) minmax(200px,.8fr)}
+.portal-intro .hub-copy h1{font-size:clamp(2rem,4.2vw,3.3rem);margin:10px 0 14px}
+.portal-intro .hub-copy p:not(.eyebrow){margin-bottom:20px;max-width:570px}
+.portal-intro .hub-signature{padding:18px;gap:10px;transform:none;border-radius:20px}
+.portal-intro .hub-signature img{width:100px;height:100px}
+.portal-intro .hub-signature>span{font-size:1.2rem}
+.portal-nav{gap:16px}
+.directory-tools{padding:8px 0 18px;margin-bottom:20px}
+.directory-search-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,.4fr);gap:12px}
+.directory-search-row .srch{max-width:none;width:100%;margin:0}
+.theme-select{display:flex;min-width:0}
+.theme-select select{width:100%;min-width:0;background:var(--panel);color:var(--ink);border:1px solid #ffffff35;border-radius:14px;padding:14px 36px 14px 14px;font:inherit;cursor:pointer}
+.theme-select select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.tools{margin-top:12px!important}.views button{min-width:38px;min-height:38px}
+.directory-heading{margin:20px 0 14px;align-items:center}.directory-heading .eyebrow{display:none}.directory-heading h2{font-size:1.35rem}
+.grp{margin:0 0 12px;padding:0;border:1px solid #ffffff24;border-radius:16px;background:#10182b75;overflow:hidden;scroll-margin-top:140px}
+.grp>summary{gap:12px;padding:18px 20px;min-height:92px}
+.grp>summary b{font-size:1rem}.grp>summary small{font-size:.8rem;line-height:1.45;max-width:410px}
+.grp>summary>span:first-child{flex:1}
+.grp>summary .theme-preview{display:flex;align-items:center;flex:none;gap:5px}
+.theme-preview img{width:26px;height:26px;border-radius:8px;background:#080d18;object-fit:contain}
+.grp>summary em{font-size:.78rem;min-width:30px;text-align:center}
+.grp[open]>summary{border-bottom:1px solid #ffffff18;background:#ffffff04}
+.grp .gapps{padding:16px;gap:12px}
+.apps.big .ap{background:#0d1424;min-height:145px}
+.apps.big .ai{width:auto;min-width:0}
+.is-filtered .theme-preview{display:none!important}
+.feat{margin:24px 0 0;min-height:190px}.feat .ftxt{max-width:650px}.feat .ftxt>small{font-size:.65rem}
+.portal-pro-teaser{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px;margin:28px 0 18px;border:1px solid #f4cf5535;border-radius:18px;background:#121a2b}
+.portal-pro-teaser .eyebrow{margin-top:0;font-size:.62rem}.portal-pro-teaser h2{font-size:1.35rem;margin:0 0 8px;line-height:1.25}
+.portal-pro-teaser p:not(.eyebrow){font-size:.9rem;color:var(--muted);margin:0;max-width:620px}.portal-pro-teaser .btn{flex:none;font-size:.85rem}
+.portal-story{margin:20px 0;color:var(--muted);font-size:.86rem}.portal-story summary{cursor:pointer;padding:10px 0;font-weight:700}.portal-story p{margin:6px 0 12px}.portal-story a{color:var(--gold)}
+.cta{margin-top:22px;padding:22px}.cta b{font-size:1rem}.cta p{font-size:.86rem}
+@media(max-width:700px){
+ .portal-intro .hub-pro-in{grid-template-columns:minmax(0,1fr);padding:25px 0 12px;gap:0}
+ .portal-intro .hub-copy h1{font-size:2rem;margin:10px 0 14px}.portal-intro .hub-copy p:not(.eyebrow){font-size:.92rem;margin-bottom:16px}
+ .portal-intro .hub-actions{gap:6px 14px}.portal-intro .hub-actions .btn{font-size:.83rem}.portal-intro .hub-secondary{font-size:.8rem}
+ .portal-intro{padding-bottom:14px}.directory-search-row{grid-template-columns:minmax(0,1fr)}
+ .directory-tools .tools{gap:8px}.theme-select select{padding-block:11px}.directory-search-row .srch input{padding-block:11px}
+ .directory-heading h2{font-size:1.2rem}.directory-heading button{max-width:none;padding:8px 10px;min-height:40px;white-space:nowrap}
+ .grp>summary{padding:16px 14px;gap:9px;min-height:96px}.grp>summary b{font-size:.98rem}.grp>summary small{font-size:.77rem}
+ .grp>summary .theme-preview{display:none}.grp>summary em{padding:3px 7px}
+ .grp .gapps{padding:12px}.apps.big .ap{grid-template-columns:78px minmax(0,1fr)}
+ .portal-pro-teaser{display:block;padding:20px}.portal-pro-teaser .btn{margin-top:16px}.portal-pro-teaser h2{font-size:1.2rem}
+ .feat .ftxt{padding:20px}.feat .ftxt>span:not(.feature-opening){font-size:.82rem}
+ .cta{padding:18px}.cta .btn{font-size:.78rem}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.portal-simple #vmFab{position:static;display:inline-flex;align-items:center;min-height:40px;padding:9px 14px;font:700 .8rem/1.4 system-ui,sans-serif;box-shadow:none;border-width:1px;margin:0}

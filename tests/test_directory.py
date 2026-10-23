@@ -15,17 +15,17 @@ class DirectoryTests(unittest.TestCase):
         titles=page.locator('.ap .ab b').all_text_contents();self.assertEqual(len(set(titles)),30)
         totals={'medias':4,'auto':2,'pro':3,'quotidien':16,'communaute':3,'bientot':2}
         for theme,total in totals.items():
-            page.locator(f'.theme-chip[data-theme="{theme}"]').click()
+            page.get_by_role('combobox',name='Choisir un thème').select_option(theme)
             self.assertEqual(page.locator('.ap:not([hidden])').count(),total)
             self.assertEqual(page.locator('.grp:not([hidden])').count(),1)
             self.assertTrue(page.locator('.grp:not([hidden])').get_attribute('open') is not None)
-            self.assertEqual(page.locator(f'.theme-chip[data-theme="{theme}"]').get_attribute('aria-pressed'),'true')
+            self.assertEqual(page.get_by_role('combobox',name='Choisir un thème').input_value(),theme)
             self.assertEqual(parse_qs(urlsplit(page.url).query)['theme'],[theme])
         context.close()
 
     def test_combined_search_reset_and_shared_url(self):
         context=self.context();page=context.new_page();page.goto(self.base+'/?utm_source=instagram',wait_until='networkidle')
-        page.locator('.theme-chip[data-theme="auto"]').click();page.get_by_role('searchbox').fill('rénovation jantes')
+        page.get_by_role('combobox',name='Choisir un thème').select_option('auto');page.get_by_role('searchbox').fill('rénovation jantes')
         self.assertEqual(page.locator('.ap:not([hidden])').count(),1)
         self.assertIn('vmunivers',page.locator('link[rel=canonical]').get_attribute('href'))
         self.assertEqual(parse_qs(urlsplit(page.url).query)['utm_source'],['instagram'])
@@ -38,6 +38,8 @@ class DirectoryTests(unittest.TestCase):
 
     def test_navigation_opens_selected_theme_after_collapse(self):
         context=self.context();page=context.new_page();page.goto(self.base,wait_until='networkidle')
+        self.assertEqual(page.locator('.grp[open]').count(),0)
+        page.locator('#toggleGroups').click();self.assertEqual(page.locator('.grp[open]').count(),6)
         page.locator('#toggleGroups').click();self.assertEqual(page.locator('.grp[open]').count(),0)
         page.locator('.portal-links a[href="#g-passion"]').click()
         self.assertEqual(page.locator('.grp:not([hidden])').count(),1)

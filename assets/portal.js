@@ -6,7 +6,7 @@
   const initialOpen = new Map(groups.map(group => [group, group.open]));
   const count = document.getElementById('projectCount');
   const feature = root.querySelector('.feat');
-  const chips = [...document.querySelectorAll('.theme-chip')];
+  const themeSelect = document.getElementById('themeSelect');
   const reset = document.getElementById('resetFilters');
   const toggle = document.getElementById('toggleGroups');
   const normalize = text => String(text || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -14,13 +14,14 @@
   const params = new URLSearchParams(location.search);
   let theme = knownThemes.has(params.get('theme')) ? params.get('theme') : '';
   search.value = params.get('q') || '';
-  document.querySelectorAll('[data-theme-count]').forEach(span => {
-    span.textContent = String(span.dataset.themeCount ? items.filter(item => item.closest('.grp').dataset.theme === span.dataset.themeCount).length : items.length);
+  [...themeSelect.options].forEach(option => {
+    const total = option.value ? items.filter(item => item.closest('.grp').dataset.theme === option.value).length : items.length;
+    option.textContent = `${option.dataset.label} (${total})`;
   });
   function syncToggle() {
     const visible = groups.filter(group => !group.hidden);
     const open = visible.some(group => group.open);
-    toggle.textContent = open ? 'Replier les catégories' : 'Déplier les catégories';
+    toggle.textContent = open ? 'Tout replier' : 'Tout afficher';
     toggle.setAttribute('aria-expanded', String(open));
     toggle.hidden = !visible.length;
   }
@@ -38,11 +39,8 @@
       group.querySelector('[data-group-count]').textContent = String(visible);
       group.open = active ? visible > 0 : initialOpen.get(group);
     });
-    chips.forEach(chip => {
-      const selected = chip.dataset.theme === theme;
-      chip.classList.toggle('on', selected);
-      chip.setAttribute('aria-pressed', String(selected));
-    });
+    themeSelect.value = theme;
+    root.classList.toggle('is-filtered', active);
     const visible = items.filter(item => !item.hidden).length;
     count.textContent = `${visible} projet${visible > 1 ? 's' : ''}${active ? ' trouvé' + (visible > 1 ? 's' : '') : ' à découvrir'}`;
     document.getElementById('none').hidden = visible > 0;
@@ -61,7 +59,7 @@
   }
   search.addEventListener('input', () => filter(true));
   search.addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); search.blur(); showResults(); } });
-  chips.forEach(chip => chip.addEventListener('click', () => { theme = chip.dataset.theme; filter(true); showResults(); }));
+  themeSelect.addEventListener('change', () => { theme = themeSelect.value; filter(true); showResults(); });
   reset.addEventListener('click', () => { search.value = ''; theme = ''; filter(true); search.focus(); });
   groups.forEach(group => group.addEventListener('toggle', () => {
     if (!search.value.trim() && !theme) initialOpen.set(group, group.open);
@@ -75,7 +73,7 @@
     });
     syncToggle();
   });
-  document.querySelectorAll('.portal-links a[href^="#"]').forEach(link => link.addEventListener('click', () => {
+  document.querySelectorAll('.portal-links a[href^="#"], .hub-actions a[href="#projets"]').forEach(link => link.addEventListener('click', () => {
     const group = groups.find(group => '#' + group.id === link.getAttribute('href'));
     if (group) { search.value = ''; theme = group.dataset.theme; filter(true); group.open = true; }
     else if (link.getAttribute('href') === '#projets') { search.value = ''; theme = ''; filter(true); }
