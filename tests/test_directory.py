@@ -13,7 +13,7 @@ class DirectoryTests(unittest.TestCase):
         self.assertEqual(page.locator('.grp').count(),6)
         self.assertEqual(page.locator('.ap').count(),29)
         titles=page.locator('.ap .ab b').all_text_contents();self.assertEqual(len(set(titles)),29)
-        totals={'medias':4,'auto':3,'pro':4,'quotidien':12,'communaute':4,'bientot':2}
+        totals={'medias':4,'auto':2,'pro':2,'quotidien':16,'communaute':3,'bientot':2}
         for theme,total in totals.items():
             page.locator(f'.theme-chip[data-theme="{theme}"]').click()
             self.assertEqual(page.locator('.ap:not([hidden])').count(),total)
