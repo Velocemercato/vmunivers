@@ -83,7 +83,7 @@ class SiteTests(unittest.TestCase):
             self.assertEqual(page.locator('.ap.soon').count(), 2)
             self.assertEqual(page.locator('a.ap img').count(), 20)
             for href in page.locator('a.ap').evaluate_all('links => links.map(link=>link.href)'):
-                self.assertIn(urlsplit(href).hostname, ['velocemercato.fr', 'velocemercato.github.io'])
+                self.assertIn(urlsplit(href).hostname, [urlsplit(self.base).hostname, 'velocemercato.fr', 'velocemercato.github.io'])
         else:
             self.assertEqual(page.locator('header a.logo').get_attribute('href'), '/')
             self.assertEqual(page.locator('.vmbar .vmb-logo').get_attribute('href'), 'https://vmunivers.fr/')

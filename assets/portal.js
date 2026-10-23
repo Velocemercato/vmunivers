@@ -100,6 +100,6 @@
   try { hash = decodeURIComponent(location.hash.slice(1)); } catch (_) { /* URL mal formée. */ }
   const group = groups.find(item => item.id === `g-${hash}` || item.id === hash);
   if (group) { initialOpen.set(group, true); group.open = true; }
-  else if (hash && hash !== 'projets' && hash !== 'contact') search.value = hash;
+  else if (hash && !document.getElementById(hash)) search.value = hash;
   filter();
 })();
