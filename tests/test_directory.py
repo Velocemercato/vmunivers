@@ -10,10 +10,10 @@ class DirectoryTests(unittest.TestCase):
 
     def test_themes_preserve_every_project_and_count(self):
         context=self.context();page=context.new_page();page.goto(self.base,wait_until='networkidle')
-        self.assertEqual(page.locator('.grp').count(),6)
+        self.assertEqual(page.locator('.grp').count(),8)
         self.assertEqual(page.locator('.ap').count(),30)
         titles=page.locator('.ap .ab b').all_text_contents();self.assertEqual(len(set(titles)),30)
-        totals={'medias':4,'auto':2,'pro':3,'quotidien':16,'communaute':3,'bientot':2}
+        totals={'medias':4,'auto':3,'pro':5,'quotidien':4,'local':5,'achats':3,'communaute':4,'bientot':2}
         for theme,total in totals.items():
             page.get_by_role('combobox',name='Choisir un thème').select_option(theme)
             self.assertEqual(page.locator('.ap:not([hidden])').count(),total)
@@ -39,7 +39,7 @@ class DirectoryTests(unittest.TestCase):
     def test_navigation_opens_selected_theme_after_collapse(self):
         context=self.context();page=context.new_page();page.goto(self.base,wait_until='networkidle')
         self.assertEqual(page.locator('.grp[open]').count(),0)
-        page.locator('#toggleGroups').click();self.assertEqual(page.locator('.grp[open]').count(),6)
+        page.locator('#toggleGroups').click();self.assertEqual(page.locator('.grp[open]').count(),8)
         page.locator('#toggleGroups').click();self.assertEqual(page.locator('.grp[open]').count(),0)
         page.locator('.portal-links a[href="#g-passion"]').click()
         self.assertEqual(page.locator('.grp:not([hidden])').count(),1)
