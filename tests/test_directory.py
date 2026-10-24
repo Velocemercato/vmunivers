@@ -10,22 +10,49 @@ class DirectoryTests(unittest.TestCase):
 
     def test_themes_preserve_every_project_and_count(self):
         context=self.context();page=context.new_page();page.goto(self.base,wait_until='networkidle')
-        self.assertEqual(page.locator('.grp').count(),8)
+        self.assertEqual(page.locator('.grp').count(),6)
         self.assertEqual(page.locator('.ap').count(),30)
         titles=page.locator('.ap .ab b').all_text_contents();self.assertEqual(len(set(titles)),30)
-        totals={'medias':4,'auto':3,'pro':5,'quotidien':4,'local':5,'achats':3,'communaute':4,'bientot':2}
+        totals={'medias':4,'pro':4,'quotidien':6,'local':5,'communaute':3,'bientot':8}
+        self.assertEqual(sum(totals.values()),30)
         for theme,total in totals.items():
-            page.get_by_role('combobox',name='Choisir un thème').select_option(theme)
+            chip=page.locator(f'#themeFilters [data-theme-filter="{theme}"]')
+            self.assertIn(str(total),chip.inner_text())
+            chip.click()
             self.assertEqual(page.locator('.ap:not([hidden])').count(),total)
             self.assertEqual(page.locator('.grp:not([hidden])').count(),1)
             self.assertTrue(page.locator('.grp:not([hidden])').get_attribute('open') is not None)
-            self.assertEqual(page.get_by_role('combobox',name='Choisir un thème').input_value(),theme)
+            self.assertEqual(chip.get_attribute('aria-pressed'),'true')
+            self.assertEqual(page.locator('#themeFilters [aria-pressed="true"]').count(),1)
             self.assertEqual(parse_qs(urlsplit(page.url).query)['theme'],[theme])
+        page.locator('#themeFilters [data-theme-filter=""]').click();self.assertEqual(page.locator('.ap:not([hidden])').count(),30)
+        context.close()
+
+    def test_old_theme_links_still_work(self):
+        context=self.context();page=context.new_page()
+        for url in ['/?theme=auto','/?theme=achats']:
+            page.goto(self.base+url,wait_until='networkidle')
+            self.assertEqual(page.locator('.grp:not([hidden])').count(),1)
+            self.assertTrue(page.locator('#g-local').is_visible())
+        page.goto(self.base+'/#g-achats',wait_until='networkidle')
+        self.assertTrue(page.locator('#g-local').get_attribute('open') is not None)
+        self.assertEqual(page.get_by_role('searchbox').input_value(),'')
+        context.close()
+
+    def test_studio_banner_and_badges(self):
+        context=self.context();page=context.new_page();page.goto(self.base,wait_until='networkidle')
+        banner=page.locator('#vm-studio')
+        self.assertTrue(banner.is_visible())
+        self.assertIn('VM Studio',banner.inner_text());self.assertIn('290 €',banner.inner_text())
+        self.assertEqual(banner.locator('a[href="https://velocemercato.fr/web-studio.html"]').count(),1)
+        self.assertEqual(banner.locator('a[href="tel:+33601112633"]').count(),1)
+        self.assertEqual(page.locator('.ap .bdg').count(),30)
+        self.assertEqual(page.locator('#g-bientot .ap .bdg.b-soon').count(),8)
         context.close()
 
     def test_combined_search_reset_and_shared_url(self):
         context=self.context();page=context.new_page();page.goto(self.base+'/?utm_source=instagram',wait_until='networkidle')
-        page.get_by_role('combobox',name='Choisir un thème').select_option('auto');page.get_by_role('searchbox').fill('rénovation jantes')
+        page.locator('#themeFilters [data-theme-filter="bientot"]').click();page.get_by_role('searchbox').fill('rénovation jantes')
         self.assertEqual(page.locator('.ap:not([hidden])').count(),1)
         self.assertIn('vmunivers',page.locator('link[rel=canonical]').get_attribute('href'))
         self.assertEqual(parse_qs(urlsplit(page.url).query)['utm_source'],['instagram'])
@@ -38,8 +65,9 @@ class DirectoryTests(unittest.TestCase):
 
     def test_navigation_opens_selected_theme_after_collapse(self):
         context=self.context();page=context.new_page();page.goto(self.base,wait_until='networkidle')
-        self.assertEqual(page.locator('.grp[open]').count(),0)
-        page.locator('#toggleGroups').click();self.assertEqual(page.locator('.grp[open]').count(),8)
+        self.assertEqual(page.locator('.grp[open]').count(),1)
+        self.assertTrue(page.locator('#g-passion').get_attribute('open') is not None)
+        page.locator('#toggleGroups').click();self.assertEqual(page.locator('.grp[open]').count(),6)
         page.locator('#toggleGroups').click();self.assertEqual(page.locator('.grp[open]').count(),0)
         page.locator('.portal-links a[href="#g-passion"]').click()
         self.assertEqual(page.locator('.grp:not([hidden])').count(),1)
