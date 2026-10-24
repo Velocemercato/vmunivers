@@ -54,3 +54,12 @@
 .portal-offers{margin:18px 0;border:1px solid #f4cf5535;border-radius:18px;background:var(--panel);scroll-margin-top:130px}.portal-offers .client{padding:24px 20px;scroll-margin-top:130px}.portal-pro-actions{display:flex;flex-direction:column;align-items:flex-start;gap:10px;flex:none}.portal-pro-actions>a:not(.btn){color:var(--gold);font-size:.85rem}.portal-offers .tf-badge{font-size:.6rem}.portal-offers .tf{background:var(--panel);color:var(--ink)}.portal-offers .dm,.portal-offers .steps li{background:var(--panel);color:var(--ink)}@media(max-width:560px){.portal-offers .tf-grid{grid-template-columns:minmax(0,1fr)}.portal-offers .tf p{display:block}.portal-offers .client{padding:20px 14px}}
 
 .visual-credit{max-width:1180px;margin:20px auto;padding:0 16px;font-size:.78rem;line-height:1.5;color:#a9b4c8}
+
+/* Volet « Réservé aux majeurs » : séparé de l'annuaire, liens vers les démos CBD/caviste et VM Services */
+.adult18{margin-top:14px;border:2px solid #e1243a;border-radius:18px;background:var(--panel,#121a2e);overflow:hidden}
+.adult18>summary{display:flex;align-items:center;gap:12px;padding:16px 20px;cursor:pointer;list-style:none}.adult18>summary::-webkit-details-marker{display:none}
+.adult18>summary b{display:block;font-size:1rem}.adult18>summary small{display:block;font-size:.8rem;opacity:.8}
+.a18-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:10px;padding:0 20px}
+.a18-list a{display:block;padding:12px 14px;border:1px solid currentColor;border-radius:12px;text-decoration:none;color:inherit}.a18-list a:hover{border-color:#e1243a}
+.a18-list b{display:block}.a18-list small{display:block;opacity:.75;font-size:.8rem}
+.a18-note{margin:12px 20px;font-size:.8rem;opacity:.8}
