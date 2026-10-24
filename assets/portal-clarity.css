@@ -122,3 +122,5 @@
  .portal-offers .dm{scroll-snap-align:start}
  .portal-offers #demos{padding-top:6px}
 }
+/* Projet ouvert depuis peu : badge doré discret, sur deux lignes si l’écran est étroit. */
+.b-new{background:#f4cf551a;color:var(--gold);border:1px solid #f4cf5570;white-space:normal;line-height:1.25}

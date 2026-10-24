@@ -11,10 +11,10 @@ class DirectoryTests(unittest.TestCase):
     def test_themes_preserve_every_project_and_count(self):
         context=self.context();page=context.new_page();page.goto(self.base,wait_until='networkidle')
         self.assertEqual(page.locator('.grp').count(),6)
-        self.assertEqual(page.locator('.ap').count(),30)
-        titles=page.locator('.ap .ab b').all_text_contents();self.assertEqual(len(set(titles)),30)
-        totals={'medias':4,'pro':4,'quotidien':6,'local':5,'communaute':3,'bientot':8}
-        self.assertEqual(sum(totals.values()),30)
+        self.assertEqual(page.locator('.ap').count(),25)
+        titles=page.locator('.ap .ab b').all_text_contents();self.assertEqual(len(set(titles)),25)
+        totals={'medias':4,'pro':3,'quotidien':6,'local':6,'communaute':3,'bientot':3}
+        self.assertEqual(sum(totals.values()),25)
         for theme,total in totals.items():
             chip=page.locator(f'#themeFilters [data-theme-filter="{theme}"]')
             self.assertIn(str(total),chip.inner_text())
@@ -25,7 +25,7 @@ class DirectoryTests(unittest.TestCase):
             self.assertEqual(chip.get_attribute('aria-pressed'),'true')
             self.assertEqual(page.locator('#themeFilters [aria-pressed="true"]').count(),1)
             self.assertEqual(parse_qs(urlsplit(page.url).query)['theme'],[theme])
-        page.locator('#themeFilters [data-theme-filter=""]').click();self.assertEqual(page.locator('.ap:not([hidden])').count(),30)
+        page.locator('#themeFilters [data-theme-filter=""]').click();self.assertEqual(page.locator('.ap:not([hidden])').count(),25)
         context.close()
 
     def test_old_theme_links_still_work(self):
@@ -46,8 +46,8 @@ class DirectoryTests(unittest.TestCase):
         self.assertIn('VM Studio',banner.inner_text());self.assertIn('290 €',banner.inner_text())
         self.assertEqual(banner.locator('a[href="https://velocemercato.fr/web-studio.html"]').count(),1)
         self.assertEqual(banner.locator('a[href="tel:+33601112633"]').count(),1)
-        self.assertEqual(page.locator('.ap .bdg').count(),30)
-        self.assertEqual(page.locator('#g-bientot .ap .bdg.b-soon').count(),8)
+        self.assertEqual(page.locator('.ap .bdg').count(),25)
+        self.assertEqual(page.locator('#g-bientot .ap .bdg.b-soon').count(),3)
         context.close()
 
     def test_combined_search_reset_and_shared_url(self):
@@ -59,7 +59,7 @@ class DirectoryTests(unittest.TestCase):
         page.reload(wait_until='networkidle');self.assertEqual(page.get_by_role('searchbox').input_value(),'rénovation jantes')
         self.assertEqual(page.locator('.ap:not([hidden])').count(),1)
         page.get_by_role('searchbox').fill('introuvable-9876');self.assertTrue(page.locator('#none').is_visible())
-        page.locator('#resetFilters').click();self.assertEqual(page.locator('.ap:not([hidden])').count(),30)
+        page.locator('#resetFilters').click();self.assertEqual(page.locator('.ap:not([hidden])').count(),25)
         self.assertFalse(page.locator('#none').is_visible());self.assertFalse(page.locator('#resetFilters').is_visible())
         context.close()
 
@@ -73,7 +73,24 @@ class DirectoryTests(unittest.TestCase):
         self.assertEqual(page.locator('.grp:not([hidden])').count(),1)
         self.assertEqual(page.locator('.ap:not([hidden])').count(),4)
         self.assertTrue(page.locator('#g-passion').get_attribute('open') is not None)
-        page.locator('.portal-links a[href="#projets"]').click();self.assertEqual(page.locator('.ap:not([hidden])').count(),30)
+        page.locator('.portal-links a[href="#projets"]').click();self.assertEqual(page.locator('.ap:not([hidden])').count(),25)
+        context.close()
+
+    def test_cleaned_directory_has_no_empty_or_duplicate_card(self):
+        context=self.context();page=context.new_page();page.goto(self.base,wait_until='networkidle')
+        self.assertIn('25 PROJETS',page.locator('.directory-heading .eyebrow').inner_text().upper())
+        titles=page.locator('.ap .ab b').all_text_contents()
+        for gone in ['VM Bons Plans','La Pastille en vrai','Sites métiers à tester','VM Boutique','VM Auto Particulier']:
+            self.assertNotIn(gone,titles)
+        self.assertEqual(page.locator('.ap.soon').count(),0)
+        pro=page.locator('#g-local a.ap[href="https://velocemercato.fr/pro/"]')
+        self.assertEqual(pro.count(),1);self.assertEqual(titles.count('VM Pro Local'),1)
+        self.assertIn('Annuaire des artisans, commerces et pros de l’auto du secteur',pro.text_content())
+        self.assertEqual(pro.locator('.bdg').text_content(),'Nouveau · inscription gratuite')
+        self.assertFalse('is-soon' in pro.get_attribute('class'))
+        for word in ['garagiste','caviste']:
+            page.get_by_role('searchbox').fill(word)
+            self.assertEqual(page.locator('.ap:not([hidden]) b').all_text_contents(),['VM Pro Local'])
         context.close()
 
     def test_professional_offers_visible_before_directory(self):

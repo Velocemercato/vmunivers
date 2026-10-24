@@ -16,7 +16,7 @@ Il sert à trois choses :
 | Site | Adresse | Rôle |
 |---|---|---|
 | Véloce Mercato | https://velocemercato.fr | Média foot, VM Actus, VM Gaming, La Pastille TV, Web Studio, démos, location VM Detailing |
-| VM Univers | https://vmunivers.fr | Portail : offre client (tarifs, démos), annuaire des 30 projets |
+| VM Univers | https://vmunivers.fr | Portail : offre client (tarifs, démos), annuaire des 25 projets |
 | Papiers Sans Galère | https://velocemercato.github.io/Papiers-sans-galere/ | Aide gratuite aux démarches administratives |
 
 Dépôts GitHub (compte **Velocemercato**) :
@@ -68,7 +68,7 @@ Mentions présentes sur les sites : VM Univers, activité d'entrepreneur individ
 
 ## 3. Les pages de vmunivers.fr
 
-- `/` Portail : « Votre commerce en ligne, clé en main », **Nos tarifs** (6 formules), **Testez votre futur site** (8 démos), **Comment ça se passe**, puis l'annuaire des 30 projets rangé en **8 volets** : Médias & direct · Auto & espaces · Services aux pros · Emploi & démarches · Vie locale & loisirs · Acheter & comparer · Communauté & boutique · À venir.
+- `/` Portail : « Votre commerce en ligne, clé en main », **Nos tarifs** (6 formules), **Testez votre futur site** (8 démos), **Comment ça se passe**, puis l'annuaire des 25 projets rangé en **6 thèmes** : Actu & foot (4) · Pros · VM Studio (3) · Outils gratuits (6) · Près de chez moi (6, dont VM Pro Local qui regroupe artisans, commerces et pros de l'auto) · Jouer & communauté (3) · Bientôt & en lancement (3).
 - `/professionnels/` offre pro détaillée + formulaire de devis · `/decouvrir.html` · `/meteo/` · `/telechargements/` (kits réseaux, visuels).
 
 ---
