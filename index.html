@@ -77,6 +77,7 @@
 <footer class="portal-footer"><div class="portal-social"><p class="portal-social-label">Retrouvez les réseaux de Véloce Mercato</p><div class="vm-channels" role="group" aria-label="Réseaux de Véloce Mercato"><a class="vm-channel vm-channel--facebook" href="https://www.facebook.com/share/1cekdv2RrD/" target="_blank" rel="noopener">Facebook</a><a class="vm-channel vm-channel--instagram" href="https://www.instagram.com/veloce.mercato" target="_blank" rel="noopener">Instagram</a><a class="vm-channel vm-channel--tiktok" href="https://www.tiktok.com/@velocemercato" target="_blank" rel="noopener">TikTok</a></div></div><a class="portal-footer-project" href="/decouvrir.html">Découvrir le projet VM en vidéo →</a><button type="button" class="vmfab" id="vmFab" aria-haspopup="dialog">📤 Partager</button></footer><p class="note">L'univers VM regroupe nos projets · activité d'entrepreneur individuel – SIRET 528 102 916 00012. <a href="https://velocemercato.fr/mentions-legales.html" style="color:inherit">Mentions légales</a></p>
 <p class="visual-credit">Cuisine, auto, produits locaux, randonnée et logement : illustrations générées par IA.</p></main>
 <script src="/assets/portal.js?v=20261024-annuaire1" defer></script>
+<script src="/assets/app-actions.js?v=20261024-1" defer></script>
 <button type="button" class="vminst" id="vmInst">📲 Installer VM Univers</button>
 <div class="vmsh" id="vmSh" hidden role="dialog" aria-modal="true" aria-labelledby="vmShT"><div class="vmsh-box">
 <h3 id="vmShT">📤 Partager cette page</h3><p class="vmsh-t" id="vmShU"></p>
@@ -95,14 +96,17 @@
 </div></div>
 <script>
 (function(){var $=function(i){return document.getElementById(i)},f=$('vmFab'),m=$('vmSh'),qr=false;if(!f||!m)return;
-function url(){return location.href.split('#')[0]}
-function open(){var u=url(),t=document.title,e=encodeURIComponent;$('vmShU').textContent=t;
+var cur=null,qrU='';function url(){return cur?cur.u:location.href.split('#')[0]}
+function ttl(){return cur?cur.t:document.title}
+function open(){var u=url(),t=ttl(),e=encodeURIComponent;$('vmShT').textContent=cur?'📤 Partager '+cur.n:'📤 Partager cette page';$('vmShU').textContent=t;
  $('vmS-wa').href='https://wa.me/?text='+e(t+' '+u);$('vmS-fb').href='https://www.facebook.com/sharer/sharer.php?u='+e(u);$('vmS-x').href='https://twitter.com/intent/tweet?text='+e(t)+'&url='+e(u);$('vmS-tg').href='https://t.me/share/url?url='+e(u)+'&text='+e(t);$('vmS-sms').href='sms:?&body='+e(t+' '+u);
  $('vmS-more').hidden=!navigator.share;
- if(!qr){qr=true;var s=document.createElement('script');s.src='/assets/vendor/qrcode.min.js';var fb=function(){var q=$('vmShQ');if(q.firstChild)return;var p=document.createElement('p');p.textContent='QR code indisponible. Vous pouvez copier le lien ci-dessus.';q.appendChild(p)};s.onload=function(){try{new QRCode($('vmShQ'),{text:u,width:180,height:180,correctLevel:QRCode.CorrectLevel.M})}catch(x){fb()}};s.onerror=fb;setTimeout(fb,4000);document.head.appendChild(s)}
+ function draw(){var q=$('vmShQ');if(qrU===u||!window.QRCode)return;qrU=u;q.textContent='';try{new QRCode(q,{text:u,width:180,height:180,correctLevel:QRCode.CorrectLevel.M})}catch(x){}}
+ if(qr)draw();
+ if(!qr){qr=true;var s=document.createElement('script');s.src='/assets/vendor/qrcode.min.js';var fb=function(){var q=$('vmShQ');if(q.firstChild)return;var p=document.createElement('p');p.textContent='QR code indisponible. Vous pouvez copier le lien ci-dessus.';q.appendChild(p)};s.onload=function(){draw();fb()};s.onerror=fb;setTimeout(fb,4000);document.head.appendChild(s)}
  m.hidden=false;$('vmShX').focus()}
-f.onclick=open;$('vmShX').onclick=function(){m.hidden=true;f.focus()};m.onclick=function(e){if(e.target===m)m.hidden=true};
-$('vmS-more').onclick=function(){navigator.share({title:document.title,url:url()}).catch(function(){})};
+f.onclick=function(){cur=null;open()};window.vmShareOpen=function(u,t,n){cur={u:u,t:t,n:n||t};open()};$('vmShX').onclick=function(){m.hidden=true;f.focus()};m.onclick=function(e){if(e.target===m)m.hidden=true};
+$('vmS-more').onclick=function(){navigator.share({title:ttl(),url:url()}).catch(function(){})};
 $('vmS-cp').onclick=function(){var b=this;(navigator.clipboard?navigator.clipboard.writeText(url()):Promise.reject()).then(function(){b.lastChild.textContent='Copié ✓'}).catch(function(){prompt('Copie ce lien :',url())})};
 document.addEventListener('keydown',function(e){if(e.key==='Escape')m.hidden=true});
 if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js', {updateViaCache:'none'}).catch(function(){});
