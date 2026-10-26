@@ -13,7 +13,7 @@ class DirectoryTests(unittest.TestCase):
         self.assertEqual(page.locator('.grp').count(),6)
         self.assertEqual(page.locator('.ap').count(),25)
         titles=page.locator('.ap .ab b').all_text_contents();self.assertEqual(len(set(titles)),25)
-        totals={'medias':4,'pro':3,'quotidien':6,'local':6,'communaute':3,'bientot':3}
+        totals={'medias':5,'pro':3,'quotidien':6,'local':6,'communaute':3,'bientot':2}
         self.assertEqual(sum(totals.values()),25)
         for theme,total in totals.items():
             chip=page.locator(f'#themeFilters [data-theme-filter="{theme}"]')
@@ -48,7 +48,7 @@ class DirectoryTests(unittest.TestCase):
         self.assertEqual(banner.locator('a[href^="tel:"]').count(),0)  # numéro retiré à la demande du propriétaire
         self.assertEqual(banner.locator('a[href^="mailto:"]').count(),1)
         self.assertEqual(page.locator('.ap .bdg').count(),25)
-        self.assertEqual(page.locator('#g-bientot .ap .bdg.b-soon').count(),3)
+        self.assertEqual(page.locator('#g-bientot .ap .bdg.b-soon').count(),2)  # Pépite FC lancé le 26/10
         context.close()
 
     def test_combined_search_reset_and_shared_url(self):
@@ -72,7 +72,7 @@ class DirectoryTests(unittest.TestCase):
         page.locator('#toggleGroups').click();self.assertEqual(page.locator('.grp[open]').count(),0)
         page.locator('.portal-links a[href="#g-passion"]').click()
         self.assertEqual(page.locator('.grp:not([hidden])').count(),1)
-        self.assertEqual(page.locator('.ap:not([hidden])').count(),4)
+        self.assertEqual(page.locator('.ap:not([hidden])').count(),5)
         self.assertTrue(page.locator('#g-passion').get_attribute('open') is not None)
         page.locator('.portal-links a[href="#projets"]').click();self.assertEqual(page.locator('.ap:not([hidden])').count(),25)
         context.close()
