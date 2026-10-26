@@ -66,8 +66,10 @@ class DirectoryTests(unittest.TestCase):
 
     def test_navigation_opens_selected_theme_after_collapse(self):
         context=self.context();page=context.new_page();page.goto(self.base,wait_until='networkidle')
-        self.assertEqual(page.locator('.grp[open]').count(),1)
-        self.assertTrue(page.locator('#g-passion').get_attribute('open') is not None)
+        self.assertEqual(page.locator('.grp[open]').count(),2)
+        self.assertTrue(page.locator('#g-rapporte').get_attribute('open') is not None)
+        self.assertTrue(page.locator('#g-gratuit').get_attribute('open') is not None)
+        self.assertIsNone(page.locator('#g-passion').get_attribute('open'))
         page.locator('#toggleGroups').click();self.assertEqual(page.locator('.grp[open]').count(),6)
         page.locator('#toggleGroups').click();self.assertEqual(page.locator('.grp[open]').count(),0)
         page.locator('.portal-links a[href="#g-passion"]').click()

@@ -107,8 +107,8 @@ class SiteTests(unittest.TestCase):
                     self.assertEqual(page.evaluate('document.documentElement.scrollWidth'), width)
                     self.assertFalse(errors, errors)
                     if PORTAL:
-                        self.assertEqual(page.locator('.grp[open]').count(),1)
-                        self.assertTrue(page.locator('#g-passion').get_attribute('open') is not None)
+                        self.assertEqual(page.locator('.grp[open]').count(),2)
+                        self.assertTrue(page.locator('#g-rapporte').get_attribute('open') is not None)
                         card = page.locator('.apps.big .ap').first.bounding_box()
                         self.assertGreater(card['width'], 240)
                     else:
