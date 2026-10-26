@@ -45,7 +45,8 @@ class DirectoryTests(unittest.TestCase):
         self.assertTrue(banner.is_visible())
         self.assertIn('VM Studio',banner.inner_text());self.assertIn('290 €',banner.inner_text())
         self.assertEqual(banner.locator('a[href="https://velocemercato.fr/web-studio.html"]').count(),1)
-        self.assertEqual(banner.locator('a[href="tel:+33601112633"]').count(),1)
+        self.assertEqual(banner.locator('a[href^="tel:"]').count(),0)  # numéro retiré à la demande du propriétaire
+        self.assertEqual(banner.locator('a[href^="mailto:"]').count(),1)
         self.assertEqual(page.locator('.ap .bdg').count(),25)
         self.assertEqual(page.locator('#g-bientot .ap .bdg.b-soon').count(),3)
         context.close()
