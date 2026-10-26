@@ -124,3 +124,6 @@
 }
 /* Projet ouvert depuis peu : badge doré discret, sur deux lignes si l’écran est étroit. */
 .b-new{background:#f4cf551a;color:var(--gold);border:1px solid #f4cf5570;white-space:normal;line-height:1.25}
+
+.pro-quick{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 16px 4px}.pq{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:14px;text-decoration:none;border:1px solid #f4cf5555;background:#121a33}.pq span{font-size:1.4rem}.pq b{font-size:1.02rem;color:var(--gold,#f4cf55)}.pq small{color:#c9d0ea;font-size:.8rem}.pq-free{border-color:#4ade8066;background:#0f2a1f}.pq-free b{color:#86efac}.pro-zone{margin:10px 16px 16px;border-top:1px dashed #f4cf5540}.pro-zone>summary{cursor:pointer;list-style:none;padding:14px 4px;display:flex}.pro-zone>summary::-webkit-details-marker{display:none}.pro-zone>summary b{display:block;color:var(--gold,#f4cf55)}.pro-zone>summary small{color:#c9d0ea}.pro-zone[open]>summary small{display:none}@media(max-width:420px){.pro-quick{grid-template-columns:1fr}}
+.pro-zone:not([open]){border-top:0;margin:0}.pro-zone:not([open])>summary{display:none}.pro-zone[open]>summary small{display:block}

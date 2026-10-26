@@ -94,22 +94,29 @@ class DirectoryTests(unittest.TestCase):
             self.assertEqual(page.locator('.ap:not([hidden]) b').all_text_contents(),['VM Pro Local'])
         context.close()
 
-    def test_professional_offers_visible_before_directory(self):
+    def test_professional_offers_folded_with_quick_links(self):
         for width in [320, 390, 1440]:
             context=self.context(width);page=context.new_page();page.goto(self.base,wait_until='networkidle')
-            self.assertTrue(page.locator('#tarifs').is_visible())
-            self.assertEqual(page.locator('#tarifs .tf').count(),6)
-            self.assertTrue(page.locator('#demos').is_visible())
-            self.assertEqual(page.locator('#demos .dm').count(),8)
+            # Accueil rangé : deux accès rapides, l'espace pro replié
+            self.assertTrue(page.locator('.pq-pro').is_visible());self.assertTrue(page.locator('.pq-free').is_visible())
+            self.assertFalse(page.locator('#tarifs').is_visible())
+            self.assertEqual(page.locator('#tarifs .tf').count(),6);self.assertEqual(page.locator('#demos .dm').count(),8)
+            self.assertEqual(page.evaluate('document.documentElement.scrollWidth'),width)
+            page.locator('.pq-pro').click()
+            self.assertTrue(page.locator('#tarifs').is_visible());self.assertTrue(page.locator('#demos').is_visible())
+            gerance=page.locator('#tarifs .tf',has_text='Gérance de votre site')
+            self.assertIn('29 €/mois : 1 mise à jour par mois',gerance.inner_text())
             tops=page.evaluate("""['#tarifs','#demos','#apps'].map(s=>document.querySelector(s).getBoundingClientRect().top)""")
             self.assertLess(tops[0],tops[1]);self.assertLess(tops[1],tops[2])
-            gerance=page.locator('#tarifs .tf',has_text='Gérance de votre site')
-            self.assertTrue(gerance.locator('p').is_visible())
-            self.assertIn('29 €/mois : 1 mise à jour par mois',gerance.inner_text())
-            self.assertIn('249 €/mois : jusqu’à 2 par jour',gerance.inner_text())
-            self.assertEqual(page.evaluate('document.documentElement.scrollWidth'),width)
-            page.locator('.portal-pro-actions a[href="#tarifs"]').click()
-            self.assertTrue(page.locator('#tarifs').is_visible())
             context.close()
+
+    def test_bottom_pro_link_opens_space_and_free_link_filters(self):
+        context=self.context(390);page=context.new_page();page.goto(self.base,wait_until='networkidle')
+        page.locator('.portal-pro-actions a[href="#tarifs"]').click()
+        self.assertTrue(page.locator('#tarifs').is_visible())
+        page.goto(self.base+'?theme=quotidien#projets',wait_until='networkidle')
+        visibles=page.locator('.ap:not([hidden]) .ab b').all_text_contents()
+        self.assertIn('VM CV',visibles);self.assertIn('VM Emploi',visibles);self.assertNotIn('VM Studio',visibles)
+        context.close()
 
 if __name__=='__main__':unittest.main(verbosity=2)
