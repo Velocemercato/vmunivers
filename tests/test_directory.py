@@ -43,7 +43,7 @@ class DirectoryTests(unittest.TestCase):
         context=self.context();page=context.new_page();page.goto(self.base,wait_until='networkidle')
         banner=page.locator('#vm-studio')
         self.assertTrue(banner.is_visible())
-        self.assertIn('VM Studio',banner.inner_text());self.assertIn('290 €',banner.inner_text())
+        self.assertIn('VM STUDIO',banner.inner_text().upper());self.assertIn('290 €',banner.inner_text())
         # Vitrine (oct. 2026) : tout le bandeau mène aux offres VM Studio, prix affichés.
         self.assertEqual(banner.get_attribute('href'),'https://velocemercato.fr/web-studio.html#tarifs')
         self.assertIn('590 €',banner.inner_text());self.assertIn('990 €',banner.inner_text())
