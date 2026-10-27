@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>VM Connect — le local, les liens, les projets</title>
+<meta name="description" content="VM Connect, l'appli locale de VM Univers : carte du coin, fil et stories, annonces, guide TV, communautés, canaux et espace rencontres 18+. Aperçu avec des exemples.">
+<link rel="canonical" href="https://vmunivers.fr/connect/">
+<meta property="og:title" content="VM Connect · Le local. Les liens. Les projets."><meta property="og:description" content="Carte du coin, fil, annonces, guide TV, communautés et rencontres 18+ : l'aperçu de la future appli locale VM."><meta property="og:url" content="https://vmunivers.fr/connect/"><meta property="og:image" content="https://vmunivers.fr/app/logo-vm-officiel.png">
+<link rel="icon" href="/app/univers-192.png" type="image/png"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#07080f">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;0,800;1,800&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<link rel="stylesheet" href="/connect/connect.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="" defer></script>
+<script src="/connect/connect.js" defer></script>
+<!-- Cloudflare Web Analytics --><script id="vm-cfwa">(function(h){if(h==='vmunivers.fr'||h==='www.vmunivers.fr'){var s=document.createElement('script');s.defer=true;s.src='https://static.cloudflareinsights.com/beacon.min.js';s.setAttribute('data-cf-beacon','{"token": "4cd530dfcddf42e19356891489744f23"}');document.head.appendChild(s)}})(location.hostname)</script>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="/" aria-label="VM Univers, accueil"><img src="/app/univers-192.png" alt="" width="34" height="34"><span>VM <b>CONNECT</b></span></a>
+  <div class="top-actions">
+    <label class="ville-pick" for="ville"><span class="sr-only">Ville</span><select id="ville"></select></label>
+    <button type="button" class="ico" id="partager" aria-label="Partager VM Connect">↗ Partager</button>
+    <button type="button" class="ico gold" id="installer" aria-label="Installer l'appli">📲 Installer</button>
+  </div>
+</header>
+
+<section class="hero">
+  <p class="eyebrow">VM Univers · aperçu</p>
+  <h1>Le local.<br><span>Les liens.</span><br>Les projets.</h1>
+  <p class="lead">Tout ce qui se passe près de chez vous, au même endroit : la carte du coin, les nouveautés, les bonnes affaires, la télé du soir, vos groupes et un espace rencontres pour adultes, à part.</p>
+  <p class="demo-note"><b>Aperçu de lancement.</b> Les commerces, annonces, messages, programmes et profils affichés ici sont des <b>exemples fictifs</b>. Les comptes, la messagerie et les publications ouvriront par étapes.</p>
+</section>
+
+<nav class="tabs" aria-label="Modules VM Connect" role="tablist">
+  <button role="tab" data-v="carte" aria-selected="true"><i>📍</i>Autour de moi</button>
+  <button role="tab" data-v="fil" aria-selected="false"><i>📰</i>Fil</button>
+  <button role="tab" data-v="shop" aria-selected="false"><i>🛍️</i>Shop</button>
+  <button role="tab" data-v="tv" aria-selected="false"><i>📺</i>Guide TV</button>
+  <button role="tab" data-v="commu" aria-selected="false"><i>💬</i>Communautés</button>
+  <button role="tab" data-v="canaux" aria-selected="false"><i>📣</i>Canaux</button>
+  <button role="tab" data-v="rencontres" aria-selected="false" class="adult"><i>❤️</i>Rencontres 18+</button>
+</nav>
+
+<main id="app">
+  <!-- 1. Autour de moi -->
+  <section class="view" id="v-carte" aria-label="Autour de moi">
+    <div class="vhead"><h2>Autour de moi</h2><p>Commerces, services, événements et signalements du coin. Aucune position GPS demandée : choisissez simplement votre ville.</p></div>
+    <div class="chips" id="filtres"></div>
+    <div class="map-wrap"><div id="map" role="region" aria-label="Carte"></div></div>
+    <div class="list" id="lieux"></div>
+    <aside class="pro-cta"><div><b>Vous êtes commerçant ou artisan ?</b><p>Votre fiche sur la carte, avec votre page du jour et votre QR code à imprimer. Et si vous voulez votre propre site : VM Studio.</p></div><a class="btn" href="https://velocemercato.fr/web-studio.html">Voir VM Studio ›</a></aside>
+  </section>
+
+  <!-- 2. Fil & stories -->
+  <section class="view" id="v-fil" aria-label="Fil et stories" hidden>
+    <div class="vhead"><h2>Fil &amp; stories</h2><p>Les nouveautés du coin. Les stories disparaissent au bout de 24 h.</p></div>
+    <div class="stories" id="stories"></div>
+    <div class="feed" id="feed"></div>
+  </section>
+
+  <!-- 3. Shop -->
+  <section class="view" id="v-shop" aria-label="VM Shop" hidden>
+    <div class="vhead"><h2>VM Shop</h2><p>Les bonnes affaires entre voisins. Le contact se fait entre particuliers : <b>VM n'encaisse aucun paiement</b> pour l'instant.</p></div>
+    <div class="chips" id="shopcats"></div>
+    <div class="grid" id="annonces"></div>
+    <aside class="pro-cta"><div><b>Vendre pour de vrai aujourd'hui</b><p>Le dépôt d'annonces est déjà ouvert sur VM Annonces, gratuitement.</p></div><a class="btn" href="https://velocemercato.fr/shop/">Déposer une annonce ›</a></aside>
+  </section>
+
+  <!-- 4. Guide TV -->
+  <section class="view" id="v-tv" aria-label="Guide TV" hidden>
+    <div class="vhead"><h2>Guide TV</h2><p>Maintenant, ce soir et vos rappels. <span class="warn">Programmes fictifs de démonstration</span> : la vraie grille arrivera avec un fournisseur de données autorisé.</p></div>
+    <div class="seg" role="tablist" aria-label="Moment"><button data-m="now" aria-selected="true">Maintenant</button><button data-m="soir" aria-selected="false">Ce soir</button><button data-m="fav" aria-selected="false">Mes chaînes</button></div>
+    <div class="tvlist" id="tvlist"></div>
+  </section>
+
+  <!-- 5. Communautés -->
+  <section class="view" id="v-commu" aria-label="Communautés" hidden>
+    <div class="vhead"><h2>Communautés</h2><p>Des salons pour discuter entre membres, avec propriétaire, admins et modérateurs. Invitations limitées et révocables.</p></div>
+    <div class="commu">
+      <div class="spaces" id="spaces"></div>
+      <div class="room" id="room" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- 6. Canaux -->
+  <section class="view" id="v-canaux" aria-label="Canaux" hidden>
+    <div class="vhead"><h2>Canaux</h2><p>Les annonces officielles, publiées uniquement par les comptes autorisés. Vous suivez, vous recevez.</p></div>
+    <div class="feed" id="canaux"></div>
+  </section>
+
+  <!-- 7. Rencontres -->
+  <section class="view" id="v-rencontres" aria-label="Rencontres 18+" hidden>
+    <div id="gate" class="gate">
+      <p class="eyebrow">Espace réservé aux adultes</p>
+      <h2>Rencontres 18+</h2>
+      <p>Un espace séparé du reste de VM Connect : votre profil local, vos annonces et vos groupes ne deviennent jamais un profil de rencontres.</p>
+      <button type="button" class="btn" id="majeur">J'ai 18 ans ou plus · entrer</button>
+      <button type="button" class="btn ghost" id="mineur">J'ai moins de 18 ans</button>
+      <p class="small">À l'ouverture, l'âge sera vérifié par une vraie méthode de contrôle, pas par une simple case à cocher.</p>
+    </div>
+    <div id="dating" hidden>
+      <div class="vhead"><h2>Rencontres 18+</h2><p>Des rencontres près de chez vous, sans jamais montrer votre adresse. <span class="warn">Ouverture prochaine</span> : les profils ci-dessous sont des exemples fictifs.</p></div>
+      <div class="rules">
+        <div><b>🔒 Espace à part</b><p>Profil, photos, conversations et notifications séparés du reste de l'appli.</p></div>
+        <div><b>💞 Intérêt mutuel</b><p>On ne peut écrire qu'après un « oui » des deux côtés.</p></div>
+        <div><b>📍 Zone approximative</b><p>Ville ou secteur seulement. Jamais de domicile, de trajet ni de GPS précis.</p></div>
+        <div><b>🛡️ Protection</b><p>Blocage, signalement, retrait du profil et suppression du compte à tout moment.</p></div>
+      </div>
+      <div class="profiles" id="profiles"></div>
+      <div class="pro-cta"><div><b>Ouverture prochaine</b><p>Vérification de l'âge, modération et règles d'utilisation sont en préparation avant l'ouverture des inscriptions.</p></div></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p><b>VM Connect</b> fait partie de <a href="/">VM Univers</a> · Franche-Comté, France · <a href="https://velocemercato.fr">velocemercato.fr</a></p>
+  <p class="small">Aperçu : contenus d'exemple. Carte © contributeurs OpenStreetMap.</p>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
