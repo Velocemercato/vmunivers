@@ -107,8 +107,9 @@ class DirectoryTests(unittest.TestCase):
             self.assertEqual(page.evaluate('document.documentElement.scrollWidth'),width)
             page.locator('.pq-pro').click()
             self.assertTrue(page.locator('#tarifs').is_visible());self.assertTrue(page.locator('#demos').is_visible())
-            gerance=page.locator('#tarifs .tf',has_text='Gérance de votre site')
-            self.assertIn('29 €/mois : 1 mise à jour par mois',gerance.inner_text())
+            # Gamme oct. 2026 : 4 packs à prix fixe + maintenance facultative 29/59 €.
+            self.assertIn('1 490 €',page.locator('#tarifs .tf',has_text='Max').first.inner_text())
+            self.assertIn('29 € ou 59 €',page.locator('#tarifs .tf',has_text='Maintenance').inner_text())
             tops=page.evaluate("""['#tarifs','#demos','#apps'].map(s=>document.querySelector(s).getBoundingClientRect().top)""")
             self.assertLess(tops[0],tops[1]);self.assertLess(tops[1],tops[2])
             context.close()
