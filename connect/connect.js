@@ -45,6 +45,8 @@
     return LIEUX.map(function (l, i) { return Object.assign({}, l, {id: ville + i, lat: c[0] + l.o[0], lng: c[1] + l.o[1]}); });
   }
   function itin(l) { return 'https://www.openstreetmap.org/directions?to=' + l.lat.toFixed(5) + '%2C' + l.lng.toFixed(5); }
+  function waze(l) { return 'https://waze.com/ul?ll=' + l.lat.toFixed(5) + '%2C' + l.lng.toFixed(5) + '&navigate=yes'; }
+  function gmaps(l) { return 'https://www.google.com/maps/dir/?api=1&destination=' + l.lat.toFixed(5) + '%2C' + l.lng.toFixed(5); }
   function renderFiltres() {
     $('filtres').innerHTML = Object.keys(CATS).map(function (k) { return '<button type="button" data-f="' + k + '" aria-pressed="' + (filtres[k] ? 'true' : 'false') + '">' + CATS[k][0] + ' ' + CATS[k][1] + '</button>'; }).join('');
     $('filtres').querySelectorAll('button').forEach(function (b) { b.onclick = function () { filtres[b.dataset.f] = filtres[b.dataset.f] ? 0 : 1; store.set('filtres', filtres); renderCarte(); }; });
@@ -60,7 +62,7 @@
     $('lieux').innerHTML = L.map(function (l) {
       return '<article class="item"><div class="meta"><span class="tag" style="color:' + CATS[l.cat][2] + '">' + CATS[l.cat][0] + ' ' + CATS[l.cat][1] + '</span><span class="tag ex">Exemple</span></div>' +
         '<h3>' + esc(l.nom) + '</h3><p>' + esc(l.d) + '</p><div class="meta">' + statutTag(l) + '</div>' +
-        '<div class="row"><a class="mini" href="' + itin(l) + '" target="_blank" rel="noopener">🧭 Itinéraire</a><button type="button" class="mini' + (favs[l.id] ? ' on' : '') + '" data-fav="' + l.id + '">' + (favs[l.id] ? '★ Favori' : '☆ Favori') + '</button>' +
+        '<div class="row"><a class="mini on" href="' + waze(l) + '" target="_blank" rel="noopener">🚗 Waze</a><a class="mini" href="' + gmaps(l) + '" target="_blank" rel="noopener">🗺️ Maps</a><button type="button" class="mini' + (favs[l.id] ? ' on' : '') + '" data-fav="' + l.id + '">' + (favs[l.id] ? '★ Favori' : '☆ Favori') + '</button>' +
         (l.cat === 'signal' ? '<button type="button" class="mini" data-confirm="1">👍 Toujours là</button>' : '') + '</div></article>';
     }).join('') || '<p class="small">Aucun résultat avec ces filtres.</p>';
     $('lieux').querySelectorAll('[data-fav]').forEach(function (b) { b.onclick = function () { var k = b.dataset.fav; if (favs[k]) delete favs[k]; else favs[k] = 1; store.set('favs', favs); renderCarte(); toast(favs[k] ? 'Ajouté à vos favoris sur cet appareil.' : 'Retiré des favoris.'); }; });
@@ -75,7 +77,7 @@
     map.setView(VILLES[ville].c, 14);
     L.forEach(function (l) {
       var icon = window.L.divIcon({className: '', html: '<div class="pin" style="background:' + CATS[l.cat][2] + '"><span>' + CATS[l.cat][0] + '</span></div>', iconSize: [30, 30], iconAnchor: [15, 30], popupAnchor: [0, -28]});
-      window.L.marker([l.lat, l.lng], {icon: icon}).addTo(layer).bindPopup('<b>' + esc(l.nom) + '</b><br>' + esc(l.d) + '<br><small>Exemple fictif</small><br><a href="' + itin(l) + '" target="_blank" rel="noopener">Itinéraire ›</a>');
+      window.L.marker([l.lat, l.lng], {icon: icon}).addTo(layer).bindPopup('<b>' + esc(l.nom) + '</b><br>' + esc(l.d) + '<br><small>Exemple fictif</small><br><a href="' + waze(l) + '" target="_blank" rel="noopener">🚗 Waze</a> · <a href="' + gmaps(l) + '" target="_blank" rel="noopener">Maps</a>');
     });
     setTimeout(function () { map.invalidateSize(); }, 60);
   }
