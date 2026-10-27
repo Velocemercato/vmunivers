@@ -1,4 +1,4 @@
-"""Monte les clips VM depuis des images, avec textes intégrés et musique originale.
+"""Monte les clips VM depuis des images, avec textes intégrés ; musique seulement si un vrai fichier est fourni (--music), sinon silence.
 Aucune génération de voix, aucune mise en ligne sur un réseau social.
 """
 import argparse,json,subprocess,tempfile,shutil
@@ -60,7 +60,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     path.write_text(header+'\n'.join(lines)+'\n',encoding='utf-8')
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--manifest',required=True);p.add_argument('--assets',required=True);p.add_argument('--music',required=True);p.add_argument('--output',required=True);p.add_argument('--vm-root',required=True);p.add_argument('--veloce-root',required=True);p.add_argument('--only')
+    p=argparse.ArgumentParser();p.add_argument('--manifest',required=True);p.add_argument('--assets',required=True);p.add_argument('--music',default='');p.add_argument('--output',required=True);p.add_argument('--vm-root',required=True);p.add_argument('--veloce-root',required=True);p.add_argument('--only')
     args=p.parse_args();rows=json.loads(Path(args.manifest).read_text());assets=Path(args.assets);dest=Path(args.output);dest.mkdir(parents=True,exist_ok=True)
     fonts=Path(args.veloce_root)/'studio/assets'
     def source(value):
@@ -96,7 +96,7 @@ def main():
                 run(['ffmpeg','-v','error','-y','-filter_complex_threads','1','-loop','1','-framerate','1','-i',str(image),'-filter_complex',filters,'-map','[out]','-t',str(SECONDS),'-an','-r',str(FPS),'-c:v','libx264','-threads','2','-preset','veryfast','-crf','21','-maxrate','4500k','-bufsize','9000k','-pix_fmt','yuv420p','-g','60','-movflags','+faststart',str(segment)])
                 segments.append(segment)
             listing=temp/'concat.txt';listing.write_text(''.join("file '"+str(s)+"'\n" for s in segments))
-            run(['ffmpeg','-v','error','-y','-f','concat','-safe','0','-i',str(listing),'-i',str(args.music),'-map','0:v:0','-map','1:a:0','-c:v','copy','-c:a','aac','-b:a','128k','-ar','48000','-af','loudnorm=I=-18:TP=-1.5:LRA=9','-t','20','-movflags','+faststart',str(output)])
+            run(['ffmpeg','-v','error','-y','-f','concat','-safe','0','-i',str(listing),*(['-i',str(args.music)] if args.music else ['-f','lavfi','-i','anullsrc=r=48000:cl=stereo']),'-map','0:v:0','-map','1:a:0','-c:v','copy','-c:a','aac','-b:a','128k','-ar','48000','-af','loudnorm=I=-18:TP=-1.5:LRA=9','-t','20','-movflags','+faststart',str(output)])
             poster=dest/(campaign['id']+'-'+kind+'.jpg')
             run(['ffmpeg','-v','error','-y','-ss','0.8','-i',str(output),'-frames:v','1','-q:v','3',str(poster)])
         print(output.name,output.stat().st_size,flush=True)
