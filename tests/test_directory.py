@@ -44,9 +44,10 @@ class DirectoryTests(unittest.TestCase):
         banner=page.locator('#vm-studio')
         self.assertTrue(banner.is_visible())
         self.assertIn('VM Studio',banner.inner_text());self.assertIn('290 €',banner.inner_text())
-        self.assertEqual(banner.locator('a[href="https://velocemercato.fr/web-studio.html"]').count(),1)
-        self.assertEqual(banner.locator('a[href^="tel:"]').count(),0)  # numéro retiré à la demande du propriétaire
-        self.assertEqual(banner.locator('a[href^="mailto:"]').count(),1)
+        # Vitrine (oct. 2026) : tout le bandeau mène aux offres VM Studio, prix affichés.
+        self.assertEqual(banner.get_attribute('href'),'https://velocemercato.fr/web-studio.html#tarifs')
+        self.assertIn('590 €',banner.inner_text());self.assertIn('990 €',banner.inner_text())
+        self.assertNotIn('tel:',page.locator('#vitrine').inner_html())  # numéro retiré à la demande du propriétaire
         self.assertEqual(page.locator('.ap .bdg').count(),26)
         self.assertEqual(page.locator('#g-bientot .ap .bdg.b-soon').count(),2)  # Pépite FC lancé le 26/10
         context.close()
