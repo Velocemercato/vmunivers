@@ -11,10 +11,10 @@ class DirectoryTests(unittest.TestCase):
     def test_themes_preserve_every_project_and_count(self):
         context=self.context();page=context.new_page();page.goto(self.base,wait_until='networkidle')
         self.assertEqual(page.locator('.grp').count(),6)
-        self.assertEqual(page.locator('.ap').count(),26)
-        titles=page.locator('.ap .ab b').all_text_contents();self.assertEqual(len(set(titles)),26)
-        totals={'medias':6,'pro':3,'quotidien':6,'local':6,'communaute':3,'bientot':2}
-        self.assertEqual(sum(totals.values()),26)
+        self.assertEqual(page.locator('.ap').count(),28)
+        titles=page.locator('.ap .ab b').all_text_contents();self.assertEqual(len(set(titles)),28)
+        totals={'medias':6,'pro':3,'quotidien':6,'local':7,'communaute':3,'bientot':3}
+        self.assertEqual(sum(totals.values()),28)
         for theme,total in totals.items():
             chip=page.locator(f'#themeFilters [data-theme-filter="{theme}"]')
             self.assertIn(str(total),chip.inner_text())
@@ -25,7 +25,7 @@ class DirectoryTests(unittest.TestCase):
             self.assertEqual(chip.get_attribute('aria-pressed'),'true')
             self.assertEqual(page.locator('#themeFilters [aria-pressed="true"]').count(),1)
             self.assertEqual(parse_qs(urlsplit(page.url).query)['theme'],[theme])
-        page.locator('#themeFilters [data-theme-filter=""]').click();self.assertEqual(page.locator('.ap:not([hidden])').count(),26)
+        page.locator('#themeFilters [data-theme-filter=""]').click();self.assertEqual(page.locator('.ap:not([hidden])').count(),28)
         context.close()
 
     def test_old_theme_links_still_work(self):
@@ -48,8 +48,8 @@ class DirectoryTests(unittest.TestCase):
         self.assertEqual(banner.get_attribute('href'),'https://velocemercato.fr/web-studio.html#tarifs')
         self.assertIn('590 €',banner.inner_text());self.assertIn('990 €',banner.inner_text())
         self.assertNotIn('tel:',page.locator('#vitrine').inner_html())  # numéro retiré à la demande du propriétaire
-        self.assertEqual(page.locator('.ap .bdg').count(),26)
-        self.assertEqual(page.locator('#g-bientot .ap .bdg.b-soon').count(),2)  # Pépite FC lancé le 26/10
+        self.assertEqual(page.locator('.ap .bdg').count(),28)
+        self.assertEqual(page.locator('#g-bientot .ap .bdg.b-soon').count(),3)  # Pépite FC lancé le 26/10
         context.close()
 
     def test_combined_search_reset_and_shared_url(self):
@@ -61,7 +61,7 @@ class DirectoryTests(unittest.TestCase):
         page.reload(wait_until='networkidle');self.assertEqual(page.get_by_role('searchbox').input_value(),'rénovation jantes')
         self.assertEqual(page.locator('.ap:not([hidden])').count(),1)
         page.get_by_role('searchbox').fill('introuvable-9876');self.assertTrue(page.locator('#none').is_visible())
-        page.locator('#resetFilters').click();self.assertEqual(page.locator('.ap:not([hidden])').count(),26)
+        page.locator('#resetFilters').click();self.assertEqual(page.locator('.ap:not([hidden])').count(),28)
         self.assertFalse(page.locator('#none').is_visible());self.assertFalse(page.locator('#resetFilters').is_visible())
         context.close()
 
@@ -77,12 +77,12 @@ class DirectoryTests(unittest.TestCase):
         self.assertEqual(page.locator('.grp:not([hidden])').count(),1)
         self.assertEqual(page.locator('.ap:not([hidden])').count(),6)
         self.assertTrue(page.locator('#g-passion').get_attribute('open') is not None)
-        page.locator('.portal-links a[href="#projets"]').click();self.assertEqual(page.locator('.ap:not([hidden])').count(),26)
+        page.locator('.portal-links a[href="#projets"]').click();self.assertEqual(page.locator('.ap:not([hidden])').count(),28)
         context.close()
 
     def test_cleaned_directory_has_no_empty_or_duplicate_card(self):
         context=self.context();page=context.new_page();page.goto(self.base,wait_until='networkidle')
-        self.assertIn('26 PROJETS',page.locator('.directory-heading .eyebrow').inner_text().upper())
+        self.assertIn('28 PROJETS',page.locator('.directory-heading .eyebrow').inner_text().upper())
         titles=page.locator('.ap .ab b').all_text_contents()
         for gone in ['VM Bons Plans','La Pastille en vrai','Sites métiers à tester','VM Boutique','VM Auto Particulier']:
             self.assertNotIn(gone,titles)
