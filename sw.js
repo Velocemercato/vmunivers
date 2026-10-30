@@ -1,5 +1,5 @@
 // VM Univers : cache limité aux ressources de ce domaine.
-const CACHE = 'vmu-v12';
+const CACHE = 'vmu-v13';
 const PREFIX = 'vmu-v';
 const PRECACHE = ["/", "/manifest.webmanifest", "/app/univers-192.png", "/app/univers-512.png", "/app/logo-vm-officiel.png", "/assets/portal.css", "/assets/portal.js", "/assets/vendor/qrcode.min.js"];
 const OFFLINE = '<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VM Univers — hors connexion</title><body style="background:#080d18;color:#fff;font:18px/1.6 system-ui;padding:32px"><h1>VM Univers</h1><p>Cette page n’est pas disponible hors connexion. Reconnectez-vous et réessayez.</p></body></html>';
@@ -16,6 +16,7 @@ self.addEventListener('fetch', event => {
   const request = event.request;
   const url = new URL(request.url);
   if (request.method !== 'GET' || url.origin !== self.location.origin) return;
+  if (url.pathname.startsWith('/batiment-3d/') || url.pathname.startsWith('/assets/projects/vm-location/') || /^\/media\/promos\/(vm-bureaux|vm-univers)[-.]/.test(url.pathname)) return;
   const page = request.mode === 'navigate';
   const asset = /\.(css|js|webp|png|jpe?g|svg|woff2?|webmanifest)$/.test(url.pathname);
   // JSON, compteurs de votes et API restent exclusivement sur le réseau.

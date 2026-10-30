@@ -1,37 +1,5 @@
 [
   {
-    "id": "vm-univers",
-    "titre": "VM Univers — tous nos projets",
-    "brand": "VM UNIVERS",
-    "color": "F4CF55",
-    "url": "vmunivers.fr",
-    "route": "https://vmunivers.fr/",
-    "audience": "VM Univers",
-    "scenes": [
-      {
-        "image": "portal-screen",
-        "title": "Votre prochain\nprojet, ici.",
-        "sub": "L’annuaire de tous les projets VM"
-      },
-      {
-        "image": "directory-screen",
-        "title": "Un thème.\nUn seul clic.",
-        "sub": "Médias · services · outils · communauté"
-      },
-      {
-        "image": "office",
-        "title": "Une vision\npour demain.",
-        "sub": "Les futurs bureaux VM",
-        "concept": true
-      },
-      {
-        "image": "vm:app/logo-vm-officiel.png",
-        "title": "Entrez dans\nl’univers VM.",
-        "sub": "Choisissez votre prochain projet"
-      }
-    ]
-  },
-  {
     "id": "veloce-foot",
     "titre": "Véloce Mercato — le foot simplement",
     "brand": "VÉLOCE MERCATO",
@@ -155,41 +123,6 @@
         "image": "studio",
         "title": "Découvrez\nLa Pastille.",
         "sub": "Les émissions déjà publiées sont sur le site",
-        "concept": true
-      }
-    ]
-  },
-  {
-    "id": "vm-bureaux",
-    "titre": "VM Univers — les futurs bureaux",
-    "brand": "VM UNIVERS",
-    "color": "F4CF55",
-    "url": "vmunivers.fr",
-    "route": "https://vmunivers.fr/decouvrir.html#vm-bureaux",
-    "audience": "VM Univers",
-    "scenes": [
-      {
-        "image": "office",
-        "title": "Les bureaux VM.\nDemain se dessine.",
-        "sub": "La partie bureaux du projet VM",
-        "concept": true
-      },
-      {
-        "image": "office",
-        "title": "L’accueil.\nL’identité VM.",
-        "sub": "Noir, rouge et or",
-        "concept": true
-      },
-      {
-        "image": "office",
-        "title": "Des idées\nprennent forme.",
-        "sub": "Une visualisation du projet, côté bureaux",
-        "concept": true
-      },
-      {
-        "image": "vm:app/logo-vm-officiel.png",
-        "title": "Explorez\ntous les projets.",
-        "sub": "VM Univers, le portail central",
         "concept": true
       }
     ]
