@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Kit Réseaux automatique · VM Univers</title>
+<meta name="description" content="Le kit réseaux VM Univers qui s'actualise automatiquement : JT et Reels à télécharger, publications football, actus et gaming, légendes à copier et projets VM.">
+<link rel="canonical" href="https://vmunivers.fr/studio/reseaux.html">
+<meta name="theme-color" content="#070c1b">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kit Réseaux Auto — VM Univers">
+<meta property="og:description" content="Vidéos, JT et posts à partager : les nouveautés des médias VM arrivent automatiquement.">
+<meta property="og:url" content="https://vmunivers.fr/studio/reseaux.html">
+<meta property="og:image" content="https://vmunivers.fr/app/logo-vm-officiel.png">
+<link rel="icon" href="/app/univers-192.png">
+<style>
+:root{color-scheme:dark;--gold:#f4cf55;--bg:#080d1b;--card:#111b32;--ink:#f7f9ff;--muted:#b5c2df;--line:#2e3d62;--blue:#5d9af9}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at 70% -8%,#254273 0,transparent 37%),var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit}button{font:inherit;cursor:pointer}
+a:focus-visible,button:focus-visible,video:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.skip{position:absolute;top:-80px;left:8px;padding:8px;background:var(--gold);color:#111;z-index:90}.skip:focus{top:8px}
+.top{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px max(16px,calc((100vw - 1160px)/2));background:#060a16ee;backdrop-filter:blur(12px);border-bottom:1px solid #394569}
+.logo{display:flex;align-items:center;gap:9px;text-decoration:none;font-weight:1000;letter-spacing:.01em}.logo img{border-radius:10px;width:44px;height:44px}.logo b{color:var(--gold)}
+.topnav{display:flex;flex-wrap:wrap;gap:8px}.topnav a{font-size:.83rem;padding:9px 11px;border:1px solid #5b6684;border-radius:999px;text-decoration:none;font-weight:750}
+.topnav a:hover{color:#080d1b;background:var(--gold)}
+main{max-width:1120px;margin:auto;padding:0 17px 60px}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:18px;margin:25px 0 17px;padding:26px clamp(16px,4vw,42px);border-radius:24px;border:2px solid #ba973f;background:linear-gradient(117deg,#101c38,#0a1229 65%,#16254b);box-shadow:0 12px 36px #0005}
+.eyebrow{font-size:.75rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);margin:0}
+h1{font-size:clamp(2rem,6vw,3.35rem);line-height:1.09;letter-spacing:-.05em;margin:8px 0 12px}h1 span{color:var(--gold)}
+.hero p{max-width:680px;color:var(--muted);margin:0}
+.hero-icon{display:grid;place-items:center;font-size:3.4rem;width:100px;height:100px;border-radius:27px;background:#f4cf551b;border:2px solid #f4cf55}
+.statusbar{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:13px 0;padding:12px 16px;background:#101b32;border-radius:14px;border:1px solid #344768}
+.status{flex:1;min-width:220px;color:var(--muted);font-size:.87rem}.status strong{color:#fff}
+.dot{display:inline-block;width:9px;height:9px;background:#f4cf55;border-radius:50%;margin-right:5px}.dot.ok{background:#55dfa4}
+button.refresh,.action,.filter{color:#eef3ff;background:#192743;border:1px solid #617398;border-radius:12px;padding:9px 12px;font-weight:750}
+button.refresh:hover,.action:hover,.filter:hover{border-color:var(--gold)}
+.intro{padding:14px 18px;background:#0c172b;border-radius:15px;border:1px solid #2f4568;color:#bfcce5}
+.intro strong{color:#fff}.intro p{margin:4px 0}
+.filters{position:sticky;top:64px;z-index:40;display:flex;overflow-x:auto;gap:8px;margin:22px 0 18px;padding:10px 0;background:linear-gradient(180deg,var(--bg) 70%,#080d1b00);scrollbar-width:thin}
+.filter{flex:none;min-height:42px;border-radius:999px;font-size:.86rem;white-space:nowrap}
+.filter.on{background:var(--gold);border-color:var(--gold);color:#111829}
+.section{margin:24px 0 34px}.sec-head{display:flex;gap:12px;align-items:end;justify-content:space-between;margin:0 0 15px}
+h2{font-size:clamp(1.3rem,4vw,1.75rem);line-height:1.17;margin:0 0 3px}
+.sec-head p{color:var(--muted);margin:0;font-size:.88rem}.count{font-size:.75rem;color:var(--gold);font-weight:900;white-space:nowrap}
+.grid{display:grid;gap:13px}
+.card{border-radius:17px;background:var(--card);border:1px solid #37496d;overflow:hidden}
+.card.jt{display:grid;grid-template-columns:180px minmax(0,1fr);gap:16px;padding:14px}
+.card.news{padding:17px}
+.screen{aspect-ratio:9/16;background:#03070e;border:2px solid #7b6d3c;border-radius:13px;overflow:hidden;position:relative;min-width:0}
+.screen video{width:100%;height:100%;object-fit:contain;background:#040608;display:block}
+.screen .screen-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;text-align:center;font-weight:900;padding:15px;color:var(--gold);background:linear-gradient(155deg,#1e3c75,#0c122b)}
+.screen-empty span{font-size:2.1rem}
+.info{min-width:0}.category{font-size:.74rem;font-weight:900;color:#0a1121;background:var(--gold);border-radius:6px;padding:3px 7px;display:inline-block;margin:0 0 8px}
+.category.actus{background:#ff7685}.category.gaming{background:#cbf777}.category.projet{background:#b6d6fa}
+.meta{font-size:.82rem;color:#aabddc;margin:0 0 5px}
+h3{font-size:1.12rem;line-height:1.3;margin:0 0 9px;overflow-wrap:anywhere}
+.summary{font-size:.88rem;color:#dae2f1;margin:0 0 12px;overflow-wrap:anywhere}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.action{font-size:.84rem;text-decoration:none;display:inline-flex;gap:5px;align-items:center;min-height:40px}
+.action.primary{color:#12192b;background:var(--gold);border-color:var(--gold)}
+.action:disabled{opacity:.6;cursor:wait}
+details{margin:12px 0 0;border-top:1px solid #344464;padding-top:9px}
+summary{cursor:pointer;font-weight:800;color:#f1f4ff}
+.caption{white-space:pre-wrap;font:13px/1.5 system-ui,sans-serif;color:#d7e2f7;background:#081026;padding:13px;border-radius:10px;border:1px solid #3a4e73;margin:10px 0;overflow-wrap:anywhere}
+.empty{padding:30px 16px;text-align:center;background:#121e35;border-radius:16px;color:var(--muted);border:1px dashed #42547c}
+.project{padding:18px;display:grid;grid-template-columns:52px minmax(0,1fr);gap:12px;align-items:start}
+.proj-ico{display:grid;place-items:center;font-size:1.7rem;width:52px;height:52px;border-radius:12px;background:#f4cf5520}
+.foot{color:#9caecc;text-align:center;font-size:.82rem;margin-top:45px;border-top:1px solid #263b5b;padding-top:26px}.foot a{color:var(--gold)}
+.toast{position:fixed;z-index:100;left:50%;bottom:25px;transform:translateX(-50%);background:var(--gold);color:#121725;border:2px solid #030712;border-radius:13px;max-width:min(94vw,440px);padding:13px 19px;font-weight:900;box-shadow:0 10px 30px #0009;text-align:center}
+[hidden]{display:none!important}
+@media(max-width:650px){.top{padding:9px 12px}.topnav a{padding:7px 9px}.hero{grid-template-columns:1fr;padding:22px 18px}.hero-icon{display:none}.card.jt{grid-template-columns:110px minmax(0,1fr);gap:10px;padding:10px}.card.jt h3{font-size:.99rem}.actions .action{font-size:.78rem;padding:8px 9px}.filters{top:60px}.card.news{padding:14px}}
+@media(max-width:350px){.card.jt{grid-template-columns:1fr}.screen{max-width:165px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#kit">Aller aux publications</a>
+<header class="top">
+  <a class="logo" href="/"><img src="/app/univers-192.png" width="44" height="44" alt=""><span><b>VM</b> UNIVERS</span></a>
+  <nav class="topnav" aria-label="Liens"><a href="/">🏠 Accueil</a><a href="https://velocemercato.fr/studio/reseaux.html">🎬 Kit JT original</a></nav>
+</header>
+<main id="kit">
+  <section class="hero" aria-labelledby="titre">
+    <div>
+      <p class="eyebrow">📲 VM Univers · Studio social</p>
+      <h1>Ton Kit Réseaux.<br><span>Mis à jour tout seul.</span></h1>
+      <p>Les derniers JT, leurs vidéos verticales et les publications des médias VM. Télécharge, copie la légende et partage sur Facebook, Instagram, TikTok ou WhatsApp — depuis ton téléphone.</p>
+    </div>
+    <div class="hero-icon" aria-hidden="true">📲</div>
+  </section>
+  <div class="statusbar" aria-live="polite"><div id="statut" class="status"><span class="dot"></span> Connexion aux publications VM…</div><button id="actualiser" type="button" class="refresh">↻ Actualiser</button></div>
+  <div class="intro">
+    <p><strong>Automatique :</strong> cette page relit les nouveaux JT et articles quand tu l’ouvres, puis toutes les 5 minutes si elle reste affichée. Les kits vidéo sont créés par le robot de La Pastille TV dès qu’un JT est prêt.</p>
+    <p><strong>À toi de choisir :</strong> les boutons permettent de copier, télécharger ou partager ; ils ne déclenchent pas de publication automatique sur tes comptes. Les robots Facebook/Instagram déjà connectés fonctionnent séparément.</p>
+  </div>
+  <nav class="filters" aria-label="Filtrer le kit réseaux">
+    <button type="button" class="filter on" data-filter="tout" aria-pressed="true">✨ Tout</button>
+    <button type="button" class="filter" data-filter="jt" aria-pressed="false">🎬 JT &amp; Reels</button>
+    <button type="button" class="filter" data-filter="foot" aria-pressed="false">⚽ Foot</button>
+    <button type="button" class="filter" data-filter="actus" aria-pressed="false">📰 VM Actus</button>
+    <button type="button" class="filter" data-filter="gaming" aria-pressed="false">🎮 Gaming</button>
+    <button type="button" class="filter" data-filter="projet" aria-pressed="false">👑 Projets VM</button>
+  </nav>
+  <section class="section" id="videos">
+    <div class="sec-head"><div><h2>🎬 JT et Reels à partager</h2><p>Vidéos verticales de moins d’une minute, avec les légendes prêtes à copier.</p></div><span class="count" id="nb-videos"></span></div>
+    <div class="grid" id="liste-videos" aria-live="polite"><p class="empty">Chargement des dernières vidéos…</p></div>
+  </section>
+  <section class="section" id="articles">
+    <div class="sec-head"><div><h2>📰 Dernières actus prêtes à relayer</h2><p>Textes de partage créés à partir des brèves sourcées des médias VM.</p></div><span class="count" id="nb-posts"></span></div>
+    <div class="grid" id="liste-articles" aria-live="polite"><p class="empty">Chargement des dernières actualités…</p></div>
+  </section>
+  <section class="section" id="projets">
+    <div class="sec-head"><div><h2>👑 Projet VM Univers du jour</h2><p>Une idée de publication différente chaque jour pour mettre en avant les projets du groupe.</p></div><span class="count">1 idée / jour</span></div>
+    <div id="liste-projets" class="grid"></div>
+  </section>
+  <footer class="foot">
+    <p>Kit préparé par <a href="/">VM Univers</a> à partir des médias <a href="https://velocemercato.fr/">Véloce Mercato</a>. Vérifie les informations avant republication. Les vidéos et légendes restent la propriété de leurs ayants droit respectifs.</p>
+    <p>Besoin des versions originales ? <a href="https://velocemercato.fr/studio/reseaux.html">Voir le kit JT Véloce Mercato</a>.</p>
+  </footer>
+</main>
+<script>
+(function(){
+"use strict";
+var RAW="https://raw.githubusercontent.com/Velocemercato/velocemercato.fr/main/";
+var LIVE="https://velocemercato.fr/";
+var SOURCES=[
+ {key:"jt",file:"studio/reseaux.json",local:"/studio/reseaux.json"},
+ {key:"foot",file:"articles.json",local:"/studio/foot.json"},
+ {key:"actus",file:"actus/news.json",local:"/studio/actus.json"},
+ {key:"gaming",file:"vm-gaming/news.json",local:"/studio/gaming.json"}
+];
+var EMOJI={foot:"⚽",actus:"📰",gaming:"🎮",projet:"👑"};
+var LABEL={foot:"Football",actus:"VM Actus",gaming:"VM Gaming"};
+var LINKS={foot:"https://velocemercato.fr/",actus:"https://velocemercato.fr/actus/",gaming:"https://velocemercato.fr/vm-gaming/"};
+var PROJECTS=[
+ {name:"VM Univers",icon:"👑",url:"https://vmunivers.fr/",pitch:"Découvre le portail et tous les projets VM"},
+ {name:"Véloce Mercato",icon:"⚽",url:"https://velocemercato.fr/",pitch:"Tout le football, le mercato et les grands reportages"},
+ {name:"VM Actus",icon:"📰",url:"https://velocemercato.fr/actus/",pitch:"L’actualité française et internationale en version accessible"},
+ {name:"VM Gaming",icon:"🎮",url:"https://velocemercato.fr/vm-gaming/",pitch:"Les infos et nouveautés jeux vidéo"},
+ {name:"VM Belfort",icon:"📍",url:"https://velocemercato.fr/belfort/",pitch:"L'actualité locale de Belfort et Montbéliard"},
+ {name:"VM Studio",icon:"💼",url:"https://velocemercato.fr/web-studio.html",pitch:"Sites et visuels pour les commerces et les artisans"}
+];
+var videos=[],articles=[],project=null,filter="tout",lastUpdate=0,loadCount=0;
+var $=function(id){return document.getElementById(id)};
+function esc(value){return String(value==null?"":value).replace(/[&<>"']/g,function(m){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]})}
+function safe(url){
+ try{var u=new URL(url);var hosts=["velocemercato.fr","www.velocemercato.fr","vmunivers.fr","www.vmunivers.fr","cdn.jsdelivr.net","raw.githubusercontent.com","www.youtube.com","youtube.com","youtu.be"];
+ return u.protocol==="https:"&&hosts.indexOf(u.hostname)>=0?u.href:""}
+ catch(e){return ""}
+}
+function day(date){var x=new Date(date);return isNaN(x)?"":x.toLocaleString("fr-FR",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit",timeZone:"Europe/Paris"})}
+function published(date){var n=new Date(date).getTime();return Number.isFinite(n)?n:0}
+function show(text){var el=document.createElement("div");el.className="toast";el.setAttribute("role","status");el.textContent=text;document.body.appendChild(el);setTimeout(function(){el.remove()},3100)}
+function copy(text){
+ if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+ return Promise.reject(new Error("Presse-papiers indisponible"));
+}
+function copyCaption(text){copy(text).then(function(){show("📋 Texte copié !")}).catch(function(){prompt("Copie cette légende :",text)})}
+function nameFile(row){return "VM-"+(row.univers||"JT")+"-"+String(row.date||"").slice(0,10)+".mp4"}
+function captionJt(row,short){
+ var original=String(short?(row.texte_vertical||row.texte):(row.texte||row.texte_vertical)||"");
+ return "👑 VM UNIVERS PARTAGE "+(row.titre||"LE JT")+"\n\n"+original+"\n\nDécouvre aussi nos projets : https://vmunivers.fr/\n#VMUnivers";
+}
+function captionNews(a){
+ return EMOJI[a.univers]+" "+LABEL[a.univers].toUpperCase()+" | "+a.titre+"\n\n"+
+ a.resume+"\n\n"+(a.source?"Source : "+a.source+".\n":"")+"D'autres actualités sur "+LINKS[a.univers]+
+ "\n\nDécouvre le réseau : https://vmunivers.fr/\n#VMUnivers #VeloceMercato";
+}
+function captionProject(p){
+ return "👑 LE PROJET VM UNIVERS DU JOUR : "+p.name+"\n\n"+p.pitch+
+ ". On développe des médias, outils et services accessibles à tous !\n\n"+
+ "👉 Découvrir : "+p.url+"\n\n#VMUnivers #ProjetVM";
+}
+function niceRows(json){return Array.isArray(json)?json:[]}
+async function getFile(src){
+ var tick=Date.now();
+ // Les fichiers du portail synchronisés sont prioritaires ; la source publique assure le repli.
+ var urls=src.key==="jt"?[RAW+src.file,src.local,LIVE+src.file]:[src.local,RAW+src.file,LIVE+src.file];
+ for(var i=0;i<urls.length;i++){
+  try{
+   var result=await fetch(urls[i]+(urls[i].indexOf("?")<0?"?":"&")+"t="+tick,{cache:"no-store",mode:"cors"});
+   if(!result.ok)continue;
+   var data=await result.json();
+   if(Array.isArray(data))return data;
+  }catch(e){/* Source suivante */}
+ }
+ throw new Error("Données "+src.key+" indisponibles");
+}
+function makeVideos(rows){
+ var result=[],seen={};
+ niceRows(rows).sort(function(a,b){return published(b.prepare_le||b.date)-published(a.prepare_le||a.date)}).forEach(function(r){
+  if(!r||!r.id||seen[r.id]||!r.titre||!safe(r.verticale))return;
+  seen[r.id]=1;
+  result.push({id:String(r.id),univers:LABEL[r.univers]?r.univers:"actus",titre:String(r.titre).slice(0,190),date:r.date,
+   verticale:safe(r.verticale),horizontale:safe(r.horizontale),poster:safe(r.poster),
+   duree_verticale:r.duree_verticale,texte:String(r.texte||""),texte_vertical:String(r.texte_vertical||"")});
+ });
+ return result.slice(0,15);
+}
+function makeNews(rows,universe){
+ var result=[],seen={};
+ niceRows(rows).sort(function(a,b){return published(b.publishedAt)-published(a.publishedAt)}).forEach(function(a){
+  if(!a||!a.id||seen[a.id]||!a.titre||!a.resume||!published(a.publishedAt))return;
+  var sources=Array.isArray(a.sources)?a.sources:[];
+  var s=sources.find(function(v){try{return v&&v.nom&&new URL(v.url).protocol==="https:"}catch(e){return false}});
+  if(!s)return;
+  seen[a.id]=1;
+  result.push({id:String(a.id),univers:universe,titre:String(a.titre).slice(0,190),
+   resume:String(a.resume).slice(0,370),date:a.publishedAt,source:String(s.nom).slice(0,70),
+   url:LINKS[universe]});
+ });
+ return result.slice(0,9);
+}
+function getProject(){
+ var current=new Date();
+ var key=Number(new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Paris",year:"numeric",month:"2-digit",day:"2-digit"}).format(current).replace(/[^0-9]/g,""))||current.getDate();
+ return PROJECTS[key%PROJECTS.length];
+}
+function actionsVideo(i,r){
+ var h='<div class="actions"><button class="action primary" data-do="share-video" data-id="'+i+'">📲 Partager</button>'+
+ '<button class="action" data-do="download-video" data-id="'+i+'">⬇️ Vidéo verticale</button>'+
+ '<button class="action" data-do="copy-video" data-id="'+i+'">📋 Copier texte</button>';
+ if(r.horizontale)h+='<button class="action" data-do="download-long" data-id="'+i+'">⬇️ Version longue</button>';
+ return h+'</div><details><summary>Voir les textes de publication</summary><div class="caption">'+esc(captionJt(r,true))+
+ '</div><button class="action" data-do="copy-video" data-id="'+i+'">Copier la légende courte</button>'+
+ '<div class="caption">'+esc(captionJt(r,false))+'</div><button class="action" data-do="copy-long" data-id="'+i+'">Copier la légende longue</button></details>';
+}
+function renderVideos(){
+ var visible=videos.filter(function(v){return filter==="tout"||filter==="jt"||filter===v.univers});
+ $("videos").hidden=filter==="projet";
+ $("nb-videos").textContent=visible.length+" vidéos";
+ if(!visible.length){$("liste-videos").innerHTML='<div class="empty">Aucun JT dans cette catégorie pour le moment. Les nouveaux arrivent automatiquement après leur préparation.</div>';return}
+ $("liste-videos").innerHTML=visible.map(function(v){
+  var i=videos.indexOf(v);
+  var media='<video controls playsinline preload="none" '+(v.poster?'poster="'+esc(v.poster)+'" ':'')+'src="'+esc(v.verticale)+'" aria-label="'+esc(v.titre)+'"></video>';
+  return '<article class="card jt"><div class="screen">'+media+'</div><div class="info">'+
+   '<span class="category '+esc(v.univers)+'">'+esc(EMOJI[v.univers]+" "+LABEL[v.univers])+'</span>'+
+   '<p class="meta">'+esc(day(v.date))+(v.duree_verticale?" · "+esc(v.duree_verticale)+" s":"")+'</p>'+
+   '<h3>'+esc(v.titre)+'</h3><p class="summary">Le JT en version verticale, prêt pour Reels, TikTok et Shorts.</p>'+
+   actionsVideo(i,v)+'</div></article>';
+ }).join("");
+}
+function renderNews(){
+ var visible=articles.filter(function(v){return filter==="tout"||filter===v.univers});
+ $("articles").hidden=filter==="jt"||filter==="projet";
+ $("nb-posts").textContent=visible.length+" brèves";
+ if(!visible.length){$("liste-articles").innerHTML='<div class="empty">Aucune nouvelle brève dans cette catégorie. Réessaie à la prochaine mise à jour du média VM.</div>';return}
+ $("liste-articles").innerHTML=visible.map(function(a){
+  var i=articles.indexOf(a);
+  return '<article class="card news"><span class="category '+esc(a.univers)+'">'+esc(EMOJI[a.univers]+" "+LABEL[a.univers])+'</span>'+
+  '<p class="meta">'+esc(day(a.date))+' · Source : '+esc(a.source)+'</p><h3>'+esc(a.titre)+'</h3>'+
+  '<p class="summary">'+esc(a.resume)+'</p><div class="actions">'+
+  '<button class="action primary" data-do="share-news" data-id="'+i+'">📲 Partager</button>'+
+  '<button class="action" data-do="copy-news" data-id="'+i+'">📋 Copier texte</button>'+
+  '<a class="action" href="'+esc(a.url)+'" target="_blank" rel="noopener">📰 Voir le média</a></div>'+
+  '<details><summary>Voir le texte prêt à publier</summary><div class="caption">'+esc(captionNews(a))+
+  '</div></details></article>';
+ }).join("");
+}
+function renderProject(){
+ $("projets").hidden=filter!=="tout"&&filter!=="projet";
+ if(!project)return;
+ $("liste-projets").innerHTML='<article class="card project"><div class="proj-ico" aria-hidden="true">'+esc(project.icon)+'</div><div>'+
+ '<span class="category projet">Projet du jour</span><h3>'+esc(project.name)+'</h3><p class="summary">'+esc(project.pitch)+'</p>'+
+ '<div class="actions"><button class="action primary" data-do="share-project">📲 Partager</button>'+
+ '<button class="action" data-do="copy-project">📋 Copier texte</button>'+
+ '<a class="action" target="_blank" rel="noopener" href="'+esc(project.url)+'">🌐 Voir le projet</a></div>'+
+ '<details><summary>Texte prêt à publier</summary><div class="caption">'+esc(captionProject(project))+'</div></details></div></article>';
+}
+function render(){renderVideos();renderNews();renderProject()}
+function status(message,ok){
+ $("statut").innerHTML='<span class="dot'+(ok?' ok':'')+'"></span> '+esc(message)
+}
+async function refresh(){
+ if(loadCount>0)return;
+ loadCount++;
+ $("actualiser").disabled=true;
+ status("Vérification des nouveautés…",false);
+ var result=await Promise.allSettled(SOURCES.map(getFile));
+ var errors=0;
+ for(var i=0;i<SOURCES.length;i++){
+  var r=result[i],kind=SOURCES[i].key;
+  if(r.status!=="fulfilled"){errors++;continue}
+  if(kind==="jt")videos=makeVideos(r.value);
+  else articles=articles.filter(function(a){return a.univers!==kind}).concat(makeNews(r.value,kind));
+ }
+ articles.sort(function(a,b){return published(b.date)-published(a.date)});
+ project=getProject();lastUpdate=Date.now();
+ render();
+ var stamp=new Date(lastUpdate).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
+ if(errors===4)status("Sources momentanément indisponibles. Affichage des dernières données chargées.",false);
+ else status(videos.length+" JT/Reels · "+articles.length+" brèves · vérifié à "+stamp+(errors?" (certaines sources indisponibles)":"")+" · actualisation toutes les 5 min",errors===0);
+ $("actualiser").disabled=false;loadCount--;
+}
+async function download(url,name,btn){
+ var old=btn.textContent;btn.disabled=true;btn.textContent="⏳ Téléchargement";
+ try{
+  var response=await fetch(url);if(!response.ok)throw new Error("HTTP "+response.status);
+  var blob=await response.blob();
+  var object=URL.createObjectURL(blob),link=document.createElement("a");
+  link.href=object;link.download=name;document.body.appendChild(link);link.click();link.remove();
+  setTimeout(function(){URL.revokeObjectURL(object)},4000);show("✅ Vidéo enregistrée");
+ }catch(e){show("Ouvre la vidéo pour l'enregistrer");window.open(url,"_blank","noopener")}
+ finally{btn.disabled=false;btn.textContent=old}
+}
+async function shareVideo(row,btn){
+ var text=captionJt(row,true);
+ var old=btn.textContent;btn.disabled=true;btn.textContent="⏳ Préparation";
+ try{
+  var response=await fetch(row.verticale);if(!response.ok)throw new Error("HTTP "+response.status);
+  var blob=await response.blob();var file=new File([blob],nameFile(row),{type:"video/mp4"});
+  if(navigator.canShare&&navigator.canShare({files:[file]})){
+   await copy(text).catch(function(){});
+   await navigator.share({files:[file],text:text,title:row.titre});
+   show("📲 Légende prête pour ta publication");return;
+  }
+  await download(row.verticale,nameFile(row),btn);
+  copyCaption(text);
+ }catch(e){if(e.name!=="AbortError")copyCaption(text)}
+ finally{btn.disabled=false;btn.textContent=old}
+}
+function shareText(text,url,title){
+ if(navigator.share)navigator.share({title:title,text:text,url:url}).catch(function(e){if(e.name!=="AbortError")copyCaption(text)});
+ else copyCaption(text);
+}
+document.querySelectorAll(".filter").forEach(function(btn){btn.addEventListener("click",function(){
+ filter=this.dataset.filter;
+ document.querySelectorAll(".filter").forEach(function(b){var on=b===btn;b.classList.toggle("on",on);b.setAttribute("aria-pressed",on?"true":"false")});
+ render();
+})});
+document.addEventListener("click",function(e){
+ var btn=e.target.closest("[data-do]");if(!btn)return;
+ var act=btn.dataset.do,id=Number(btn.dataset.id);
+ var video=videos[id],article=articles[id];
+ if(act==="download-video"&&video)download(video.verticale,nameFile(video),btn);
+ else if(act==="download-long"&&video&&video.horizontale)download(video.horizontale,"VM-JT-complet.mp4",btn);
+ else if(act==="copy-video"&&video)copyCaption(captionJt(video,true));
+ else if(act==="copy-long"&&video)copyCaption(captionJt(video,false));
+ else if(act==="share-video"&&video)shareVideo(video,btn);
+ else if(act==="copy-news"&&article)copyCaption(captionNews(article));
+ else if(act==="share-news"&&article)shareText(captionNews(article),article.url,article.titre);
+ else if(act==="copy-project"&&project)copyCaption(captionProject(project));
+ else if(act==="share-project"&&project)shareText(captionProject(project),project.url,project.name);
+});
+$("actualiser").addEventListener("click",refresh);
+document.addEventListener("visibilitychange",function(){if(!document.hidden&&Date.now()-lastUpdate>180000)refresh()});
+setInterval(function(){if(!document.hidden)refresh()},300000);
+refresh();
+})();
+</script>
+</body>
+</html>
