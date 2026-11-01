@@ -61,6 +61,13 @@ h3{font-size:1.12rem;line-height:1.3;margin:0 0 9px;overflow-wrap:anywhere}
 .action{font-size:.84rem;text-decoration:none;display:inline-flex;gap:5px;align-items:center;min-height:40px}
 .action.primary{color:#12192b;background:var(--gold);border-color:var(--gold)}
 .action:disabled{opacity:.6;cursor:wait}
+.ai-assist{border-color:#856e39;background:linear-gradient(115deg,#152647,#101a34)}
+.ai-assist h2{margin:0 0 6px;font-size:1.2rem;color:var(--gold)}
+.ai-assist p{margin:7px 0}
+.ai-assist .actions{margin:12px 0}
+.action.ai-action{background:#20365f;border-color:#668acb}
+.action.ai-action:hover,.action.ai-action:focus-visible{background:#2b4980;border-color:var(--gold)}
+.ai-steps{font-size:.82rem;color:var(--muted)}
 details{margin:12px 0 0;border-top:1px solid #344464;padding-top:9px}
 summary{cursor:pointer;font-weight:800;color:#f1f4ff}
 .caption{white-space:pre-wrap;font:13px/1.5 system-ui,sans-serif;color:#d7e2f7;background:#081026;padding:13px;border-radius:10px;border:1px solid #3a4e73;margin:10px 0;overflow-wrap:anywhere}
@@ -95,6 +102,15 @@ summary{cursor:pointer;font-weight:800;color:#f1f4ff}
     <p><strong>Automatique :</strong> cette page relit les nouveaux JT et articles quand tu l’ouvres, puis toutes les 5 minutes si elle reste affichée. Les kits vidéo sont créés par le robot de La Pastille TV dès qu’un JT est prêt.</p>
     <p><strong>À toi de choisir :</strong> les boutons permettent de copier, télécharger ou partager ; ils ne déclenchent pas de publication automatique sur tes comptes. Les robots Facebook/Instagram déjà connectés fonctionnent séparément.</p>
   </div>
+  <section class="intro ai-assist" aria-label="Confier le kit à ChatGPT ou Claude">
+    <h2>🤖 Confier le travail à ChatGPT ou Claude</h2>
+    <p>Sélectionne un contenu ci-dessous, ou envoie une sélection des nouveautés à l’IA : le briefing (texte, source, vidéo si disponible) sera copié et ChatGPT ou Claude s’ouvrira. <strong>Colle le briefing dans la conversation</strong> pour demander une préparation ou une programmation.</p>
+    <div class="actions">
+      <a class="action ai-action" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" data-do="ai-kit" data-ai="chatgpt">🤖 Confier le kit à ChatGPT</a>
+      <a class="action ai-action" href="https://claude.ai/" target="_blank" rel="noopener noreferrer" data-do="ai-kit" data-ai="claude">✨ Confier le kit à Claude</a>
+    </div>
+    <p class="ai-steps"><strong>Important :</strong> ces boutons ne publient rien. La publication effective nécessite un accès autorisé aux comptes et une validation des textes, médias et destinations. Aucune connexion ou clé ne transite par ce kit.</p>
+  </section>
   <nav class="filters" aria-label="Filtrer le kit réseaux">
     <button type="button" class="filter on" data-filter="tout" aria-pressed="true">✨ Tout</button>
     <button type="button" class="filter" data-filter="jt" aria-pressed="false">🎬 JT &amp; Reels</button>
@@ -209,7 +225,7 @@ function makeNews(rows,universe){
   seen[a.id]=1;
   result.push({id:String(a.id),univers:universe,titre:String(a.titre).slice(0,190),
    resume:String(a.resume).slice(0,370),date:a.publishedAt,source:String(s.nom).slice(0,70),
-   url:LINKS[universe]});
+   url:LINKS[universe],sourceUrl:String(s.url||"").slice(0,900)});
  });
  return result.slice(0,9);
 }
@@ -223,6 +239,8 @@ function actionsVideo(i,r){
  '<button class="action" data-do="download-video" data-id="'+i+'">⬇️ Vidéo verticale</button>'+
  '<button class="action" data-do="copy-video" data-id="'+i+'">📋 Copier texte</button>';
  if(r.horizontale)h+='<button class="action" data-do="download-long" data-id="'+i+'">⬇️ Version longue</button>';
+ h+='<a class="action ai-action" data-do="ai-video" data-ai="chatgpt" data-id="'+i+'" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">🤖 ChatGPT</a>'+
+ '<a class="action ai-action" data-do="ai-video" data-ai="claude" data-id="'+i+'" href="https://claude.ai/" target="_blank" rel="noopener noreferrer">✨ Claude</a>';
  return h+'</div><details><summary>Voir les textes de publication</summary><div class="caption">'+esc(captionJt(r,true))+
  '</div><button class="action" data-do="copy-video" data-id="'+i+'">Copier la légende courte</button>'+
  '<div class="caption">'+esc(captionJt(r,false))+'</div><button class="action" data-do="copy-long" data-id="'+i+'">Copier la légende longue</button></details>';
@@ -254,6 +272,8 @@ function renderNews(){
   '<p class="summary">'+esc(a.resume)+'</p><div class="actions">'+
   '<button class="action primary" data-do="share-news" data-id="'+i+'">📲 Partager</button>'+
   '<button class="action" data-do="copy-news" data-id="'+i+'">📋 Copier texte</button>'+
+  '<a class="action ai-action" data-do="ai-news" data-ai="chatgpt" data-id="'+i+'" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">🤖 ChatGPT</a>'+
+  '<a class="action ai-action" data-do="ai-news" data-ai="claude" data-id="'+i+'" href="https://claude.ai/" target="_blank" rel="noopener noreferrer">✨ Claude</a>'+
   '<a class="action" href="'+esc(a.url)+'" target="_blank" rel="noopener">📰 Voir le média</a></div>'+
   '<details><summary>Voir le texte prêt à publier</summary><div class="caption">'+esc(captionNews(a))+
   '</div></details></article>';
@@ -266,6 +286,8 @@ function renderProject(){
  '<span class="category projet">Projet du jour</span><h3>'+esc(project.name)+'</h3><p class="summary">'+esc(project.pitch)+'</p>'+
  '<div class="actions"><button class="action primary" data-do="share-project">📲 Partager</button>'+
  '<button class="action" data-do="copy-project">📋 Copier texte</button>'+
+ '<a class="action ai-action" data-do="ai-project" data-ai="chatgpt" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">🤖 ChatGPT</a>'+
+ '<a class="action ai-action" data-do="ai-project" data-ai="claude" href="https://claude.ai/" target="_blank" rel="noopener noreferrer">✨ Claude</a>'+
  '<a class="action" target="_blank" rel="noopener" href="'+esc(project.url)+'">🌐 Voir le projet</a></div>'+
  '<details><summary>Texte prêt à publier</summary><div class="caption">'+esc(captionProject(project))+'</div></details></div></article>';
 }
@@ -325,6 +347,46 @@ function shareText(text,url,title){
  if(navigator.share)navigator.share({title:title,text:text,url:url}).catch(function(e){if(e.name!=="AbortError")copyCaption(text)});
  else copyCaption(text);
 }
+function aiBrief(kind,row){
+ var head="MISSION VM UNIVERS — préparation éditoriale avec revue humaine.\n"+
+ "Kit : https://vmunivers.fr/studio/reseaux.html\n"+
+ "Prépare une publication Facebook/Instagram/TikTok adaptée à la marque et au média. "+
+ "Vérifie la fraîcheur des informations et leurs sources. Propose une légende, un format et des créneaux en heure de Paris. "+
+ "Vérifie le statut public de la vidéo et les droits avant de proposer son usage. "+
+ "Ne présente jamais une vidéo absente comme publiée. "+
+ "Ne crée aucun score ou pourcentage de pronostic. 100 points virtuels maximum, zéro mise réelle. "+
+ "Ne publie ni ne programme sans accord explicite et vérification des destinataires et doublons.\n\n";
+ if(kind==="video"&&row){
+  return head+"TYPE : JT / Reel\nTitre : "+row.titre+"\nDate de l'édition : "+(row.date||"inconnue")+
+   "\nVidéo verticale : "+(row.verticale||"indisponible")+
+   "\nVersion longue : "+(row.horizontale||"indisponible")+
+   "\nTexte initial :\n"+captionJt(row,true);
+ }
+ if(kind==="news"&&row){
+  return head+"TYPE : actualité "+(LABEL[row.univers]||"VM")+
+   "\nDate de la source : "+(row.date||"inconnue")+
+   "\nSource : "+(row.source||"non renseignée")+
+   "\nLien source : "+(row.sourceUrl||"à vérifier")+
+   "\nTexte initial :\n"+captionNews(row);
+ }
+ if(kind==="project"&&row){
+  return head+"TYPE : projet VM Univers\nNom : "+row.name+"\nSite : "+row.url+
+   "\nTexte initial :\n"+captionProject(row);
+ }
+ return head+"Sélection du kit à traiter (confirme les contenus récents et évite les doublons) :\n\n"+
+  videos.slice(0,3).map(function(v){return aiBrief("video",v).split("TYPE : ")[1]}).join("\n\n---\n\n")+
+  "\n\n"+articles.slice(0,6).map(function(a){return aiBrief("news",a).split("TYPE : ")[1]}).join("\n\n---\n\n")+
+  (project?"\n\n"+aiBrief("project",project).split("TYPE : ")[1]:"");
+}
+function handoffAi(kind,row){
+ var brief=aiBrief(kind,row);
+ // L'ouverture de ChatGPT/Claude est assurée par le lien ; le texte reste à coller manuellement.
+ copy(brief).then(function(){
+  show("🤖 Briefing copié. Colle-le dans la conversation IA ouverte.");
+ }).catch(function(){
+  prompt("Copie ce briefing, puis colle-le dans l'IA ouverte :",brief);
+ });
+}
 document.querySelectorAll(".filter").forEach(function(btn){btn.addEventListener("click",function(){
  filter=this.dataset.filter;
  document.querySelectorAll(".filter").forEach(function(b){var on=b===btn;b.classList.toggle("on",on);b.setAttribute("aria-pressed",on?"true":"false")});
@@ -334,7 +396,11 @@ document.addEventListener("click",function(e){
  var btn=e.target.closest("[data-do]");if(!btn)return;
  var act=btn.dataset.do,id=Number(btn.dataset.id);
  var video=videos[id],article=articles[id];
- if(act==="download-video"&&video)download(video.verticale,nameFile(video),btn);
+ if(act==="ai-kit")handoffAi("kit");
+ else if(act==="ai-video"&&video)handoffAi("video",video);
+ else if(act==="ai-news"&&article)handoffAi("news",article);
+ else if(act==="ai-project"&&project)handoffAi("project",project);
+ else if(act==="download-video"&&video)download(video.verticale,nameFile(video),btn);
  else if(act==="download-long"&&video&&video.horizontale)download(video.horizontale,"VM-JT-complet.mp4",btn);
  else if(act==="copy-video"&&video)copyCaption(captionJt(video,true));
  else if(act==="copy-long"&&video)copyCaption(captionJt(video,false));
