@@ -293,5 +293,30 @@ class SiteTests(unittest.TestCase):
             context.close()
 
 
+    def test_07_vm_village_landing(self):
+        """Le projet VM Village s'affiche et reste fonctionnel sur mobile et bureau."""
+        if not PORTAL:
+            self.skipTest('VM Village appartient uniquement à vmunivers.fr')
+        for width in [320, 390, 1440]:
+            with self.subTest(width=width):
+                context = self.context(width, 'dark')
+                page = context.new_page()
+                errors = []
+                page.on('pageerror', lambda error: errors.append(str(error)))
+                page.goto(self.base + '/village/', wait_until='networkidle')
+                self.assertIn('VM Village', page.title())
+                self.assertEqual(page.locator('h1').count(), 1)
+                self.assertIn('MILLE PASSIONS', page.locator('h1').inner_text())
+                self.assertIn('Immobilier non acquis', page.locator('.disclaimer').inner_text())
+                self.assertTrue(page.locator('.hero-visual img').evaluate('img => img.complete && img.naturalWidth > 0'))
+                self.assertEqual(page.evaluate('document.documentElement.scrollWidth'), width)
+                page.get_by_role('button', name='💎 Collectionneurs').click()
+                self.assertIn('collection', page.locator('#audience-title').inner_text().lower())
+                self.assertEqual(page.get_by_role('button', name='💎 Collectionneurs').get_attribute('aria-pressed'), 'true')
+                self.assertTrue(page.locator('#contact-form select').is_visible())
+                self.assertFalse(errors, errors)
+                context.close()
+
+
 if __name__ == '__main__':
     unittest.main(verbosity=2)
