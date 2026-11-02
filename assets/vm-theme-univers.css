@@ -1,0 +1,25 @@
+/* Thème VM (maquettes Multisport / Mangas) : noir, rouge néon, or — commun à velocemercato.fr */
+:root{--gold:#f4c430;--muted:#c9c2b2;--ink:#f7f3ea;--panel:#121018;--vt-red:#e3122b;--vt-red2:#ff2a45;--vt-glow:0 0 18px #ff1f3d66}
+html,body{background:#07060a!important}
+body{background:radial-gradient(1200px 520px at 50% -160px,#3b0710 0,transparent 70%),#07060a!important;color:var(--ink)}
+.portal-nav{border-bottom:2px solid var(--vt-red)!important;box-shadow:0 6px 24px #e3122b33;background:#050408f2}
+.portal-links a{font-family:"Barlow Condensed",system-ui,sans-serif;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.hub{position:relative;isolation:isolate;margin:14px auto 8px;max-width:1160px;border:2px solid var(--vt-red2);border-radius:14px;overflow:hidden;box-shadow:var(--vt-glow),inset 0 0 40px #000;
+ background:linear-gradient(180deg,#07060a99 0,#07060acc 55%,#07060af2 100%),url('/img/vm-art/vm-banniere-tetes.webp') center 30%/cover no-repeat,#08070a!important;text-shadow:2px 2px 0 #000,0 0 14px #000}
+.hub h1,.hub .eyebrow{font-family:"Barlow Condensed",Impact,sans-serif;font-style:italic;text-transform:uppercase}
+.hub h1{font-weight:900;letter-spacing:.01em}
+.hub .eyebrow{color:var(--gold)}
+.hub h1 em,.hub h1 span,.hub h1 b{color:var(--gold)}
+.feat{border:2px solid var(--gold)!important;box-shadow:0 0 22px #f4c43055!important;border-radius:14px!important}
+.grp>summary{font-family:"Barlow Condensed",Impact,sans-serif;font-style:italic;text-transform:uppercase}
+.grp>summary span,.grp>summary b,.grp>summary h2{font-weight:900;letter-spacing:.02em}
+.ap{background:linear-gradient(180deg,#16121b,#0d0b11)!important;border:2px solid #ff2a4566!important;border-radius:12px!important;box-shadow:0 0 0 #0000;transition:transform .18s,border-color .18s,box-shadow .18s}
+a.ap:hover,a.ap:focus-visible{border-color:var(--vt-red2)!important;box-shadow:var(--vt-glow)}
+.go{color:var(--vt-red2)!important;font-family:"Barlow Condensed",system-ui,sans-serif;text-transform:uppercase;letter-spacing:.04em}
+.btn{background:linear-gradient(180deg,#ff2a45,#c50f24)!important;color:#fff!important;border:1px solid #ff6b7d;box-shadow:var(--vt-glow);text-shadow:none!important;font-family:"Barlow Condensed",system-ui,sans-serif;text-transform:uppercase;letter-spacing:.04em}
+.bdg{border-radius:6px!important}
+.theme-chip,.views button{border-color:#ff2a4566!important}
+.theme-chip.on,.theme-chip[aria-pressed="true"],.views button.on{background:var(--vt-red)!important;color:#fff!important;box-shadow:var(--vt-glow)}
+.srch{border-color:var(--vt-red2)!important;box-shadow:var(--vt-glow)}
+@media(max-width:640px){.hub{background:linear-gradient(180deg,#07060a99 0,#07060acc 50%,#07060af2 100%),url('/img/vm-art/vm-banniere-tetes-768.webp') center 30%/cover no-repeat,#08070a!important;margin:10px 10px 8px}}
+@media(prefers-reduced-motion:reduce){.ap{transition:none}}
