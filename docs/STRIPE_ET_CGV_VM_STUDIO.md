@@ -6,7 +6,7 @@
 | Élément | Présent ? | Où |
 |---|---|---|
 | Mentions légales (micro-entreprise, SIRET 528 102 916 00012, TVA non applicable selon l'art. 293 B du CGI, hébergeur) | ✅ | velocemercato.fr/mentions-legales.html |
-| **Nom et prénom de l'entrepreneur individuel** (obligatoire) | ⚠️ non vu | À ajouter aux mentions légales |
+| **Nom et prénom de l'entrepreneur individuel** (obligatoire) | ✅ Romain ORIEZ | Ajouté aux mentions légales le 4/11 |
 | Politique de confidentialité | ✅ partielle | Mentions légales. **Ajouter** FormSubmit (formulaire de devis) et Stripe (paiement) comme prestataires |
 | Tarifs | ✅ prix nets, TVA non applicable | vmunivers.fr/professionnels, velocemercato.fr/web-studio.html, /pub/ |
 | **CGV** | ❌ absentes | Projet ci-dessous, **à faire valider** |
@@ -39,7 +39,7 @@
 
 ## 5. PROJET de conditions générales de vente VM Studio (À FAIRE VALIDER par un professionnel du droit avant publication)
 
-**Article 1 – Vendeur.** VM Studio, activité de [NOM Prénom], entrepreneur individuel (micro-entreprise), SIRET 528 102 916 00012, [adresse professionnelle], vminvest.fr@gmail.com. TVA non applicable, article 293 B du CGI.
+**Article 1 – Vendeur.** VM Studio, activité de Romain ORIEZ, entrepreneur individuel (micro-entreprise), SIRET 528 102 916 00012, [adresse professionnelle], vminvest.fr@gmail.com. TVA non applicable, article 293 B du CGI.
 
 **Article 2 – Objet.** Les présentes conditions s'appliquent aux prestations de VM Studio : création de sites, entretien, identité visuelle, supports imprimés et numériques, publicité sur les médias VM.
 
