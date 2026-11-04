@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Maquette · VM Univers · Véloce Universe</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&display=swap">
+<link rel="stylesheet" href="charte.css">
+<style>
+.hero{position:relative;margin-top:18px;border-radius:18px;overflow:hidden;border:1px solid var(--ligne);background:linear-gradient(120deg,#2a0610ee,#071d44ee),url(https://velocemercato.fr/img/vm-art/vm-banniere-tetes.webp) center/cover}
+.hero .in{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;align-items:center;padding:40px 34px}
+.hero h1{font:900 italic clamp(38px,6vw,72px)/.92 var(--titre);text-transform:uppercase}
+.hero h1 span{color:var(--rouge);text-shadow:var(--lueur-rouge)}.hero h1 em{font-style:normal;color:var(--or)}
+.hero p{color:var(--doux);font-size:18px;max-width:560px}
+.hero .ctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.hero img.logo-xl{width:min(320px,80%);margin:auto;filter:drop-shadow(0 0 30px #ffc21a55)}
+.piliers{display:grid;gap:14px;grid-template-columns:repeat(4,1fr);margin-top:18px}
+.pilier{padding:18px}.pilier b{font-size:30px}.pilier h3{font-size:26px;margin:6px 0;text-transform:uppercase}.pilier p{margin:0;color:var(--doux);font-size:14px}
+.pilier.r{border-top:3px solid var(--rouge)}.pilier.b{border-top:3px solid var(--bleu)}.pilier.o{border-top:3px solid var(--or)}.pilier.n{border-top:3px solid var(--bleu-neon)}
+.filtres{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.filtres button{font:800 15px var(--titre);text-transform:uppercase;background:#0f1118;color:var(--encre);border:1px solid var(--ligne);border-radius:999px;padding:7px 14px;cursor:pointer}
+.filtres button.on{border-color:var(--rouge);box-shadow:var(--lueur-rouge)}
+.annu{display:flex;gap:12px;align-items:center;padding:14px}
+.annu img{border-radius:12px;flex:none;background:#000}.annu h3{font-size:22px;margin:6px 0 2px}.annu p{margin:0;color:var(--doux);font-size:14px}
+.offres{display:grid;gap:14px;grid-template-columns:repeat(3,1fr)}
+.offre{padding:22px}.offre h3{font-size:28px;text-transform:uppercase;margin:8px 0}.offre ul{padding-left:18px;color:var(--doux)}.offre .prix{font:900 22px var(--titre);color:var(--or)}
+.reso{display:grid;gap:10px;grid-template-columns:repeat(7,1fr)}
+.reso .carte{padding:14px;text-align:center}.reso b{display:block;font:900 20px var(--titre)}.reso small{color:var(--doux)}
+.contact{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;align-items:center;padding:26px;background:linear-gradient(120deg,#160409,#06142e)}
+.contact h2{font:900 italic 40px var(--titre);text-transform:uppercase}.contact p{color:var(--doux)}
+.preuves{display:grid;gap:10px;grid-template-columns:repeat(3,1fr)}.preuve{padding:14px;text-align:center}.preuve b{display:block;font:900 30px var(--titre);color:var(--or)}.preuve small{color:var(--doux)}
+@media (max-width:900px){.hero .in,.contact{grid-template-columns:1fr}.piliers,.offres{grid-template-columns:1fr 1fr}.reso{grid-template-columns:repeat(4,1fr)}.preuves{grid-template-columns:1fr}}
+@media (max-width:560px){.hero img.logo-xl{display:none}.piliers,.offres{grid-template-columns:1fr}.reso{grid-template-columns:repeat(2,1fr)}.hero .in{padding:26px 18px}}
+</style></head><body>
+<div class="maquette"><p>MAQUETTE VÉLOCE UNIVERSE · non publiée · à valider par le patron avant toute mise en ligne</p></div>
+<header class="entete"><div class="wrap">
+<a class="logo" href="#"><img src="https://velocemercato.fr/img/logo-vm-officiel.png" alt="Logo VM"><span><strong>VÉLOCE <i>UNIVERSE</i></strong><small>VMUNIVERS.FR · LA VITRINE OFFICIELLE</small></span></a>
+<nav class="menu" aria-label="Sections"><a class="on" href="#medias">Médias</a><a href="#annuaire">Annuaire</a><a href="#offres">Services</a><a href="#reseaux">Réseaux</a><a class="pronos" href="#contact">Contact</a></nav>
+</div></header>
+<main class="wrap">
+<section class="hero"><div class="in"><div>
+<span class="puce or">Le réseau média multi-univers</span>
+<h1>Un seul <span>univers</span>,<br>toutes nos <em>passions</em></h1>
+<p>Médias, services pour les pros et projets utiles : tout l'écosystème VM au même endroit. Deux sites complémentaires, une seule marque.</p>
+<div class="ctas"><a class="btn" href="https://velocemercato.fr/">Lire Véloce Mercato</a><a class="btn or" href="#contact">Devenir partenaire</a><a class="btn ghost" href="#annuaire">Tout l'annuaire</a></div>
+</div><img class="logo-xl" src="https://velocemercato.fr/img/logo-vm-officiel.png" alt=""></div></section>
+<section class="piliers" id="medias">
+<a class="carte pilier r" href="https://velocemercato.fr/"><b>⚽</b><h3>Nos médias</h3><p>Foot, mercato, multisport, actus, gaming, mangas, séries, JT.</p></a>
+<a class="carte pilier b" href="#offres"><b>🛠️</b><h3>Nos services</h3><p>Sites web, publicité, visibilité locale pour les pros.</p></a>
+<a class="carte pilier o" href="#annuaire"><b>🚀</b><h3>Nos projets</h3><p>Outils gratuits et utiles : démarches, CV, annonces.</p></a>
+<a class="carte pilier n" href="#contact"><b>🤝</b><h3>Partenaires</h3><p>Sponsors, annonceurs, collaborations.</p></a>
+</section>
+<h2 class="sec" id="annuaire">L'annuaire VM</h2>
+<div class="filtres" role="group" aria-label="Filtrer"><button class="on" data-f="">Tout</button><button data-f="Médias">Médias</button><button data-f="Services">Services</button><button data-f="Projets">Projets</button></div>
+<section class="grille" id="liste"><a class="carte annu" href="https://velocemercato.fr/" data-cat="Médias"><img src="../../assets/projects/app/foot-192.png" alt="" width="56" height="56"><div><span class="puce ">Médias</span><h3>Véloce Mercato</h3><p>Le média foot, mercato et multi-univers</p></div></a><a class="carte annu" href="https://velocemercato.fr/actus/" data-cat="Médias"><img src="../../assets/projects/app/actus-192.png" alt="" width="56" height="56"><div><span class="puce ">Médias</span><h3>VM Actus</h3><p>National, international, régional</p></div></a><a class="carte annu" href="https://velocemercato.fr/multisport/" data-cat="Médias"><img src="../../assets/projects/app/arena-192.png" alt="" width="56" height="56"><div><span class="puce ">Médias</span><h3>VM Multisport</h3><p>NBA, NHL, tennis, rugby, F1…</p></div></a><a class="carte annu" href="https://velocemercato.fr/vm-gaming/" data-cat="Médias"><img src="../../assets/projects/app/gaming-192.png" alt="" width="56" height="56"><div><span class="puce ">Médias</span><h3>VM Gaming</h3><p>Actu jeu vidéo et esport</p></div></a><a class="carte annu" href="https://velocemercato.fr/studio.html" data-cat="Médias"><img src="../../assets/projects/app/tv-192.png" alt="" width="56" height="56"><div><span class="puce ">Médias</span><h3>JT VM</h3><p>Les éditions de 7 h, 12 h et 20 h</p></div></a><a class="carte annu" href="https://velocemercato.fr/pro/" data-cat="Services"><img src="../../assets/projects/app/pro-192.png" alt="" width="56" height="56"><div><span class="puce bleu">Services</span><h3>Création de sites</h3><p>Vitrines pour commerces et artisans, 8 démos</p></div></a><a class="carte annu" href="https://velocemercato.fr/pub/" data-cat="Services"><img src="../../assets/projects/app/annonces-192.png" alt="" width="56" height="56"><div><span class="puce bleu">Services</span><h3>Publicité &amp; visibilité</h3><p>Packs annonceurs sur nos médias</p></div></a><a class="carte annu" href="https://velocemercato.fr/emploi/" data-cat="Services"><img src="../../assets/projects/app/emploi-192.png" alt="" width="56" height="56"><div><span class="puce bleu">Services</span><h3>Emploi &amp; CV</h3><p>Offres locales et CV en ligne</p></div></a><a class="carte annu" href="https://velocemercato.fr/menu/" data-cat="Services"><img src="../../assets/projects/app/menu-192.png" alt="" width="56" height="56"><div><span class="puce bleu">Services</span><h3>Menus &amp; commandes</h3><p>Menus en ligne pour restaurants</p></div></a><a class="carte annu" href="https://velocemercato.fr/pro-auto/" data-cat="Services"><img src="../../assets/projects/app/autopart-192.png" alt="" width="56" height="56"><div><span class="puce bleu">Services</span><h3>Pièces auto</h3><p>Pro Auto, recherche de pièces</p></div></a><a class="carte annu" href="https://velocemercato.github.io/Papiers-sans-galere/" data-cat="Projets"><img src="../../assets/projects/papiers/icon-192.png" alt="" width="56" height="56"><div><span class="puce or">Projets</span><h3>Papiers Sans Galère</h3><p>Bail, quittance et démarches, gratuitement</p></div></a><a class="carte annu" href="https://velocemercato.fr/allolivre/" data-cat="Projets"><img src="../../assets/projects/app/allolivre-192.png" alt="" width="56" height="56"><div><span class="puce or">Projets</span><h3>AlloLivre</h3><p>Livraison et services de proximité</p></div></a><a class="carte annu" href="https://velocemercato.fr/shop/" data-cat="Projets"><img src="../../assets/projects/app/bonsplans-192.png" alt="" width="56" height="56"><div><span class="puce or">Projets</span><h3>Bons plans &amp; annonces</h3><p>Petites annonces et bons plans</p></div></a><a class="carte annu" href="https://velocemercato.fr/cv/" data-cat="Projets"><img src="../../assets/projects/app/cv-192.png" alt="" width="56" height="56"><div><span class="puce or">Projets</span><h3>CV express</h3><p>Créer son CV en quelques minutes</p></div></a></section>
+<h2 class="sec" id="offres">Nos offres pour les pros</h2>
+<section class="offres">
+<article class="carte offre"><span class="puce bleu">Site vitrine</span><h3>Ton commerce en ligne</h3><ul><li>Site mobile rapide</li><li>Menu, horaires, contact, plan</li><li>8 modèles prêts à l'emploi</li></ul><p class="prix">Sur devis</p><a class="btn ghost" href="https://velocemercato.fr/demos/restaurant.html">Voir une démo</a></article>
+<article class="carte offre"><span class="puce">Visibilité</span><h3>Pub sur nos médias</h3><ul><li>Bannières et articles partenaires</li><li>Posts sur nos réseaux officiels</li><li>Bilan de diffusion</li></ul><p class="prix">Packs sur devis</p><a class="btn ghost" href="https://velocemercato.fr/pub/">Voir les packs</a></article>
+<article class="carte offre"><span class="puce or">Partenariat</span><h3>Sponsor VM</h3><ul><li>Présence sur les JT et rubriques</li><li>Événements et opérations</li><li>Contrat sur mesure</li></ul><p class="prix">Sur rendez-vous</p><a class="btn ghost" href="#contact">Nous écrire</a></article>
+</section>
+<h2 class="sec">Ils nous suivent</h2>
+<section class="preuves"><div class="carte preuve"><b>—</b><small>visiteurs par mois (mesure à activer)</small></div><div class="carte preuve"><b>—</b><small>abonnés sur nos réseaux (à consolider)</small></div><div class="carte preuve"><b>—</b><small>JT publiés (compteur automatique)</small></div></section>
+<h2 class="sec" id="reseaux">Nos réseaux officiels</h2>
+<section class="reso"><div class="carte"><b>Facebook</b><small>Véloce Universe</small></div><div class="carte"><b>Instagram</b><small>Véloce Universe</small></div><div class="carte"><b>TikTok</b><small>Véloce Universe</small></div><div class="carte"><b>YouTube</b><small>JT · dossiers</small></div><div class="carte"><b>Twitch</b><small>Lives</small></div><div class="carte"><b>X</b><small>Infos en direct</small></div><div class="carte"><b>Snapchat</b><small>Stories</small></div></section>
+<h2 class="sec" id="contact">Contact</h2>
+<section class="carte contact"><div><h2>Un projet ? Un partenariat ?</h2><p>Création de site, publicité, sponsoring ou simple question : écris-nous directement.</p></div>
+<div><a class="btn or" href="mailto:vminvest.fr@gmail.com?subject=V%C3%A9loce%20Universe%20%3A%20prise%20de%20contact">📩 vminvest.fr@gmail.com</a><p style="font-size:13px">Ton adresse sert uniquement à te répondre.</p></div></section>
+</main>
+<footer class="pied"><div class="wrap">
+<div><h3>Véloce Universe</h3><p>Deux sites, un réseau, un univers.</p></div>
+<div><h3>Le média</h3><a href="https://velocemercato.fr/">velocemercato.fr →</a><a href="https://velocemercato.fr/actus/">VM Actus</a><a href="https://velocemercato.fr/multisport/">VM Multisport</a></div>
+<div><h3>Pour les pros</h3><a href="https://velocemercato.fr/pro/">Création de sites</a><a href="https://velocemercato.fr/pub/">Publicité</a><a href="#contact">Partenariats</a></div>
+<div><h3>Infos</h3><a href="https://velocemercato.fr/mentions-legales.html">Mentions légales</a><a href="#contact">Contact</a></div>
+</div><div class="legal">© Véloce Universe · vmunivers.fr</div></footer>
+<script>
+document.querySelectorAll('.filtres button').forEach(function(b){b.addEventListener('click',function(){
+document.querySelectorAll('.filtres button').forEach(function(x){x.classList.toggle('on',x===b)});
+document.querySelectorAll('#liste .annu').forEach(function(c){c.hidden=!!b.dataset.f&&c.dataset.cat!==b.dataset.f});})});
+</script>
+</body></html>
