@@ -1,0 +1,7 @@
+{
+ "_note": "Liens de paiement Stripe (Payment Links) créés par le titulaire du compte Stripe. AUCUNE clé ni secret ici : seulement des liens publics https://buy.stripe.com/... Laisser actif=false tant que les CGV ne sont pas validées et que les liens test n'ont pas été essayés.",
+ "actif": false,
+ "mode": "test",
+ "cgv_validees": false,
+ "liens": []
+}
