@@ -1,0 +1,27 @@
+/* VÉLOCE UNIVERSE — charte commune appliquée au portail (noir, rouge néon, bleu, or).
+   Chargée en dernier : n'ajoute que de l'habillage et les nouveaux blocs, aucune structure existante supprimée. */
+:root{--vu-noir:#07080b;--vu-rouge:#ff1f3d;--vu-bleu:#2b7bff;--vu-bleu-neon:#3fb8ff;--vu-or:#ffc21a;--vu-ligne:#262b3b;--vu-titre:'Barlow Condensed','Arial Narrow',Impact,sans-serif}
+.portal-brand .wordmark strong{color:#fff}
+.portal-brand .wordmark i{color:var(--vu-bleu-neon);text-shadow:0 0 14px #3fb8ff66;font-style:italic}
+.portal-intro h1{font-family:var(--vu-titre);font-style:italic;text-transform:uppercase;letter-spacing:.01em}
+.portal-intro h1 span{color:var(--vu-or);text-shadow:0 0 18px #ffc21a55}
+.portal-intro .eyebrow{color:var(--vu-or);letter-spacing:.14em}
+.portal-intro .hub-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.portal-intro .hub-secondary{border-bottom:2px solid var(--vu-bleu-neon)}
+.vu-piliers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;max-width:1180px;margin:22px auto;padding:0 16px}
+.vu-pilier{display:block;text-decoration:none;color:#f5f6fa;background:linear-gradient(180deg,#141722,#0b0d14);border:1px solid var(--vu-ligne);border-radius:14px;padding:18px;min-width:0}
+.vu-pilier:hover,.vu-pilier:focus-visible{box-shadow:0 0 18px #ff1f3d55;border-color:var(--vu-rouge)}
+.vu-pilier b{font-size:28px}
+.vu-pilier h2{font:900 24px/1.05 var(--vu-titre);text-transform:uppercase;margin:6px 0;color:#fff}
+.vu-pilier p{margin:0;font-size:14px;line-height:1.45;color:#b9bfd0}
+.vu-r{border-top:3px solid var(--vu-rouge)}.vu-b{border-top:3px solid var(--vu-bleu)}.vu-o{border-top:3px solid var(--vu-or)}.vu-n{border-top:3px solid var(--vu-bleu-neon)}
+.vu-reseaux{max-width:1180px;margin:26px auto;padding:0 16px}
+.vu-reseaux h2{font:900 italic clamp(24px,4vw,34px) var(--vu-titre);text-transform:uppercase;display:flex;align-items:center;gap:10px;color:#fff}
+.vu-reseaux h2::before{content:"";width:8px;height:28px;border-radius:4px;background:linear-gradient(var(--vu-rouge),var(--vu-bleu))}
+.vu-reseaux-grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.vu-reseaux-grille a{display:block;text-align:center;text-decoration:none;color:#f5f6fa;background:#0f1118;border:1px solid var(--vu-ligne);border-radius:12px;padding:12px}
+.vu-reseaux-grille a:hover,.vu-reseaux-grille a:focus-visible{border-color:var(--vu-bleu-neon);box-shadow:0 0 14px #3fb8ff44}
+.vu-reseaux-grille b{display:block;font:900 20px var(--vu-titre)}.vu-reseaux-grille small{color:#b9bfd0}
+.vu-note{font-size:13px;color:#b9bfd0}
+@media (max-width:900px){.vu-piliers{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.vu-piliers{grid-template-columns:1fr}}
