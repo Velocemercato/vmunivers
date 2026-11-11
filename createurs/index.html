@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>VM Créateurs — générateur de site (prototype)</title>
+<style>
+:root{--bg:#07080d;--card:#11131d;--line:#2b3046;--txt:#f3f4f8;--muted:#a9b0c4;--gold:#f4cf55;--red:#e52643}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+header{padding:18px 16px;border-bottom:2px solid var(--red)}header h1{margin:0;font-size:1.4rem}header p{margin:4px 0 0;color:var(--muted)}
+.badge{display:inline-block;background:var(--gold);color:#111;border-radius:999px;padding:2px 10px;font-weight:800;font-size:.75rem}
+main{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;padding:16px;max-width:1200px;margin:auto}
+@media(max-width:820px){main{grid-template-columns:1fr}}
+form,.preview-wrap{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+label{display:block;font-weight:700;margin:10px 0 4px;font-size:.9rem}input,textarea{width:100%;background:#0b0d16;color:var(--txt);border:1px solid var(--line);border-radius:9px;padding:9px;font:inherit}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.prod{border:1px dashed var(--line);border-radius:10px;padding:8px;margin-top:8px}
+button{cursor:pointer;border:0;border-radius:10px;padding:11px 14px;font-weight:800;margin-top:12px}.primary{background:var(--gold);color:#111}.ghost{background:#1b2033;color:var(--txt)}
+.note{color:var(--muted);font-size:.82rem}.err{color:#ff7a8a;font-size:.82rem;min-height:1em}
+iframe{width:100%;height:640px;border:0;border-radius:10px;background:#fff}
+</style></head><body>
+<header><span class="badge">PROTOTYPE · MODE TEST</span><h1>VM Créateurs</h1>
+<p>Un site prêt à vendre pour un influenceur en 2 minutes. Remplis le formulaire, regarde l'aperçu, télécharge le site.</p></header>
+<main>
+<form id="f" autocomplete="off">
+  <label for="nom">Nom du créateur</label><input id="nom" maxlength="60" value="Léa Fit" required>
+  <label for="bio">Présentation (2 lignes)</label><textarea id="bio" rows="2" maxlength="220">Coach sportive. Programmes simples pour reprendre le sport à la maison.</textarea>
+  <label for="photo">Photo (lien https vers une image)</label><input id="photo" placeholder="https://…/photo.jpg">
+  <div class="row"><div><label for="c1">Couleur principale</label><input id="c1" type="color" value="#e52643"></div><div><label for="c2">Couleur d'accent</label><input id="c2" type="color" value="#f4cf55"></div></div>
+  <label for="ig">Instagram (lien)</label><input id="ig" placeholder="https://instagram.com/…">
+  <label for="tt">TikTok (lien)</label><input id="tt" placeholder="https://tiktok.com/@…">
+  <label for="yt">YouTube (lien)</label><input id="yt" placeholder="https://youtube.com/@…">
+  <div id="prods"></div>
+  <button type="button" class="ghost" id="addp">+ Ajouter un produit</button>
+  <p class="note">Paiement : colle pour chaque produit le <strong>lien de paiement Stripe du créateur</strong> (https://buy.stripe.com/…). L'argent va directement sur son compte. Dans la version finale, la commission VM (8 %) sera prélevée automatiquement par Stripe Connect.</p>
+  <p class="err" id="err" role="status"></p>
+  <button type="button" class="primary" id="dl">⬇ Télécharger le site (fichier HTML)</button>
+</form>
+<div class="preview-wrap"><strong>Aperçu</strong><iframe id="pv" title="Aperçu du site du créateur" sandbox=""></iframe></div>
+</main>
+<script>
+(function(){'use strict';
+var $=function(id){return document.getElementById(id)};
+var prods=$('prods'),err=$('err'),n=0;
+function addProd(t,p,u){if(n>=8)return;n++;var d=document.createElement('div');d.className='prod';
+ d.innerHTML='<div class="row"><div><label>Produit</label><input class="pt" maxlength="60"></div><div><label>Prix</label><input class="pp" maxlength="20" placeholder="29 €"></div></div><label>Lien de paiement Stripe</label><input class="pu" placeholder="https://buy.stripe.com/…">';
+ d.querySelector('.pt').value=t||'';d.querySelector('.pp').value=p||'';d.querySelector('.pu').value=u||'';prods.appendChild(d)}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function okUrl(u,hosts){try{var x=new URL(u);return x.protocol==='https:'&&!x.username&&!x.password&&(!hosts||hosts.some(function(h){return x.hostname===h||x.hostname.endsWith('.'+h)}))}catch(e){return false}}
+function color(v,d){return /^#[0-9a-f]{6}$/i.test(v)?v:d}
+function build(){
+ var errs=[],c1=color($('c1').value,'#e52643'),c2=color($('c2').value,'#f4cf55');
+ var photo=$('photo').value.trim();if(photo&&!okUrl(photo)){errs.push('Photo : lien https invalide');photo=''}
+ var socials=[['Instagram',$('ig').value,['instagram.com']],['TikTok',$('tt').value,['tiktok.com']],['YouTube',$('yt').value,['youtube.com','youtu.be']]]
+  .filter(function(s){var v=s[1].trim();if(!v)return false;if(!okUrl(v,s[2])){errs.push(s[0]+' : lien invalide');return false}return true});
+ var items=[].map.call(prods.querySelectorAll('.prod'),function(d){return{t:d.querySelector('.pt').value.trim(),p:d.querySelector('.pp').value.trim(),u:d.querySelector('.pu').value.trim()}})
+  .filter(function(it){return it.t}).map(function(it){if(it.u&&!okUrl(it.u,['buy.stripe.com'])){errs.push('« '+it.t+' » : seul un lien https://buy.stripe.com/ est accepté');it.u=''}return it});
+ err.textContent=errs.join(' · ');
+ var nom=esc($('nom').value.trim()||'Mon site');
+ var html='<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+nom+'</title>'+
+ '<style>body{margin:0;font:16px/1.5 system-ui,sans-serif;background:#0b0c12;color:#fff}.w{max-width:640px;margin:auto;padding:24px 16px;text-align:center}'+
+ 'img.av{width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid '+c2+'}h1{margin:12px 0 4px}p{color:#c9cede}'+
+ '.soc{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:14px 0}.soc a{color:#fff;border:1px solid '+c2+';border-radius:999px;padding:6px 12px;text-decoration:none}'+
+ '.p{background:#151826;border:2px solid '+c1+';border-radius:14px;padding:14px;margin:12px 0;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:10px}'+
+ '.p b{display:block}.p span{color:'+c2+';font-weight:800}.buy{background:'+c1+';color:#fff;border-radius:10px;padding:10px 14px;text-decoration:none;font-weight:800;white-space:nowrap}'+
+ '.buy.off{background:#444;pointer-events:none}footer{font-size:.75rem;color:#8a90a6;margin-top:24px}</style></head><body><div class="w">'+
+ (photo?'<img class="av" src="'+esc(photo)+'" alt="">':'')+'<h1>'+nom+'</h1><p>'+esc($('bio').value.trim())+'</p>'+
+ '<div class="soc">'+socials.map(function(s){return'<a href="'+esc(s[1].trim())+'" target="_blank" rel="noopener">'+s[0]+'</a>'}).join('')+'</div>'+
+ items.map(function(it){return'<div class="p"><div><b>'+esc(it.t)+'</b><span>'+esc(it.p)+'</span></div>'+(it.u?'<a class="buy" href="'+esc(it.u)+'" target="_blank" rel="noopener">Acheter</a>':'<a class="buy off">Bientôt</a>')+'</div>'}).join('')+
+ '<footer>Paiement sécurisé par Stripe · Site créé avec VM Créateurs</footer></div></body></html>';
+ $('pv').srcdoc=html;return{html:html,name:(nom.toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'site')}}
+$('addp').onclick=function(){addProd();build()};
+$('f').addEventListener('input',build);
+$('dl').onclick=function(){var r=build();var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([r.html],{type:'text/html'}));a.download=r.name+'.html';document.body.appendChild(a);a.click();a.remove()};
+addProd('Programme 4 semaines','29 €','https://buy.stripe.com/test_exemple');addProd('Coaching visio 1 h','49 €','');build();
+})();
+</script>
+</body></html>
