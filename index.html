@@ -46,7 +46,49 @@
  function init(){var v;try{v=localStorage.getItem(key)}catch(e){}if(v==='yes')load();else if(v!=='no')show()}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();</script>
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Organization", "name": "VM Univers", "url": "https://vmunivers.fr/", "logo": "https://vmunivers.fr/app/univers-192.png", "email": "vminvest.fr@gmail.com", "sameAs": ["https://velocemercato.fr/", "https://www.facebook.com/1349998758205153"]}, {"@context": "https://schema.org", "@type": "WebSite", "name": "VM Univers", "url": "https://vmunivers.fr/", "inLanguage": "fr-FR"}]</script></head>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Organization", "name": "VM Univers", "url": "https://vmunivers.fr/", "logo": "https://vmunivers.fr/app/univers-192.png", "email": "vminvest.fr@gmail.com", "sameAs": ["https://velocemercato.fr/", "https://www.facebook.com/1349998758205153"]}, {"@context": "https://schema.org", "@type": "WebSite", "name": "VM Univers", "url": "https://vmunivers.fr/", "inLanguage": "fr-FR"}]</script><style>
+.vm-mobile-access{box-sizing:border-box;max-width:1180px;margin:12px auto;padding:0 14px;display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px;font:700 14px/1.4 system-ui,sans-serif}
+.vm-mobile-access summary,.vm-mobile-access>a{display:block;padding:9px 14px;border:1px solid #d7b65d;border-radius:10px;background:#101a34;color:#fff;text-decoration:none;cursor:pointer}
+.vm-mobile-access summary::-webkit-details-marker{display:none}
+.vm-mobile-access p{max-width:360px;margin:6px 0 0;padding:10px 12px;border-radius:10px;background:#101a34;color:#fff;font-weight:500}
+.vm-mobile-access [hidden]{display:none}
+@media(display-mode:standalone){.vm-mobile-access details{display:none}}
+</style>
+<script>
+(function () {
+  let installPrompt;
+  const installed = () => {
+    const panel = document.getElementById('vm-mobile-install');
+    if (panel) panel.hidden = true;
+  };
+  window.addEventListener('beforeinstallprompt', event => {
+    event.preventDefault();
+    installPrompt = event;
+  });
+  window.addEventListener('appinstalled', installed);
+  document.addEventListener('DOMContentLoaded', () => {
+    const panel = document.getElementById('vm-mobile-install');
+    if (navigator.standalone) installed();
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js', {updateViaCache:'none'}).catch(() => {});
+    }
+    panel.querySelector('summary').addEventListener('click', async event => {
+      if (!installPrompt) return;
+      event.preventDefault();
+      const prompt = installPrompt;
+      installPrompt = null;
+      try {
+        await prompt.prompt();
+        const choice = await prompt.userChoice;
+        if (choice.outcome === 'accepted') installed();
+      } catch (_) {
+        panel.open = true;
+      }
+    });
+  });
+})();
+</script>
+</head>
 <body class="portal-simple">
 <a class="skip" href="#projets">Aller aux projets</a>
 <nav class="portal-nav" aria-label="Navigation principale">
@@ -54,6 +96,13 @@
 <div class="portal-links"><a href="#projets">L’annuaire</a><a href="#g-gratuit">Gratuit pour tous</a><a href="#g-passion">L’actu &amp; le foot</a><a href="/studio/reseaux.html" style="color:#f4cf55;font-weight:900">📲 Réseaux et vidéos</a><a class="nav-pro" href="/professionnels/">Pour les pros →</a><a href="#contact">Contact</a><a class="nav-hb" href="https://www.instagram.com/vmunivers.fr" target="_blank" rel="noopener" aria-label="Instagram VM Univers" style="background:linear-gradient(135deg,#833ab4,#c13584,#e1306c);color:#fff;border-radius:999px;padding:4px 10px;font-weight:800">📷 Instagram</a><a class="nav-hb" href="https://www.facebook.com/share/1DzrG1EFTp/" target="_blank" rel="noopener" style="background:#1877f2;color:#fff;border-radius:999px;padding:4px 10px;font-weight:800">👍 Facebook</a><a class="nav-hb nav-don" href="https://velocemercato.fr/soutenir.html" style="background:#ffd1df;color:#0b1533;border-radius:999px;padding:4px 10px;font-weight:800">💛 Don</a></div>
 </nav>
 <header class="hub hub-pro portal-intro"><div class="hub-pro-in"><div class="hub-copy"><p class="eyebrow">VM UNIVERS · FRANCHE-COMTÉ · FRANCE</p><h1>Un seul univers,<br><span>toutes nos passions.</span></h1><p>Médias, services pour les pros et projets utiles : tout l’écosystème VM au même endroit. Deux sites complémentaires, une seule marque.</p><div class="hub-actions"><a class="btn" href="#projets">Explorer les projets ↓</a><a class="hub-secondary" href="https://velocemercato.fr/">Lire Véloce Mercato →</a><a class="hub-secondary" href="/professionnels/">Créer mon site avec VM Studio →</a></div></div><a class="hub-signature" href="/decouvrir.html" aria-label="Découvrir l’histoire de VM Univers"><img src="/app/univers-192.png" width="150" height="150" alt="Emblème VM Univers"><span>Des idées. Des projets.<small>UN SEUL UNIVERS.</small></span></a></div></header>
+<section class="vm-mobile-access" aria-label="Application et alertes">
+  <details id="vm-mobile-install">
+    <summary>📲 Installer VM Univers</summary>
+    <p><strong>Android :</strong> dans Chrome, ouvre le menu ⋮ et choisis « Installer l’application » ou « Ajouter à l’écran d’accueil ».<br><strong>iPhone :</strong> dans Safari, touche Partager, puis « Sur l’écran d’accueil ».<br>Depuis Facebook ou Instagram, ouvre d’abord le site dans ton navigateur.</p>
+  </details>
+  <a href="https://velocemercato.fr/notifications/">🔔 Mes alertes</a>
+</section>
 <section class="vu-piliers" aria-label="Les quatre univers VM"><a class="vu-pilier vu-r" href="https://velocemercato.fr/"><b aria-hidden="true">⚽</b><h2>Nos médias</h2><p>Foot, mercato, multisport, actus, gaming, mangas, séries et JT sur Véloce Mercato.</p></a><a class="vu-pilier vu-b" href="/professionnels/"><b aria-hidden="true">🛠️</b><h2>Nos services</h2><p>Sites web, cartes, visuels et publicité locale avec VM Studio.</p></a><a class="vu-pilier vu-o" href="#projets"><b aria-hidden="true">🚀</b><h2>Nos projets</h2><p>Outils gratuits et utiles : démarches, CV, annonces, emploi.</p></a><a class="vu-pilier vu-n" href="#contact"><b aria-hidden="true">🤝</b><h2>Partenaires</h2><p>Sponsors, annonceurs et collaborations sur nos médias.</p></a></section>
 
 <main>
@@ -225,7 +274,6 @@
 <p class="visual-credit">Cuisine, auto, produits locaux, randonnée et logement : illustrations générées par IA.</p></main>
 <script src="/assets/portal.js?v=20261024-annuaire1" defer></script>
 <script src="/assets/app-actions.js?v=20261024-1" defer></script>
-<button type="button" class="vminst" id="vmInst">📲 Installer VM Univers</button>
 <div class="vmsh" id="vmSh" hidden role="dialog" aria-modal="true" aria-labelledby="vmShT"><div class="vmsh-box">
 <h3 id="vmShT">📤 Partager cette page</h3><p class="vmsh-t" id="vmShU"></p>
 <div class="vmsh-g">
@@ -256,19 +304,6 @@ f.onclick=function(){cur=null;open()};window.vmShareOpen=function(u,t,n){cur={u:
 $('vmS-more').onclick=function(){navigator.share({title:ttl(),url:url()}).catch(function(){})};
 $('vmS-cp').onclick=function(){var b=this;(navigator.clipboard?navigator.clipboard.writeText(url()):Promise.reject()).then(function(){b.lastChild.textContent='Copié ✓'}).catch(function(){prompt('Copie ce lien :',url())})};
 document.addEventListener('keydown',function(e){if(e.key==='Escape')m.hidden=true});
-if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js', {updateViaCache:'none'}).catch(function(){});
-var ib=$('vmInst'),dp=null,standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone,ios=/iphone|ipad|ipod/i.test(navigator.userAgent),andr=/android/i.test(navigator.userAgent);
-var mf=(($('vmapp-m')||{}).getAttribute&&$('vmapp-m').getAttribute('href'))||'',app=(mf.match(/app[/]([a-z]+)[.]webmanifest/)||[,'univers'])[1];
-var NOMS={location:'VM Detailing',menu:'VM Menu QR',pro:'VM Pro Local',cv:'VM CV',emploi:'VM Emploi',univers:'VM Univers',foot:'VM Foot',gaming:'VM Gaming',actus:'VM Actus',arena:'VM Arena',tv:'VM TV',annonces:'VM Annonces',allolivre:'AlloLivre'},nom=NOMS[app]||'VM',key='vm-app-non-'+app,no=false;try{no=localStorage.getItem(key)==='1'}catch(e){}
-ib.textContent='📲 Installer '+nom;
-function show(){if(!no)ib.classList.add('show')}
-if(!standalone){addEventListener('beforeinstallprompt',function(e){e.preventDefault();dp=e;show()});if(ios)show();}
-addEventListener('appinstalled',function(){ib.classList.remove('show')});
-ib.onclick=function(){
- if(dp){dp.prompt();dp.userChoice.then(function(){ib.classList.remove('show')});dp=null;return}
- if(ios){alert('Pour installer '+nom+' sur iPhone : — 1. Ouvre cette page dans Safari — 2. Bouton Partager ↑ en bas — 3. « Sur l’écran d’accueil » — 4. « Ajouter »')}
-
- try{localStorage.setItem(key,'1')}catch(e){}ib.classList.remove('show')};
 window.vmMail=function(su,bo){var to='vminvest.fr@gmail.com';location.href='mailto:'+to+'?subject='+encodeURIComponent(su)+'&body='+encodeURIComponent(bo);
  var d=document.getElementById('vmMailBox');if(d)d.remove();d=document.createElement('div');d.id='vmMailBox';d.setAttribute('role','dialog');
  d.style.cssText='position:fixed;left:12px;right:12px;bottom:12px;z-index:95;max-width:440px;margin:0 auto;background:#fff;color:#0b1533;border:3px solid #000;border-radius:16px;padding:14px;box-shadow:5px 5px 0 #1d3fb8;font:15px/1.4 system-ui,sans-serif';
