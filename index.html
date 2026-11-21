@@ -215,7 +215,8 @@
 .vmviv-scene h3{font:italic 900 clamp(26px,5vw,40px)/1 Impact,"Arial Black",sans-serif;text-transform:uppercase;margin:0;text-shadow:0 3px 0 #000}
 .vmviv-scene b.go{justify-self:start;font:900 15px/1 system-ui;padding:12px 16px;border-radius:999px;background:#fff;color:#0b1533;border:2px solid #000;box-shadow:3px 3px 0 #000}
 .vmviv-scene:focus-visible{outline:3px solid #fff;outline-offset:3px}
-.vmviv-deja{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.vmviv-deja{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media(min-width:1050px){.vmviv-deja{grid-template-columns:repeat(4,minmax(0,1fr))}}
 .vmviv-deja a{display:grid;gap:6px;background:#0b1533;border:2px solid #26305e;border-radius:18px;padding:12px;color:#fff;text-decoration:none;min-width:0}
 .vmviv-deja img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:12px;max-width:100%}
 .vmviv-deja small{color:var(--vg);font-weight:800;letter-spacing:.04em;text-transform:uppercase;font-size:12px}
@@ -234,6 +235,7 @@
 <div><h2>Ça se passe <b>déjà</b> chez VM</h2><p>De vraies créations, en ligne aujourd’hui.</p></div>
 <div class="vmviv-deja">
 <a href="https://velocemercato.fr/reportages/alexia-depagne.html"><img src="https://velocemercato.fr/img/reportages/alexia-depagne/partage.jpg" alt="" width="1200" height="630" loading="lazy"><small>Reportage · octobre 2026</small><strong>Alexia Depagne, de la fête foraine à l’équipe de France</strong></a>
+<a href="https://velocemercato.fr/reportages/loic-tanzi.html#reportage-video"><img src="https://velocemercato.fr/img/studio/plateau-veloce-600.webp" alt="" width="600" height="1066" loading="lazy" style="object-position:50% 35%"><small>Reportage vidéo · octobre 2026</small><strong>Loïc Tanzi, du terrain aux plateaux télé</strong></a>
 <a href="/studio/reseaux.html"><img src="/assets/projects/img/apps/actus.webp" alt="" width="900" height="507" loading="lazy"><small>Facebook · JT et Reels</small><strong>📲 La communauté Véloce Mercato : nos pages, vidéos et partages</strong></a>
 <a href="https://velocemercato.fr/web-studio.html#modeles"><img src="/img/studio/manga-vm-studio-600.webp" alt="" width="600" height="1066" loading="lazy" style="object-position:50% 72%"><small>VM Studio</small><strong>Les démos de sites par métier, à tester sur téléphone</strong></a>
 </div>
