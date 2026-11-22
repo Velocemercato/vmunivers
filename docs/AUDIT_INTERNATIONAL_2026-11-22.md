@@ -92,3 +92,16 @@ L'arbre GitHub du dépôt contient 12 fichiers HTML :
 - Pages explicitement à ne pas indexer : `/createurs/` (prototype, noindex), `/index-7.html` (noindex), et les deux pages de maquette (noindex,nofollow).
 
 Le sitemap de la branche de visibilité est donc porté de 5 à **8 URL publiques vérifiées**. Les pages de prototype et de maquette sont volontairement exclues. Le fichier de sitemap reste dans une branche de revue ; aucune publication n'a été déclenchée.
+
+
+## 9. Service worker — contrôle du code actuel sur main
+
+Le fichier `sw.js` actuellement présent sur `main` est en version `vmu-v13`. Le contrôle statique confirme :
+- le cache ne concerne que les ressources du même domaine ;
+- seules les requêtes GET de pages et d'assets statiques sont mises en cache ;
+- les JSON, compteurs et API restent sur le réseau ;
+- les caches supprimés sont limités au préfixe `vmu-v`, sans effacer ceux d'autres projets ;
+- les médias lourds et certains dossiers de projets sont exclus ;
+- les erreurs de stockage du cache n'empêchent pas de servir la réponse réseau.
+
+C'est une configuration beaucoup plus sûre pour préserver l'autonomie de VM Univers. Il reste à vérifier le comportement réel sur un téléphone après déploiement, notamment la mise à jour du cache et le mode hors connexion.
