@@ -103,6 +103,13 @@
 .vm-projet-vedette figcaption{margin:.45rem 0 0;color:#f6d9c2;font-size:.81rem}
 @media(max-width:680px){.vm-projet-vedette{grid-template-columns:1fr;border-radius:19px}}
 </style>
+<style>
+.vm-vedette-actions,.vm-audio-links{display:flex;flex-wrap:wrap;gap:.55rem}
+.vm-projet-vedette .vm-vedette-actions a:nth-child(2){background:transparent;color:#f4c69c;border:1px solid #ba927e}
+.vm-audio-links{max-width:1190px;margin:0 auto 1.15rem}
+.vm-audio-links a{display:inline-flex;align-items:center;min-height:44px;padding:0 .85rem;border-radius:9px;border:1px solid #674d74;background:#271c35;color:#ffe9d5;text-decoration:none;font-weight:750}
+.vm-audio-links a:hover{text-decoration:underline}
+</style>
 </head>
 <body class="portal-simple">
 <a class="skip" href="#projets">Aller aux projets</a>
@@ -263,13 +270,14 @@
     <p class="eyebrow">VM STUDIO</p>
     <h2 id="vm-projet-vedette-titre">Votre activité mérite son propre site</h2>
     <p>Découvrez nos modèles pour présenter votre activité, vos réalisations et vos coordonnées. Chaque modèle est consultable en ligne.</p>
-    <a href="/professionnels/" aria-label="Voir les modèles de sites et les offres de VM Studio">Voir les modèles et les offres&nbsp; →</a>
+    <div class="vm-vedette-actions"><a href="https://velocemercato.fr/creer/">Créer mon site ou mon appli&nbsp; →</a><a href="/professionnels/" aria-label="Voir les modèles de sites et les offres de VM Studio">Voir les modèles et les offres&nbsp; →</a></div>
   </div>
   <figure>
     <img src="/assets/pro/veloce-apercu.webp" alt="Aperçu du bureau interactif de Véloce Mercato" width="1200" height="750" loading="lazy" decoding="async">
     <figcaption>Une réalisation VM Studio · Véloce Mercato</figcaption>
   </figure>
 </section>
+<nav class="vm-audio-links" aria-label="Écouter VM"><a href="https://velocemercato.fr/vm-radio/">VM Radio Multisport</a><a href="https://velocemercato.fr/vm-musique/">VM Musique</a></nav>
 <section class="directory-tools" id="projets" aria-labelledby="t-annuaire">
 <div class="directory-heading"><p class="eyebrow">L’ANNUAIRE VM · 26 PROJETS</p><h2 id="t-annuaire">Que cherchez-vous ?</h2></div>
 <label class="srch"><span aria-hidden="true">⌕</span><span class="sr-only">Rechercher un projet VM</span><input id="q" type="search" enterkeyhint="search" placeholder="Foot, emploi, CV, météo, site…" autocomplete="off"></label>
