@@ -14,6 +14,7 @@ Validation (Python 3.12, Chromium et Playwright) :
 
 ```sh
 python3 -m pip install -r tests/requirements.txt
+python3 tests/test_sitemap.py
 python3 tests/test_site.py
 ```
 
