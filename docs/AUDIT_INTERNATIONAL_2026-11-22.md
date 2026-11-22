@@ -83,3 +83,12 @@ Aucune publication planifiée n'a été retournée pour cette marque entre le 22
 Les métriques disponibles sont partielles et hétérogènes selon les réseaux. Elles ne doivent pas être additionnées entre plateformes ni présentées comme audience globale. Les valeurs brutes ne sont pas utilisées comme preuve d'audience commerciale.
 
 **Action recommandée :** créer ou sélectionner des marques Metricool distinctes pour VM Univers et Véloce Mercato, rattacher chaque réseau au bon projet, vérifier les permissions, puis établir un tableau de bord séparé. Avant toute programmation, confirmer les contenus, les médias et le calendrier éditorial. Aucune publication n'a été créée ou envoyée pendant cet audit.
+
+
+## 8. Cartographie complémentaire des pages HTML
+
+L'arbre GitHub du dépôt contient 12 fichiers HTML :
+- Pages publiques avec canonical vérifié : accueil, `/connect/`, `/decouvrir.html`, `/meteo/`, `/professionnels/`, `/studio/reseaux.html`, `/telechargements/` et `/en/`.
+- Pages explicitement à ne pas indexer : `/createurs/` (prototype, noindex), `/index-7.html` (noindex), et les deux pages de maquette (noindex,nofollow).
+
+Le sitemap de la branche de visibilité est donc porté de 5 à **8 URL publiques vérifiées**. Les pages de prototype et de maquette sont volontairement exclues. Le fichier de sitemap reste dans une branche de revue ; aucune publication n'a été déclenchée.
