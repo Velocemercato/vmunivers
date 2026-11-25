@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://vmunivers.fr/</loc><lastmod>2026-11-02</lastmod></url>
+  <url><loc>https://vmunivers.fr/</loc></url>
   <url><loc>https://vmunivers.fr/decouvrir.html</loc></url>
+  <url><loc>https://vmunivers.fr/meteo/</loc></url>
+  <url><loc>https://vmunivers.fr/professionnels/</loc></url>
+  <url><loc>https://vmunivers.fr/studio/reseaux.html</loc></url>
   <url><loc>https://vmunivers.fr/telechargements/</loc></url>
-  <url><loc>https://vmunivers.fr/professionnels/</loc><lastmod>2026-11-14</lastmod></url>
   <url><loc>https://vmunivers.fr/en/</loc></url>
 </urlset>

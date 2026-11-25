@@ -1,0 +1,32 @@
+name: VM Univers - Validation SEO et sitemap
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'sitemap.xml'
+      - 'connect/index.html'
+      - 'tests/test_sitemap.py'
+      - '.github/workflows/validate-portal.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'sitemap.xml'
+      - 'connect/index.html'
+      - 'tests/test_sitemap.py'
+      - '.github/workflows/validate-portal.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  seo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Valider le sitemap, les canonicals et les pages noindex
+        run: python tests/test_sitemap.py
