@@ -129,8 +129,8 @@
       } else {
         button.disabled = false;
         button.textContent = label0;
-        show('L’envoi n’a pas abouti. Votre demande n’a pas été transmise : utilisez le bouton ci-dessous pour l’envoyer depuis votre messagerie.', 'err');
-        showDraft('Votre demande est prête dans votre messagerie : il ne reste qu’à appuyer sur Envoyer.');
+        show('L’envoi automatique n’a pas été confirmé. Vous pouvez utiliser le brouillon ci-dessous pour nous contacter.', 'err');
+        showDraft('Votre brouillon est prêt. Ouvrez votre messagerie avec le bouton ci-dessous, puis envoyez le message.');
       }
     });
 
