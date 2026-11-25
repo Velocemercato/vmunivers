@@ -1,0 +1,28 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Configurateur — VM Design Factory</title>
+<meta name="description" content="Personnalisez vos skins : choisissez l'appareil, créez votre design, exportez le fichier d'impression et de découpe, demandez un devis.">
+<link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#080e2c">
+<style>
+:root{--a:#ffdf39;--b:#ff4f8f;--ink:#080e2c;--card:#121a44;--line:#2b3a7a}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 70% 0,#1e4fc5 0,transparent 40%),var(--ink);color:#fff;font:16px/1.45 system-ui,Segoe UI,Roboto,sans-serif}
+header{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 16px;border-bottom:2px solid var(--a)}header a{color:#fff;text-decoration:none;font-weight:800;letter-spacing:.04em}header .sp{flex:1}
+h1{font:900 1.4rem Impact,Arial Black,sans-serif;margin:0;text-transform:uppercase;letter-spacing:.03em}h1 em{color:var(--a);font-style:normal}h2{font-size:1rem;margin:14px 0 6px;color:var(--a);text-transform:uppercase;letter-spacing:.06em}
+main{display:grid;grid-template-columns:minmax(260px,330px) 1fr minmax(260px,340px);gap:12px;padding:12px;max-width:1500px;margin:auto}@media(max-width:1000px){main{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}label{display:block;font-size:12px;color:#b8c4ff;margin:8px 0 2px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;background:#0a1236;color:#fff;border:1px solid var(--line);border-radius:8px;padding:8px}input[type=color]{padding:2px;height:38px}input[type=range]{padding:0}
+button{background:var(--a);color:#111;border:0;border-radius:10px;padding:9px 14px;font-weight:800;cursor:pointer}button.g{background:#24336d;color:#fff;border:1px solid var(--line)}button.b{background:var(--b);color:#fff}button:disabled{opacity:.4}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chips button{padding:6px 10px;font-size:13px}.chips .on{outline:3px solid #fff}.row{display:flex;gap:8px;align-items:center}.row>*{flex:1;min-width:0}
+#stage{background:repeating-conic-gradient(#0d1744 0 25%,#0a1236 0 50%) 0 0/24px 24px;border-radius:12px;display:flex;justify-content:center;align-items:center;padding:12px;min-height:300px;touch-action:none}#stage svg{max-width:100%;max-height:58vh;height:auto;filter:drop-shadow(0 8px 18px #000a);cursor:grab}
+.warn{background:#4a3a00;border:1px solid var(--a);border-radius:10px;padding:8px;font-size:13px}.ok{background:#0b3a22;border:1px solid #3c9;border-radius:10px;padding:8px;font-size:13px}.hint{color:#b8c4ff;font-size:12.5px}
+.layers button{width:100%;text-align:left;margin:2px 0;background:#1a2660;color:#fff;font-weight:600}.layers .sel{outline:2px solid var(--a)}.price{font:900 1.8rem Impact,sans-serif;color:var(--a)}
+</style><link rel="canonical" href="https://vmunivers.fr/design-factory/configurateur/"></head><body>
+<header><a href="/design-factory/">← VM DESIGN FACTORY</a><h1>Configurateur <em>skins</em></h1><span class="sp"></span><button class="g" id="share">Partager</button><button class="g" id="install" hidden>Installer l'appli</button></header>
+<main>
+<section class="card"><h2>1 · Appareil</h2><div class="chips" id="cats"></div><label for="dev">Modèle</label><select id="dev"></select><div id="devinfo" class="hint"></div>
+<label for="surf">Surface à personnaliser</label><select id="surf"></select><div class="row"><div><label for="sw">Largeur (mm)</label><input id="sw" type="number" min="5" max="2000"></div><div><label for="sh">Hauteur (mm)</label><input id="sh" type="number" min="5" max="2000"></div></div>
+<h2>2 · Design</h2><label for="bg">Couleur de fond</label><input id="bg" type="color" value="#1e4fc5"><div class="chips" style="margin-top:8px"><button class="g" data-add="text">+ Texte</button><button class="g" data-add="star">+ Étoile</button><button class="g" data-add="circle">+ Cercle</button><button class="g" data-add="rect">+ Rectangle</button></div>
+<label for="photo">Importer une photo (JPEG, PNG, WebP — reste sur votre appareil)</label><input id="photo" type="file" accept="image/jpeg,image/png,image/webp"><p class="err hint" id="photoerr" role="alert"></p></section>
+<section class="card"><div id="stage" aria-label="Aperçu du produit personnalisé"></div><p class="hint">Glissez un élément pour le déplacer. Aperçu schématique à l'échelle réelle de la surface (1 unité = 1 mm).</p></section>
+<section class="card"><h2>Éléments</h2><div class="layers" id="layers"></div><div id="ctl"></div>
+<h2>3 · Prix et devis</h2><div class="row"><div><label for="fin">Finition</label><select id="fin"><option value="mat">Mat</option><option value="brillant">Brillant</option></select></div><div><label for="qty">Quantité</label><input id="qty" type="number" min="1" max="100" value="1"></div></div><div id="price"></div>
+<div class="chips" style="margin-top:8px"><button id="expSvg">Fichier impression + découpe (SVG)</button><button class="g" id="expPng">Aperçu (PNG)</button><button class="g" id="expJson">Projet (JSON)</button></div>
+<label for="cn">Votre nom</label><input id="cn" maxlength="80"><label for="ce">Votre e-mail</label><input id="ce" type="email" maxlength="120"><label for="cm">Message</label><textarea id="cm" rows="2" maxlength="500"></textarea>
+<div class="chips" style="margin-top:8px"><button class="b" id="quote">Préparer ma demande de devis</button></div><p class="hint" id="qmsg" role="status"></p></section>
+</main><script type="module" src="app.js"></script></body></html>
