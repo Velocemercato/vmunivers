@@ -1,0 +1,1 @@
+{"name":"vm-design-factory-configurateur","private":true,"type":"module","scripts":{"test":"node --test tests/*.test.js"}}
